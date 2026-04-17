@@ -13,11 +13,6 @@
         .insult-box { border-left: 3px solid #dc2626; background: linear-gradient(90deg, rgba(220, 38, 38, 0.05) 0%, transparent 100%); }
         .nav-link-active { background: rgba(255, 255, 255, 0.05); color: #ffffff; border-left: 2px solid #ffffff; }
         
-        /* Estilo de los códigos y botones */
-        .code-display { background: #000; border: 1px solid #333; border-radius: 0.75rem; }
-        .btn-copy { background: #facc15; color: #000; font-weight: 800; transition: all 0.2s; }
-        .btn-copy:active { transform: scale(0.95); }
-        
         .column-grid { display: grid; gap: 1rem; }
         @media (min-width: 768px) {
             .column-grid { grid-template-columns: repeat(4, 1fr); }
@@ -44,9 +39,7 @@
                 <div class="text-[10px] font-bold text-gray-600 uppercase tracking-[0.2em] mb-4 pl-4">Fases de Operación</div>
                 
                 <a href="modulo1.html" class="flex items-center px-4 py-3 rounded-xl text-gray-500 hover:text-white transition-all text-sm font-medium">1. Ejecución de Gastos</a>
-                
                 <a href="#" class="nav-link-active flex items-center px-4 py-3 rounded-xl text-sm font-semibold">2. La Selva Numérica</a>
-                
                 <a href="modulo3.html" class="flex items-center px-4 py-3 rounded-xl text-gray-500 hover:text-white transition-all text-sm font-medium">3. Radar de Contrataciones</a>
             </nav>
         </aside>
@@ -93,84 +86,119 @@
             </div>
 
             <div class="bento-card p-6 md:p-10 border border-yellow-500/20 mb-12">
-                <h2 class="text-2xl font-black text-white mb-6">Técnica de Búsqueda de Precisión</h2>
+                <h2 class="text-2xl font-black text-white mb-6">Táctica de Extracción de Datos</h2>
                 <div class="space-y-6 text-sm text-gray-300 leading-relaxed">
                     <p>No leas la planilla línea por línea. Usá la herramienta Buscar: <span class="bg-white/10 px-2 py-1 rounded text-white font-mono">CTRL + F</span> en computadora o la opción <span class="bg-white/10 px-2 py-1 rounded text-white italic">"Buscar en la página"</span> de tu celular.</p>
                     
                     <div class="bg-black/50 p-5 rounded-2xl border border-white/5">
-                        <h3 class="text-white font-bold mb-3 flex items-center gap-2">
-                            <svg class="w-4 h-4 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-                            Instrucciones para infiltrarse:
-                        </h3>
                         <ol class="space-y-4 ml-4 list-decimal text-gray-400">
                             <li><strong class="text-white">Pegá solo el código:</strong> Copiá los 3 dígitos de abajo y pegalos en el buscador. El sistema te llevará automáticamente a la celda exacta de ese rubro.</li>
-                            <li><strong class="text-white">Filtro de rubro:</strong> Si el código no te arroja resultados (a veces los municipios usan formatos distintos), buscá directamente por el <strong class="text-yellow-500">Nombre del Rubro</strong> (ej. "Combustibles", "Medicamentos").</li>
+                            <li><strong class="text-white">Filtro de rubro:</strong> Si el código no te arroja resultados, buscá directamente por el <strong class="text-yellow-500">Nombre del Rubro</strong>.</li>
                             <li><strong class="text-white">Mirá a la derecha:</strong> Una vez que encuentres la fila del código, deslizate directo a las columnas de <strong class="text-red-400 uppercase font-bold">Total Pagado</strong>.</li>
                         </ol>
                     </div>
                 </div>
             </div>
 
-            <h2 class="text-xl font-bold text-white mb-6 uppercase tracking-wider">Arsenal de códigos listos</h2>
-            <div class="space-y-4">
+            <div class="mb-16">
+                <div class="flex flex-col md:flex-row md:items-end justify-between mb-6 gap-4">
+                    <h2 class="text-xl font-bold text-white uppercase tracking-wider">Arsenal de Códigos MEF</h2>
+                    <a href="https://www.mef.gov.py/sites/default/files/2024-07/archivo%20%282%29_3_1.pdf" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-[10px] font-bold text-yellow-500 bg-yellow-500/10 px-3 py-2 rounded-lg border border-yellow-500/20 hover:bg-yellow-500 hover:text-black transition-colors w-fit">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                        VER MANUAL OFICIAL MEF
+                    </a>
+                </div>
                 
-                <div class="bento-card p-5 group">
-                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
-                        <div class="flex items-center gap-4">
-                            <div class="code-display px-4 py-2">
-                                <span id="code-361" class="text-xl font-black text-yellow-500">361</span>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    
+                    <div class="bg-[#111114] border border-white/5 rounded-xl p-5 flex flex-col justify-between hover:border-white/20 transition-colors">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="bg-black border border-white/10 px-3 py-1 rounded-lg">
+                                <span class="text-lg font-black text-white">144</span>
                             </div>
-                            <div>
-                                <h3 class="font-bold text-white uppercase text-sm">Combustibles y Lubricantes</h3>
-                                <p class="text-[11px] text-gray-500">Rastreo de gastos en flota oficial.</p>
-                            </div>
+                            <button onclick="copyCode('144', this)" class="bg-white/5 hover:bg-yellow-500 hover:text-black text-gray-300 text-[10px] font-bold uppercase px-3 py-1.5 rounded transition-all active:scale-95">Copiar</button>
                         </div>
-                        <button onclick="copyCode('361')" class="btn-copy px-6 py-2 rounded-lg text-[10px] uppercase">Copiar Código</button>
-                    </div>
-                    <div class="mt-4 pt-4 border-t border-white/5">
-                        <p class="text-[11px] text-gray-400 leading-relaxed italic"><strong class="text-red-500">La Autopsia:</strong> Analizá la relación entre el total pagado y los servicios municipales reales. Es común ver cifras que implicarían camionetas recorriendo miles de kilómetros diarios.</p>
-                    </div>
-                </div>
-
-                <div class="bento-card p-5 group border-l-4 border-blue-500/30">
-                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
-                        <div class="flex items-center gap-4">
-                            <div class="code-display px-4 py-2">
-                                <span id="code-352" class="text-xl font-black text-blue-400">352</span>
-                            </div>
-                            <div>
-                                <h3 class="font-bold text-white uppercase text-sm">Productos Farmacéuticos</h3>
-                                <p class="text-[11px] text-gray-500">Insumos médicos y medicamentos.</p>
-                            </div>
+                        <div>
+                            <h3 class="text-sm font-bold text-white mb-1 uppercase">Jornales</h3>
+                            <p class="text-[11px] text-gray-400 leading-relaxed mb-2">Remuneración a personal contratado para tareas temporales o estacionales.</p>
+                            <p class="text-[10px] text-yellow-500/80 font-medium italic">Tip: Útil para cruzar datos de aumentos de personal en años electorales.</p>
                         </div>
-                        <button onclick="copyCode('352')" class="btn-copy px-6 py-2 rounded-lg text-[10px] uppercase">Copiar Código</button>
                     </div>
-                    <div class="mt-4 pt-4 border-t border-white/5 text-[11px] text-gray-400 leading-relaxed italic">
-                        <strong class="text-blue-400">La Autopsia:</strong> Si el saldo en esta columna es muy alto y el hospital local no tiene ni gasas, estás ante una falta de ejecución crítica de los recursos para el pueblo.
-                    </div>
-                </div>
 
-                <div class="bento-card p-5 group">
-                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
-                        <div class="flex items-center gap-4">
-                            <div class="code-display px-4 py-2">
-                                <span id="code-144" class="text-xl font-black text-yellow-500">144</span>
+                    <div class="bg-[#111114] border border-white/5 rounded-xl p-5 flex flex-col justify-between hover:border-white/20 transition-colors">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="bg-black border border-white/10 px-3 py-1 rounded-lg">
+                                <span class="text-lg font-black text-white">284</span>
                             </div>
-                            <div>
-                                <h3 class="font-bold text-white uppercase text-sm">Jornales</h3>
-                                <p class="text-[11px] text-gray-500">Personal contratado temporal.</p>
-                            </div>
+                            <button onclick="copyCode('284', this)" class="bg-white/5 hover:bg-yellow-500 hover:text-black text-gray-300 text-[10px] font-bold uppercase px-3 py-1.5 rounded transition-all active:scale-95">Copiar</button>
                         </div>
-                        <button onclick="copyCode('144')" class="btn-copy px-6 py-2 rounded-lg text-[10px] uppercase">Copiar Código</button>
+                        <div>
+                            <h3 class="text-sm font-bold text-white mb-1 uppercase">Servicios de Catering</h3>
+                            <p class="text-[11px] text-gray-400 leading-relaxed mb-2">Gastos por provisión de comidas y bebidas para eventos o reuniones oficiales.</p>
+                            <p class="text-[10px] text-yellow-500/80 font-medium italic">Tip: Compara el gasto total en este rubro contra inversiones en salud primaria.</p>
+                        </div>
                     </div>
-                    <div class="mt-4 pt-4 border-t border-white/5">
-                        <p class="text-[11px] text-gray-400 leading-relaxed italic"><strong class="text-red-500">La Autopsia:</strong> La nómina del silencio. Personal sin funciones claras que suele aparecer con fuerza en registros de épocas electorales.</p>
-                    </div>
-                </div>
 
+                    <div class="bg-[#111114] border border-white/5 rounded-xl p-5 flex flex-col justify-between hover:border-white/20 transition-colors">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="bg-black border border-white/10 px-3 py-1 rounded-lg">
+                                <span class="text-lg font-black text-white">352</span>
+                            </div>
+                            <button onclick="copyCode('352', this)" class="bg-white/5 hover:bg-yellow-500 hover:text-black text-gray-300 text-[10px] font-bold uppercase px-3 py-1.5 rounded transition-all active:scale-95">Copiar</button>
+                        </div>
+                        <div>
+                            <h3 class="text-sm font-bold text-white mb-1 uppercase">Productos Farmacéuticos</h3>
+                            <p class="text-[11px] text-gray-400 leading-relaxed mb-2">Adquisición de medicamentos e insumos médicos para dispensarios locales.</p>
+                            <p class="text-[10px] text-yellow-500/80 font-medium italic">Tip: Auditar si la ejecución financiera coincide con el stock físico del centro de salud municipal.</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-[#111114] border border-white/5 rounded-xl p-5 flex flex-col justify-between hover:border-white/20 transition-colors">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="bg-black border border-white/10 px-3 py-1 rounded-lg">
+                                <span class="text-lg font-black text-white">361</span>
+                            </div>
+                            <button onclick="copyCode('361', this)" class="bg-white/5 hover:bg-yellow-500 hover:text-black text-gray-300 text-[10px] font-bold uppercase px-3 py-1.5 rounded transition-all active:scale-95">Copiar</button>
+                        </div>
+                        <div>
+                            <h3 class="text-sm font-bold text-white mb-1 uppercase">Combustibles</h3>
+                            <p class="text-[11px] text-gray-400 leading-relaxed mb-2">Provisión de nafta, diésel o lubricantes para el parque automotor de la institución.</p>
+                            <p class="text-[10px] text-yellow-500/80 font-medium italic">Tip: Calcular si el volumen en litros pagados es lógicamente consumible por la flota existente.</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-[#111114] border border-white/5 rounded-xl p-5 flex flex-col justify-between hover:border-white/20 transition-colors">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="bg-black border border-white/10 px-3 py-1 rounded-lg">
+                                <span class="text-lg font-black text-white">520</span>
+                            </div>
+                            <button onclick="copyCode('520', this)" class="bg-white/5 hover:bg-yellow-500 hover:text-black text-gray-300 text-[10px] font-bold uppercase px-3 py-1.5 rounded transition-all active:scale-95">Copiar</button>
+                        </div>
+                        <div>
+                            <h3 class="text-sm font-bold text-white mb-1 uppercase">Construcciones</h3>
+                            <p class="text-[11px] text-gray-400 leading-relaxed mb-2">Obras públicas, pavimentación, empedrados, puentes y mantenimiento edilicio.</p>
+                            <p class="text-[10px] text-yellow-500/80 font-medium italic">Tip: El rubro más intensivo en capital. Requiere fiscalización in situ del avance físico de las obras.</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-[#111114] border border-white/5 rounded-xl p-5 flex flex-col justify-between hover:border-white/20 transition-colors">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="bg-black border border-white/10 px-3 py-1 rounded-lg">
+                                <span class="text-lg font-black text-white">842</span>
+                            </div>
+                            <button onclick="copyCode('842', this)" class="bg-white/5 hover:bg-yellow-500 hover:text-black text-gray-300 text-[10px] font-bold uppercase px-3 py-1.5 rounded transition-all active:scale-95">Copiar</button>
+                        </div>
+                        <div>
+                            <h3 class="text-sm font-bold text-white mb-1 uppercase">Aportes a Inst. sin Fines de Lucro</h3>
+                            <p class="text-[11px] text-gray-400 leading-relaxed mb-2">Transferencias directas a comisiones vecinales, fundaciones o asociaciones civiles.</p>
+                            <p class="text-[10px] text-yellow-500/80 font-medium italic">Tip: Rastrea la existencia real y la directiva de las comisiones que reciben estas transferencias.</p>
+                        </div>
+                    </div>
+
+                </div>
             </div>
 
-            <div class="hidden lg:flex justify-between mt-16">
+            <div class="hidden lg:flex justify-between mt-8">
                 <a href="modulo1.html" class="bg-transparent border border-white/20 hover:bg-white/5 text-gray-300 font-bold text-sm px-6 py-4 rounded-xl transition-colors flex items-center gap-2">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
                     Volver al Módulo 1
@@ -206,15 +234,17 @@
     </div>
 
     <script>
-        function copyCode(code) {
+        function copyCode(code, btnElement) {
             navigator.clipboard.writeText(code).then(() => {
-                const btn = event.target;
-                const originalText = btn.innerHTML;
-                btn.innerHTML = "¡COPIADO!";
-                btn.classList.replace('btn-copy', 'bg-green-500');
+                const originalText = btnElement.innerHTML;
+                const originalClasses = btnElement.className;
+                
+                btnElement.innerHTML = "¡COPIADO!";
+                btnElement.className = "bg-green-500 text-black text-[10px] font-bold uppercase px-3 py-1.5 rounded transition-all";
+                
                 setTimeout(() => {
-                    btn.innerHTML = originalText;
-                    btn.classList.replace('bg-green-500', 'btn-copy');
+                    btnElement.innerHTML = originalText;
+                    btnElement.className = originalClasses;
                 }, 2000);
             });
         }
