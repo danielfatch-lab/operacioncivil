@@ -2,28 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+    .bento-card {
+        @apply bg-dark-card border border-brand-borderDark rounded-xl p-6 md:p-8 transition-all duration-300;
+    }
+    
+    .btn-primary {
+        @apply bg-brand-success text-dark-void font-title font-black py-4 px-6 rounded-lg text-xs uppercase tracking-[0.15em] hover:bg-white transition-all shadow-[0_0_25px_rgba(16,185,129,0.2)];
+    }
+
+    .btn-secondary {
+        @apply border border-brand-borderDark text-white font-title font-bold py-4 px-6 rounded-lg text-xs uppercase tracking-[0.15em] hover:bg-white/5 transition-all;
+    }
+}
+
 body {
     background-color: #000000;
-    color: #ffffff;
-}
-
-.bento-card-black {
-    background-color: #0A0A0C;
-    border: 1px solid #1F1F22;
-    border-radius: 1rem;
-    transition: all 0.3s ease;
-}
-
-.bento-card-success {
-    background-color: rgba(16, 185, 129, 0.05);
-    border: 1px solid rgba(16, 185, 129, 0.2);
-    border-radius: 1rem;
-}
-
-.btn-main {
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.btn-main:active {
-    transform: scale(0.98);
+    -webkit-font-smoothing: antialiased;
 }
