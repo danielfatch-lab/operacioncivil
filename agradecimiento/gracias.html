@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aporte Confirmado | Daniel Franco</title>
+    <title>Acceso Liberado | Protocolo de Auditoría</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
     
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@400;800;900&display=swap" rel="stylesheet">
     
-    <script src="js/tailwind-config.js"></script>
-    <link rel="stylesheet" href="css/styles.css">
+    <script src="/js/tailwind-config.js"></script>
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body class="antialiased selection:bg-brand-yellow selection:text-black bg-dark-void min-h-screen flex flex-col">
 
@@ -20,51 +20,63 @@
         </div>
     </nav>
 
-    <main class="flex-grow flex items-center justify-center py-16 px-6 lg:px-12 relative overflow-hidden">
+    <main class="flex-grow flex items-center justify-center py-12 px-6 lg:px-12 relative overflow-hidden">
         <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-brand-yellow/5 filter blur-[100px] rounded-full pointer-events-none"></div>
 
-        <div class="max-w-3xl mx-auto text-center relative z-10">
+        <div class="max-w-4xl mx-auto text-center relative z-10">
             
-            <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-brand-yellow/10 border border-brand-yellow/30 text-brand-yellow mb-8 shadow-[0_0_30px_rgba(250,204,21,0.2)]">
-                <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+            <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-green-500/10 border border-green-500/30 text-green-500 mb-6 shadow-[0_0_30px_rgba(34,197,94,0.2)]">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
             </div>
             
-            <div class="font-body font-semibold text-xs tracking-[0.2em] text-brand-yellow uppercase mb-4">Transacción Segura Exitosa</div>
-            <h1 class="font-title text-4xl md:text-5xl font-black leading-tight mb-6 uppercase tracking-tight text-white">
-                EL SISTEMA HA COMENZADO A <span class="text-brand-yellow drop-shadow-md">TEMBLAR</span>.
+            <div class="font-body font-semibold text-xs tracking-[0.2em] text-green-500 uppercase mb-4">Pago Aprobado en Hotmart</div>
+            <h1 class="font-title text-3xl md:text-5xl font-black leading-tight mb-4 uppercase tracking-tight text-white">
+                TU ACCESO AL SISTEMA HA SIDO <span class="text-brand-yellow drop-shadow-md">LIBERADO</span>.
             </h1>
             
-            <p class="text-xl text-brand-textWhite font-normal leading-relaxed mb-12 max-w-2xl mx-auto">
-                Tu aporte silencioso ha sido procesado correctamente. Acabas de dar el primer paso para financiar la estructura que tomará Canindeyú en 2030.
-            </p>
+            <div class="bg-red-900/20 border border-red-500/50 rounded-lg p-4 mb-10 max-w-2xl mx-auto text-left flex items-start gap-4">
+                <svg class="w-6 h-6 text-red-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                <div>
+                    <h4 class="text-white font-bold text-sm uppercase">Paso Crítico: No cierres esta página</h4>
+                    <p class="text-brand-textGray text-sm mt-1">El acceso al Bono (Curso Táctico) <strong>NO se enviará por correo</strong> por motivos de seguridad. Debes ingresar ahora mismo y guardar el enlace maestro en tu navegador.</p>
+                </div>
+            </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-left mb-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-left mb-10">
                 
-                <div class="bento-card-black p-8 relative overflow-hidden">
+                <div class="bento-card-black p-8 relative overflow-hidden border-brand-yellow/30 bg-[#0a0a0c]">
+                    <div class="w-10 h-10 mb-4 text-brand-yellow">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                    </div>
+                    <h3 class="font-body text-lg font-bold mb-2 text-brand-yellow">PASO 1: Ingresa al Curso Táctico (Bono)</h3>
+                    <p class="text-brand-textGray text-sm leading-relaxed font-normal mb-6">Accede ahora a la plataforma interactiva. Aprenderás a cruzar datos de la DNCP y el MEF para detectar fugas de capital y proveedores de maletín en tiempo real.</p>
+                    
+                    <a href="https://operacioncivil.org/curso-tactico/modulo1" class="w-full btn-main inline-flex items-center justify-center gap-2 bg-brand-yellow text-black font-title font-black py-4 px-4 rounded-lg text-sm uppercase tracking-widest hover:bg-white transition-all shadow-[0_0_20px_rgba(250,204,21,0.3)]">
+                        INICIAR MÓDULO 1 AHORA
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                    </a>
+                </div>
+
+                <div class="bento-card-black p-8 relative overflow-hidden opacity-80">
                     <div class="w-10 h-10 mb-4 text-brand-textGray">
                         <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
                     </div>
-                    <h3 class="font-body text-lg font-bold mb-2 text-white">1. Revisá tu correo</h3>
-                    <p class="text-brand-textGray text-sm leading-relaxed font-normal">En los próximos 5 minutos recibirás un email automático de <strong class="text-brand-textWhite">Hotmart</strong> con tu acceso exclusivo para leer el Manual Táctico (Ebook).</p>
-                </div>
-
-                <div class="bento-card-black p-8 relative overflow-hidden">
-                    <div class="w-10 h-10 mb-4 text-brand-textGray">
-                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
-                    </div>
-                    <h3 class="font-body text-lg font-bold mb-2 text-white">2. Bandeja de Spam</h3>
-                    <p class="text-brand-textGray text-sm leading-relaxed font-normal">Si no ves el correo en tu bandeja principal, revisá la carpeta de Spam o Correo no deseado. A veces las verdades incómodas terminan ahí.</p>
+                    <h3 class="font-body text-lg font-bold mb-2 text-white">PASO 2: Descarga el eBook</h3>
+                    <p class="text-brand-textGray text-sm leading-relaxed font-normal">Hotmart acaba de enviar el recibo y el acceso al libro <strong>"12 Peones Acorralados"</strong> a tu correo electrónico. Revísalo más tarde (verifica la carpeta de Spam).</p>
                 </div>
 
             </div>
 
-            <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <a href="index.html" class="btn-main inline-flex items-center justify-center gap-3 bg-transparent border border-brand-borderDark text-white font-body font-bold py-4 px-8 rounded-lg text-sm uppercase tracking-wider hover:bg-brand-borderDark/50">
-                    VOLVER AL INICIO
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-6 mt-8">
+                <a href="https://www.instagram.com/danielfranco.py/" target="_blank" class="inline-flex items-center justify-center gap-3 text-brand-textGray hover:text-white font-body font-bold text-xs uppercase tracking-wider transition-colors">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.20 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                    Seguir en Instagram
                 </a>
-                <a href="AQUI_TU_LINK_DE_TIKTOK_O_INSTAGRAM" target="_blank" class="btn-main inline-flex items-center justify-center gap-3 bg-[#111114] border border-brand-borderDark text-white font-body font-bold py-4 px-8 rounded-lg text-sm uppercase tracking-wider hover:border-white/20">
-                    SEGUIR LA LUCHA EN REDES
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                
+                <span class="hidden sm:block text-brand-borderDark">|</span>
+                
+                <a href="https://operacioncivil.org/" class="text-brand-textGray/50 hover:text-white font-body text-xs uppercase tracking-wider transition-colors">
+                    Volver a la Portada
                 </a>
             </div>
 
@@ -73,21 +85,9 @@
 
     <footer class="py-10 bg-[#030303] text-center border-t border-brand-borderDark mt-auto">
         <div class="max-w-4xl mx-auto px-6 flex flex-col items-center">
-            
-            <div class="flex flex-wrap justify-center items-center gap-4 md:gap-6 mb-6 text-xs font-bold text-brand-textGray uppercase tracking-wider">
-                <a href="#" class="hover:text-brand-yellow transition-colors">Políticas de Privacidad</a>
-                <span class="hidden md:inline text-brand-borderDark">|</span>
-                <a href="#" class="hover:text-brand-yellow transition-colors">Términos de Uso</a>
-            </div>
-            
             <p class="text-brand-textGray/60 text-xs font-bold uppercase tracking-wider mb-4">
                 &copy; 2026 MOVIMIENTO CANINDEYÚ LIBRE. EL ANONIMATO ESTÁ GARANTIZADO.
             </p>
-            
-            <p class="text-brand-textGray/40 text-[10px] max-w-2xl mx-auto font-normal leading-relaxed text-justify md:text-center">
-                Este sitio no es parte del sitio web de Meta, Facebook o Instagram. Además, este sitio NO está respaldado por Meta de ninguna manera. FACEBOOK es una marca comercial de META PLATFORMS, Inc.
-            </p>
-            
         </div>
     </footer>
 
