@@ -3,84 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aporte Confirmado | Operación Civil</title>
+    <title>Aporte Confirmado | Daniel Franco</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
     <script src="js/tailwind-config.js"></script>
     <link rel="stylesheet" href="css/styles.css">
 </head>
-<body class="bg-[#030303] text-white">
+<body class="bg-dark-void text-white min-h-screen flex flex-col">
 
-    <nav class="w-full py-6 px-6 border-b border-white/5 bg-[#030303]">
-        <div class="max-w-6xl mx-auto flex justify-center">
-            <span class="text-white font-body font-bold text-[10px] uppercase tracking-[0.4em] opacity-40">Daniel Franco</span>
+    <nav class="w-full py-6 px-6 lg:px-12 flex justify-center border-b border-white/5 bg-dark-void">
+        <div class="max-w-7xl w-full mx-auto flex justify-center">
+            <span class="font-body font-bold text-[10px] tracking-[0.4em] text-white opacity-40 uppercase">DANIEL FRANCO</span>
         </div>
     </nav>
 
-    <section class="pt-12 pb-16 px-6 lg:px-12 bg-[#030303] relative overflow-hidden min-h-screen">
-        <div class="absolute -left-20 top-20 w-96 h-96 bg-yellow-500/5 blur-[120px] rounded-full pointer-events-none"></div>
-        <div class="absolute -right-20 bottom-20 w-96 h-96 bg-yellow-500/5 blur-[120px] rounded-full pointer-events-none"></div>
+    <main class="flex-grow pt-16 pb-20 px-6 lg:px-12 relative overflow-hidden">
+        
+        <div class="absolute -left-40 top-40 w-[500px] h-[500px] bg-brand-yellow/5 blur-[150px] rounded-full pointer-events-none"></div>
+        <div class="absolute -right-40 bottom-40 w-[500px] h-[500px] bg-brand-success/5 blur-[150px] rounded-full pointer-events-none"></div>
 
         <div class="max-w-6xl mx-auto relative z-10">
             
-            <div class="mb-12 text-center max-w-3xl mx-auto">
-                <span class="text-yellow-500 font-body font-bold text-[10px] uppercase tracking-[0.3em] mb-4 block">Transacción Confirmada</span>
-                <h2 class="font-body text-4xl md:text-6xl font-bold text-white tracking-tighter mb-6">
-                    Aporte Recibido. <span class="text-yellow-500">Acceso Total.</span>
+            <div class="mb-16 text-center max-w-3xl mx-auto">
+                <span class="text-brand-yellow font-body font-bold text-[10px] uppercase tracking-[0.3em] mb-4 block">Operación Confirmada</span>
+                <h2 class="font-body text-4xl md:text-5xl font-bold text-white tracking-tighter mb-6">
+                    Aporte procesado con éxito. <span class="text-brand-yellow">Tu lucha comienza.</span>
                 </h2>
                 <p class="text-brand-textGray text-base md:text-lg leading-relaxed">
-                    Has financiado la inteligencia táctica de la <strong class="text-white font-medium">Oposición Permanente.</strong> Tu eBook ya está en tu correo, pero tu entrenamiento interactivo empieza aquí.
+                    Has financiado la estructura que tomará Canindeyú en 2030. Cero donaciones. Es una transacción directa que nos vuelve inmunes a sus maletines.
                 </p>
             </div>
 
-            <div class="bento-card-main mb-8">
-                <div class="absolute -right-4 -top-10 text-[10rem] font-black text-yellow-500/5 pointer-events-none select-none">+</div>
+            <div class="bento-grid">
                 
-                <div class="relative z-10">
-                    <span class="text-yellow-500 font-bold text-[10px] uppercase tracking-[0.3em] mb-2 block">Bonus Exclusivo</span>
-                    <h3 class="font-body font-bold text-3xl md:text-4xl text-white mb-6 tracking-tight">El Curso Táctico: Módulo 1</h3>
-                    <p class="text-brand-textGray text-base md:text-lg leading-relaxed mb-8 max-w-2xl">
-                        No esperes al correo electrónico. Accedé ahora mismo a la plataforma de fiscalización y aprendé a arrinconar al oficialismo usando sus propios datos de ejecución presupuestaria.
+                <div class="bento-card-instructions border border-brand-yellow/10">
+                    <div class="w-10 h-10 mb-5 text-brand-yellow">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                    </div>
+                    <h3 class="font-body font-bold text-2xl text-white mb-3 tracking-tight relative z-10">1. Revisa tu Correo Electrónico</h3>
+                    <p class="text-brand-textGray text-base leading-relaxed relative z-10 mb-0">
+                        En los próximos 5 a 10 minutos, recibirás un email automático de la plataforma <strong class="text-white">Hotmart</strong>. Allí está el enlace exclusivo para leer tu ejemplar maestro del libro <strong class="text-brand-yellow">"12 Peones Acorralados Hunden al Intendente"</strong>. Si no lo ves, verifica la carpeta de Spam.
+                    </p>
+                </div>
+
+                <div class="bento-card-instructions border border-brand-yellow/30 bg-[#0A0A0C]">
+                    <div class="absolute left-0 top-0 w-1/2 h-full bg-yellow-500/5 blur-3xl pointer-events-none"></div>
+                    
+                    <div class="w-10 h-10 mb-5 text-brand-yellow relative z-10">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                    </div>
+                    <h3 class="font-body font-bold text-2xl text-white mb-3 tracking-tight relative z-10">2. Reclama tu Curso Táctico (Bonus)</h3>
+                    <p class="text-brand-textGray text-base leading-relaxed relative z-10 mb-8">
+                        No esperes al mail. Tu acceso a la plataforma de fiscalización interactiva ya está liberado por haber adquirido el método. Hacé clic abajo para reclamar tu BONUS y empezar a auditar facturas municipales hoy mismo.
                     </p>
                     
-                    <a href="https://operacioncivil.org/curso-tactico/modulo1.html" class="btn-yellow">
-                        INICIAR ENTRENAMIENTO AHORA
+                    <a href="https://operacioncivil.org/curso-tactico/modulo1.html" class="w-full md:w-auto btn-brand-yellow relative z-10">
+                        ENTRAR AL CURSO TÁCTICO
                     </a>
                 </div>
-            </div>
 
-            <div class="bento-card-alt flex flex-col md:flex-row items-start md:items-center gap-6 md:gap-10 mb-12">
-                <div class="absolute left-0 top-0 w-1/2 h-full bg-yellow-500/5 blur-3xl pointer-events-none"></div>
-                
-                <div class="flex-shrink-0 relative z-10">
-                    <span class="text-yellow-500 font-bold text-[10px] uppercase tracking-[0.3em] mb-2 block">Entrega Inmediata</span>
-                    <h3 class="font-body font-bold text-2xl md:text-3xl text-white tracking-tight">Manual Táctico</h3>
-                </div>
-                
-                <div class="hidden md:block w-px h-24 bg-white/10 mx-4 relative z-10"></div>
-                
-                <div class="relative z-10 border-t border-white/10 pt-6 md:border-none md:pt-0">
-                    <p class="text-brand-textGray text-sm leading-relaxed">
-                        Hotmart ha enviado el PDF a tu bandeja de entrada. Si no lo ves, revisá la carpeta de <strong class="text-white">Spam</strong>. Ese archivo contiene la base teórica; el link de arriba es la herramienta práctica. Usá ambos para blindar tu estructura.
-                    </p>
-                </div>
-            </div>
-
-            <div class="flex flex-col items-center justify-center gap-6 relative z-10">
-                <a href="https://operacioncivil.org/" class="text-brand-textGray hover:text-white font-body font-bold text-[10px] uppercase tracking-[0.3em] transition-all">
-                    Volver a la Portada
-                </a>
             </div>
 
         </div>
-    </section>
+    </main>
 
-    <footer class="py-12 bg-[#030303] border-t border-white/5 text-center px-6">
-        <p class="text-brand-textGray text-[9px] font-bold uppercase tracking-[0.3em] opacity-40">
-            © 2026 MOVIMIENTO CANINDEYÚ LIBRE. FISCALIZACIÓN CIVIL ACTIVA.
-        </p>
+    <div class="w-full px-6 lg:px-12 max-w-7xl mx-auto mb-10">
+        <div class="h-px w-full bg-brand-yellow opacity-40 rounded-full shadow-[0_0_10px_rgba(250,204,21,0.5)]"></div>
+    </div>
+
+    <footer class="py-10 bg-dark-void border-t border-white/5 text-center mt-auto px-6">
+        <div class="max-w-5xl mx-auto flex flex-col items-center gap-5">
+            <a href="https://www.instagram.com/danielfranco.py/" target="_blank" class="flex items-center gap-2 text-brand-textGray hover:text-white text-[11px] uppercase font-bold tracking-widest transition-all">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.20 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                Seguir lucha en Redes
+            </a>
+            <p class="text-[9px] text-brand-textGray/50 font-medium uppercase tracking-[0.3em] mb-0">
+                &copy; 2026 MOVIMIENTO CANINDEYÚ LIBRE. FISCALIZACIÓN CIVIL ACTIVA.
+            </p>
+        </div>
     </footer>
 
 </body>

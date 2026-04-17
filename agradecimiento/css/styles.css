@@ -3,21 +3,23 @@
 @tailwind utilities;
 
 @layer components {
-    .bento-card-main {
-        @apply bg-[#080808] border border-yellow-500/20 rounded-3xl p-8 md:p-12 relative overflow-hidden shadow-[0_10px_30px_rgba(250,204,21,0.02)];
+    .bento-grid {
+        @apply grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 max-w-5xl mx-auto mb-12;
     }
     
-    .bento-card-alt {
-        @apply bg-[#0a0a0a] border border-yellow-500/20 rounded-3xl p-8 md:p-12 relative overflow-hidden;
+    .bento-card-instructions {
+        @apply bg-[#080808] border border-white/5 rounded-3xl p-8 md:p-10 relative overflow-hidden transition-all duration-300;
     }
 
-    .btn-yellow {
-        @apply inline-block bg-yellow-500 hover:bg-yellow-400 text-black font-body font-bold py-4 px-10 rounded-xl text-lg uppercase tracking-wider transition-all shadow-[0_0_20px_rgba(250,204,21,0.2)] hover:shadow-[0_0_30px_rgba(250,204,21,0.4)] hover:-translate-y-1 text-center;
+    /* Estética del botón de la captura de referencia */
+    .btn-brand-yellow {
+        @apply inline-block bg-yellow-500 hover:bg-yellow-400 text-black font-body font-bold py-4 px-10 rounded-xl text-lg uppercase tracking-wider transition-all shadow-[0_0_20px_rgba(250,204,21,0.15)] hover:shadow-[0_0_30px_rgba(250,204,21,0.3)] hover:-translate-y-0.5 text-center;
     }
 }
 
 body {
     background-color: #030303;
     -webkit-font-smoothing: antialiased;
+    color: #ffffff;
     font-family: 'Inter', sans-serif;
 }
