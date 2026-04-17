@@ -1,21 +1,23 @@
 tailwind.config = {
     theme: {
         extend: {
-            fontFamily: { 
-                title: ['Montserrat', 'sans-serif'], 
-                body: ['Inter', 'sans-serif'] 
-            },
             colors: {
-                brand: { 
-                    black: '#030303',
-                    darkBlue: '#0a0f1a',  
-                    card: '#0d1322',      
-                    borderDark: '#1a233a', 
-                    yellow: '#facc15',    
-                    red: '#DC2626',       
-                    textGray: '#94a3b8',  
-                    textWhite: '#f8fafc'
+                brand: {
+                    yellow: '#FACC15',
+                    borderDark: '#1F1F22',
+                    textGray: '#8B8B93',
+                    textWhite: '#E4E4E7',
+                    success: '#10B981', // Verde de confirmación
+                    successDark: '#047857'
+                },
+                dark: {
+                    void: '#000000',
+                    surface: '#0A0A0C'
                 }
+            },
+            fontFamily: {
+                title: ['Montserrat', 'sans-serif'],
+                body: ['Inter', 'sans-serif']
             }
         }
     }
