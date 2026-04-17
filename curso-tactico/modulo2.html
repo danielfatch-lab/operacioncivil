@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Módulo 2 | Operación Civil</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #0a0a0a; color: #ffffff; padding-bottom: 100px; }
+        .bento-card { background: linear-gradient(145deg, #16161a 0%, #0d0d0f 100%); border: 1px solid #222226; border-radius: 1.5rem; }
+        .logo-text { font-weight: 700; letter-spacing: 0.3em; color: #facc15; text-transform: uppercase; }
+        .insult-box { border-left: 3px solid #dc2626; background: linear-gradient(90deg, rgba(220, 38, 38, 0.05) 0%, transparent 100%); }
+        .nav-link-active { background: rgba(255, 255, 255, 0.05); color: #ffffff; border-left: 2px solid #ffffff; }
+        
+        /* Estilo de los códigos y botones */
+        .code-display { background: #000; border: 1px solid #333; border-radius: 0.75rem; }
+        .btn-copy { background: #facc15; color: #000; font-weight: 800; transition: all 0.2s; }
+        .btn-copy:active { transform: scale(0.95); }
+        
+        .column-grid { display: grid; gap: 1rem; }
+        @media (min-width: 768px) {
+            .column-grid { grid-template-columns: repeat(4, 1fr); }
+            .col-span-full-custom { grid-column: span 4 / span 4; }
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen">
+
+    <header class="w-full bg-[#0a0a0a]/90 backdrop-blur-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
+            <span class="logo-text text-xs md:text-sm">Operación Civil</span>
+            <div class="flex items-center gap-2">
+                <span class="h-2 w-2 rounded-full bg-red-600 animate-pulse"></span>
+                <span class="text-[9px] font-bold text-gray-500 uppercase tracking-widest">Protocolo de Auditoría</span>
+            </div>
+        </div>
+        <div class="h-[1px] w-full bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
+    </header>
+
+    <div class="max-w-7xl mx-auto flex flex-col lg:flex-row mt-4">
+        <aside class="hidden lg:block w-72 p-8">
+            <nav class="space-y-2 sticky top-28">
+                <div class="text-[10px] font-bold text-gray-600 uppercase tracking-[0.2em] mb-4 pl-4">Fases de Operación</div>
+                <a href="modulo1.html" class="flex items-center px-4 py-3 rounded-xl text-gray-500 hover:text-white transition-all text-sm font-medium">1. Ejecución de Gastos</a>
+                <a href="modulo2.html" class="flex items-center px-4 py-3 rounded-xl text-gray-500 hover:text-white transition-all text-sm font-medium">2. La Selva Numérica</a>
+                <a href="#" class="nav-link-active flex items-center px-4 py-3 rounded-xl text-sm font-semibold">3. Radar de Contrataciones</a>
+            </nav>
+        </aside>
+
+        <main class="flex-1 p-6 lg:p-12 max-w-4xl mx-auto w-full">
+            <h1 class="text-3xl md:text-5xl font-black tracking-tight mb-8 text-white">La disección del archivo.</h1>
+
+            <div class="bento-card p-6 md:p-8 mb-12 shadow-2xl">
+                <div class="insult-box p-6 mb-6">
+                    <p class="text-red-400 font-medium italic leading-relaxed">
+                        "Un Excel es una selva de números diseñada para que te pierdas. Confían en que tu mente se va a nublar al ver tantas columnas. Hoy vas a aprender a ignorar el 90% de esa basura burocrática para enfocarte solo en la sangre del sistema: el dinero."
+                    </p>
+                </div>
+            </div>
+
+            <h2 class="text-xl font-bold text-white mb-6 uppercase tracking-wider">Las 5 columnas del poder</h2>
+            <div class="column-grid mb-16">
+                <div class="col-span-full-custom bento-card p-6 border-b-2 border-yellow-500/50">
+                    <p class="text-[10px] text-yellow-500 font-black uppercase tracking-widest mb-1">Columna 1 (El Origen)</p>
+                    <p class="text-xl font-black text-white mb-2">Presupuesto Vigente</p>
+                    <p class="text-sm text-gray-400 leading-relaxed">Es la promesa oficial. Representa el monto total que las autoridades declararon que iban a gastar en cada rubro al inicio del año.</p>
+                </div>
+                
+                <div class="bento-card p-5">
+                    <p class="text-[10px] text-gray-500 font-black uppercase mb-2">Columna 2</p>
+                    <p class="text-base font-bold text-white mb-1">Total Obligado</p>
+                    <p class="text-[11px] text-gray-400">El compromiso legal. Plata que ya tiene un dueño asignado por contrato.</p>
+                </div>
+                <div class="bento-card p-5 border border-red-500/30 bg-red-900/5">
+                    <p class="text-[10px] text-red-500 font-black uppercase mb-2">Columna 3</p>
+                    <p class="text-base font-bold text-red-400 mb-1">Total Pagado</p>
+                    <p class="text-[11px] text-gray-300 italic">La salida real. Acá el cheque ya se cobró. Es el desembolso consumado.</p>
+                </div>
+                <div class="bento-card p-5">
+                    <p class="text-[10px] text-gray-500 font-black uppercase mb-2">Columna 4</p>
+                    <p class="text-base font-bold text-white mb-1">Saldo</p>
+                    <p class="text-[11px] text-gray-400">La inoperancia. Lo que no se usó. Si sobra mucho en áreas clave, hubo falta de gestión.</p>
+                </div>
+                <div class="bento-card p-5 border border-white/20">
+                    <p class="text-[10px] text-white font-black uppercase mb-2">Columna 5</p>
+                    <p class="text-base font-bold text-yellow-500 mb-1">Objeto Gasto</p>
+                    <p class="text-[11px] text-gray-400 font-mono">El código de 3 dígitos que define el destino del dinero.</p>
+                </div>
+            </div>
+
+            <div class="bento-card p-6 md:p-10 border border-yellow-500/20 mb-12">
+                <h2 class="text-2xl font-black text-white mb-6">Técnica de Búsqueda de Precisión</h2>
+                <div class="space-y-6 text-sm text-gray-300 leading-relaxed">
+                    <p>No leas la planilla línea por línea. Usá la herramienta Buscar: <span class="bg-white/10 px-2 py-1 rounded text-white font-mono">CTRL + F</span> en computadora o la opción <span class="bg-white/10 px-2 py-1 rounded text-white italic">"Buscar en la página"</span> de tu celular.</p>
+                    
+                    <div class="bg-black/50 p-5 rounded-2xl border border-white/5">
+                        <h3 class="text-white font-bold mb-3 flex items-center gap-2">
+                            <svg class="w-4 h-4 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                            Instrucciones para infiltrarse:
+                        </h3>
+                        <ol class="space-y-4 ml-4 list-decimal text-gray-400">
+                            <li><strong class="text-white">Pegá solo el código:</strong> Copiá los 3 dígitos de abajo y pegalos en el buscador. El sistema te llevará automáticamente a la celda exacta de ese rubro.</li>
+                            <li><strong class="text-white">Filtro de rubro:</strong> Si el código no te arroja resultados (a veces los municipios usan formatos distintos), buscá directamente por el <strong class="text-yellow-500">Nombre del Rubro</strong> (ej. "Combustibles", "Medicamentos").</li>
+                            <li><strong class="text-white">Mirá a la derecha:</strong> Una vez que encuentres la fila del código, deslizate directo a las columnas de <strong class="text-red-400 uppercase font-bold">Total Pagado</strong>.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="text-xl font-bold text-white mb-6 uppercase tracking-wider">Arsenal de códigos listos</h2>
+            <div class="space-y-4">
+                
+                <div class="bento-card p-5 group">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                        <div class="flex items-center gap-4">
+                            <div class="code-display px-4 py-2">
+                                <span id="code-361" class="text-xl font-black text-yellow-500">361</span>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-white uppercase text-sm">Combustibles y Lubricantes</h3>
+                                <p class="text-[11px] text-gray-500">Rastreo de gastos en flota oficial.</p>
+                            </div>
+                        </div>
+                        <button onclick="copyCode('361')" class="btn-copy px-6 py-2 rounded-lg text-[10px] uppercase">Copiar Código</button>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-white/5">
+                        <p class="text-[11px] text-gray-400 leading-relaxed italic"><strong class="text-red-500">La Autopsia:</strong> Analizá la relación entre el total pagado y los servicios municipales reales. Es común ver cifras que implicarían camionetas recorriendo miles de kilómetros diarios.</p>
+                    </div>
+                </div>
+
+                <div class="bento-card p-5 group border-l-4 border-blue-500/30">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                        <div class="flex items-center gap-4">
+                            <div class="code-display px-4 py-2">
+                                <span id="code-352" class="text-xl font-black text-blue-400">352</span>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-white uppercase text-sm">Productos Farmacéuticos</h3>
+                                <p class="text-[11px] text-gray-500">Insumos médicos y medicamentos.</p>
+                            </div>
+                        </div>
+                        <button onclick="copyCode('352')" class="btn-copy px-6 py-2 rounded-lg text-[10px] uppercase">Copiar Código</button>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-white/5 text-[11px] text-gray-400 leading-relaxed italic">
+                        <strong class="text-blue-400">La Autopsia:</strong> Si el saldo en esta columna es muy alto y el hospital local no tiene ni gasas, estás ante una falta de ejecución crítica de los recursos para el pueblo.
+                    </div>
+                </div>
+
+                <div class="bento-card p-5 group">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                        <div class="flex items-center gap-4">
+                            <div class="code-display px-4 py-2">
+                                <span id="code-144" class="text-xl font-black text-yellow-500">144</span>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-white uppercase text-sm">Jornales</h3>
+                                <p class="text-[11px] text-gray-500">Personal contratado temporal.</p>
+                            </div>
+                        </div>
+                        <button onclick="copyCode('144')" class="btn-copy px-6 py-2 rounded-lg text-[10px] uppercase">Copiar Código</button>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-white/5">
+                        <p class="text-[11px] text-gray-400 leading-relaxed italic"><strong class="text-red-500">La Autopsia:</strong> La nómina del silencio. Personal sin funciones claras que suele aparecer con fuerza en registros de épocas electorales.</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="hidden lg:flex justify-end mt-16">
+                <a href="modulo3.html" class="bg-white hover:bg-gray-200 text-black font-bold text-sm px-8 py-4 rounded-xl transition-colors flex items-center gap-2 shadow-2xl">
+                    Módulo 3: Contrataciones (DNCP)
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                </a>
+            </div>
+
+        </main>
+    </div>
+
+    <div class="lg:hidden fixed bottom-0 left-0 right-0 bg-[#0a0a0a]/90 backdrop-blur-xl border-t border-white/10 p-4 z-50 shadow-[0_-10px_30px_rgba(0,0,0,0.5)]">
+        <div class="flex items-center justify-between max-w-3xl mx-auto gap-4">
+            <div class="flex flex-col overflow-hidden">
+                <span class="text-[9px] text-gray-500 uppercase tracking-widest font-black mb-0.5">Fase Actual</span>
+                <span class="text-sm font-bold text-white truncate">La Selva Numérica</span>
+            </div>
+            <a href="modulo3.html" class="bg-white text-black font-extrabold text-[11px] px-6 py-3.5 rounded-xl active:scale-95 transition-transform flex items-center gap-2 shrink-0 shadow-lg uppercase tracking-tighter">
+                Siguiente 
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"></path></svg>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        function copyCode(code) {
+            navigator.clipboard.writeText(code).then(() => {
+                const btn = event.target;
+                const originalText = btn.innerHTML;
+                btn.innerHTML = "¡COPIADO!";
+                btn.classList.replace('btn-copy', 'bg-green-500');
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                    btn.classList.replace('bg-green-500', 'btn-copy');
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>

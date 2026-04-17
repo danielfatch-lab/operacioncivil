@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Red de Fiscalización | Daniel Franco</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@400;800;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { 
+                        title: ['Montserrat', 'sans-serif'], 
+                        body: ['Inter', 'sans-serif'] 
+                    },
+                    colors: {
+                        brand: { 
+                            black: '#030303',
+                            darkBlue: '#0a0f1a',  
+                            borderDark: '#1a233a', 
+                            yellow: '#facc15',    
+                            red: '#DC2626',       
+                            textGray: '#94a3b8',  
+                            textWhite: '#f8fafc'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html { scroll-behavior: smooth; }
+        body { background-color: #0a0f1a; color: #f8fafc; overflow-x: hidden; font-family: 'Inter', sans-serif; }
+        
+        .btn-main { transition: all 0.3s ease; }
+        .btn-main:hover { transform: translateY(-2px); box-shadow: 0 10px 30px -5px rgba(250, 204, 21, 0.3); }
+        
+        .bg-dark-void { background: linear-gradient(to bottom, #030303 0%, #0a0f1a 100%); }
+
+        .bento-card-black {
+            background: linear-gradient(145deg, #111114 0%, #030303 100%);
+            border: 1px solid #1f1f22;
+            border-radius: 1.5rem;
+            box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.02), 0 20px 40px -10px rgba(0,0,0,0.8);
+        }
+
+        .input-field {
+            background-color: #0d1322;
+            border: 1px solid #1a233a;
+            color: #f8fafc;
+            transition: all 0.3s ease;
+        }
+        .input-field:focus {
+            outline: none;
+            border-color: #facc15;
+            box-shadow: 0 0 10px rgba(250, 204, 21, 0.2);
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-brand-yellow selection:text-black bg-dark-void min-h-screen flex flex-col">
+
+    <nav class="w-full py-5 px-6 lg:px-12 flex justify-start sm:justify-center border-b border-brand-borderDark bg-transparent absolute top-0 z-50">
+        <div class="font-title font-normal text-sm tracking-[0.2em] text-white uppercase opacity-70">
+            DANIEL FRANCO
+        </div>
+    </nav>
+
+    <main class="flex-grow flex items-center pt-24 pb-12 px-6 lg:px-12 relative overflow-hidden">
+        
+        <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-red/5 filter blur-[100px] rounded-full pointer-events-none translate-x-1/3 -translate-y-1/3"></div>
+
+        <div class="max-w-6xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 items-center relative z-10">
+            
+            <div class="text-left">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-red/10 border border-brand-red/20 text-brand-red text-xs font-bold uppercase tracking-widest mb-4 md:mb-6">
+                    <span class="w-2 h-2 rounded-full bg-brand-red animate-pulse"></span>
+                    Alerta Ciudadana
+                </div>
+                
+                <h1 class="font-title text-4xl md:text-5xl font-black leading-[1.1] mb-6 uppercase tracking-tight text-white">
+                    VAMOS A <span class="text-brand-yellow drop-shadow-md">OBLIGARLOS</span> A TRABAJAR.
+                </h1>
+
+                <a href="#formulario" class="block lg:hidden btn-main bg-brand-yellow text-brand-black text-center font-body font-bold py-3 px-6 rounded-lg text-sm uppercase tracking-wider mb-8 shadow-[0_0_15px_rgba(250,204,21,0.2)]">
+                    COMPLETAR MIS DATOS 👇
+                </a>
+                
+                <div class="space-y-5 text-brand-textGray text-base md:text-lg leading-relaxed font-normal mb-8">
+                    <p>
+                        Las mulas de la Junta operan en la oscuridad. Frenan el progreso de tu barrio porque saben que <strong class="text-white">nadie los vigila.</strong> Vamos a prenderles la luz.
+                    </p>
+                    
+                    <p class="text-brand-textWhite font-medium">Esto no es campaña, es presión ciudadana. Te avisaremos antes de cada sesión clave para:</p>
+
+                    <ul class="space-y-3 pl-2">
+                        <li class="flex items-start gap-3">
+                            <svg class="w-6 h-6 text-brand-red flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                            <span>Exponer en vivo (LIVE) si defienden a su patrón o a tu barrio.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <svg class="w-6 h-6 text-brand-red flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"></path></svg>
+                            <span>Escrachar masivamente a quienes voten en contra de las obras.</span>
+                        </li>
+                    </ul>
+
+                    <div class="border-l-2 border-brand-yellow pl-4 py-2 mt-4 bg-[#0d1322] rounded-r-lg">
+                        <p class="text-sm font-medium text-white">
+                            Necesitamos: <span class="text-brand-yellow">WhatsApp</span> para la alerta urgente de conexión, y <span class="text-brand-yellow">Correo</span> para enviarte las pruebas oficiales en PDF.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="formulario" class="flex justify-center lg:justify-end pt-4 lg:pt-0">
+                <div class="bento-card-black p-8 w-full max-w-md relative">
+                    
+                    <h3 class="font-body text-2xl font-bold text-white mb-2 tracking-tight">Activá tu Alerta</h3>
+                    <p class="text-brand-textGray text-sm mb-8">Recibí las pruebas antes de cada sesión.</p>
+                    
+                    <form action="https://formsubmit.co/TU_CORREO_AQUI@GMAIL.COM" method="POST" class="space-y-5">
+                        
+                        <input type="hidden" name="_captcha" value="false">
+                        <input type="hidden" name="_next" value="https://tudominio.com/gracias-alerta.html">
+                        <input type="hidden" name="_subject" value="NUEVO SOLDADO PARA LA FISCALIZACIÓN">
+
+                        <div>
+                            <label for="nombre" class="block text-xs font-bold text-brand-textGray uppercase tracking-wider mb-2">Tu Nombre (o Alias)</label>
+                            <input type="text" id="nombre" name="Nombre" required placeholder="Ej: Juan Pérez" class="input-field w-full px-4 py-3 rounded-lg text-base">
+                        </div>
+
+                        <div>
+                            <label for="whatsapp" class="block text-xs font-bold text-brand-textGray uppercase tracking-wider mb-2">WhatsApp <span class="text-brand-yellow font-normal normal-case tracking-normal">(Para urgencias)</span></label>
+                            <input type="tel" id="whatsapp" name="WhatsApp" required placeholder="+595 9XX XXX XXX" class="input-field w-full px-4 py-3 rounded-lg text-base">
+                        </div>
+
+                        <div>
+                            <label for="email" class="block text-xs font-bold text-brand-textGray uppercase tracking-wider mb-2">Correo <span class="text-brand-textGray/50 font-normal normal-case tracking-normal">(Para evidencia/PDFs)</span></label>
+                            <input type="email" id="email" name="Email" required placeholder="tu@correo.com" class="input-field w-full px-4 py-3 rounded-lg text-base">
+                        </div>
+
+                        <button type="submit" class="btn-main w-full bg-brand-yellow text-brand-black font-body font-bold py-4 rounded-lg text-lg uppercase tracking-wider mt-4">
+                            UNIRME A LA ALERTA
+                        </button>
+
+                        <p class="text-center text-xs text-brand-textGray mt-4 opacity-70">
+                            Tus datos están blindados. Cero spam, solo presión ciudadana.
+                        </p>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="py-10 bg-[#030303] text-center border-t border-brand-borderDark mt-auto z-20 relative">
+        <div class="max-w-4xl mx-auto px-6 flex flex-col items-center">
+            
+            <div class="flex flex-wrap justify-center items-center gap-4 md:gap-6 mb-6 text-xs font-bold text-brand-textGray uppercase tracking-wider">
+                <a href="#" class="hover:text-brand-yellow transition-colors">Políticas de Privacidad</a>
+                <span class="hidden md:inline text-brand-borderDark">|</span>
+                <a href="#" class="hover:text-brand-yellow transition-colors">Términos de Uso</a>
+            </div>
+            
+            <p class="text-brand-textGray/60 text-xs font-bold uppercase tracking-wider mb-4">
+                &copy; 2026 MOVIMIENTO CANINDEYÚ LIBRE. TUS DATOS ESTÁN PROTEGIDOS.
+            </p>
+            
+            <p class="text-brand-textGray/40 text-[10px] max-w-2xl mx-auto font-normal leading-relaxed text-justify md:text-center">
+                Este sitio no es parte del sitio web de Meta, Facebook o Instagram. Además, este sitio NO está respaldado por Meta de ninguna manera. FACEBOOK es una marca comercial de META PLATFORMS, Inc.
+            </p>
+            
+        </div>
+    </footer>
+
+</body>
+</html>

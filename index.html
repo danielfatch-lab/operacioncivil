@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, viewport-fit=cover">
+    <title>12 Peones Acorralados | Daniel Franco</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { 
+                        body: ['Inter', 'sans-serif'] 
+                    },
+                    colors: {
+                        brand: { 
+                            black: '#030303',
+                            darkBlue: '#0a0f1a',  
+                            card: '#0d1322',      
+                            borderDark: '#1a233a', 
+                            yellow: '#facc15',    
+                            red: '#DC2626',       
+                            textGray: '#cbd5e1', 
+                            textWhite: '#f8fafc'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="antialiased selection:bg-brand-yellow selection:text-black flex flex-col min-h-screen">
+
+        <section class="relative pt-8 md:pt-16 lg:pt-20 pb-0 lg:pb-16 px-6 lg:px-12 bg-hero-black border-b border-brand-borderDark min-h-[65vh] lg:min-h-0 flex flex-col lg:block overflow-hidden">
+            
+            <div class="absolute bottom-0 left-0 w-full h-[55%] lg:hidden z-0 translate-y-1">
+                <div class="absolute inset-0 bg-gradient-to-b from-[#030303] via-[#030303]/60 to-transparent z-10 h-[50%]"></div>
+                <img src="img/84e94d2b-6d61-4660-8eac-54bdcff29fc0.jpg" alt="Ajedrez" fetchpriority="high" decoding="async" class="absolute bottom-0 left-0 w-full h-full object-cover object-center grayscale-[10%] opacity-90 z-0">
+            </div>
+
+            <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 items-center relative z-10 flex-grow h-full w-full">
+                
+                <div class="lg:col-span-7 text-left flex flex-col justify-start lg:justify-center z-10 pb-[25vh] lg:pb-0">
+                    
+                    <div class="font-body font-bold text-xs tracking-[0.2em] text-brand-textGray uppercase mb-6 flex flex-col items-start">
+                        DANIEL FRANCO
+                        <hr class="w-[30px] border-t border-[#555555] mt-2">
+                    </div>
+
+                    <h1 class="font-body text-[2.6rem] sm:text-[2.8rem] md:text-5xl lg:text-[4.2rem] font-black leading-[1.05] mb-6 uppercase tracking-tight text-white drop-shadow-md">
+                        <span class="text-brand-red">12 PEONES</span><br>ACORRALADOS<br>HUNDEN AL<br>INTENDENTE.
+                    </h1>
+                    
+                    <p class="text-base sm:text-lg md:text-xl text-brand-textGray font-normal leading-relaxed mb-8 max-w-xl drop-shadow-md pr-4">
+                        Descubrí cómo operan en las sombras y la falla estructural exacta <strong class="text-brand-textWhite font-semibold">para derrocarlos.</strong>
+                    </p>
+
+                    <div class="self-start inline-block">
+                        <a href="#oferta" class="btn-main inline-flex items-center justify-center gap-3 bg-brand-yellow text-brand-black font-body font-bold py-3 px-8 rounded-lg text-base sm:text-lg uppercase tracking-wider shadow-[0_0_20px_rgba(250, 204, 21, 0.2)]">
+                            COMPRAR AHORA
+                        </a>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-5 relative mt-8 lg:mt-0 hidden lg:flex justify-end z-10">
+                    <div class="relative w-full max-w-sm">
+                        <img src="img/libro-foto.png" alt="Ebook 12 Peones" loading="lazy" decoding="async" class="relative z-10 w-full h-auto rounded-xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-white/5">
+                    </div>
+                </div>
+            </div>
+            
+        </section>
+
+        <section class="py-14 px-6 lg:px-12 bg-[#030303] border-b border-[#1a1a1a]">
+            <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                
+                <div class="order-2 lg:order-1 relative flex justify-center lg:justify-start">
+                    <div class="w-full max-w-md bg-[#080808] rounded-2xl border border-[#1a1a1a] p-2 shadow-xl">
+                        <img src="img/foto-historia.png" alt="Daniel Franco" loading="lazy" decoding="async" class="w-full h-auto rounded-xl object-cover opacity-90 hover:opacity-100 transition-opacity grayscale-[20%]">
+                    </div>
+                </div>
+
+                <div class="order-1 lg:order-2 text-left">
+                    <div class="font-body font-bold text-[10px] uppercase tracking-[0.3em] text-red-500 mb-4">La Farsa Electoral</div>
+                    
+                    <h2 class="font-body text-3xl md:text-5xl font-bold text-white tracking-tight mb-6">
+                        Crecí en el corazón del monstruo.
+                    </h2>
+                    
+                    <div class="space-y-4 text-brand-textGray text-base md:text-lg leading-relaxed font-normal">
+                        <p>Vengo de una familia que operó para el oficialismo. Sé exactamente cómo te usan de cajero automático para pagar sus asados de domingo, mientras a vos te dejan rogando que no asalten a tu hijo en la esquina.</p>
+                        
+                        <p>Pasé 5 años en silencio mapeando su estructura. Operación Civil es el resultado de un paso a paso para que entiendas como derrotaremos a este sistema.</p>
+                        
+                        <div class="border-l-2 border-yellow-500 pl-5 mt-6 py-4 bg-gradient-to-r from-yellow-500/10 to-transparent">
+                            <p class="text-brand-textGray font-normal text-base leading-relaxed">
+                                Olvidate de las marchas inútiles. Yo ya hice la autopsia de su sistema. <strong class="text-white font-medium block mt-1">Acá te revelo la máquina para asfixiar a sus peones:</strong>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-16 px-6 lg:px-12 bg-[#030303] relative overflow-hidden">
+            
+            <div class="max-w-6xl mx-auto relative z-10 text-center">
+                
+                <div class="mb-12 max-w-3xl mx-auto">
+                    <span class="text-brand-red font-body font-bold text-[10px] uppercase tracking-[0.3em] mb-4 block">Falla Estructural</span>
+                    <h2 class="font-body text-3xl md:text-5xl font-bold text-white tracking-tight mb-6">
+                        La matemática del asedio.
+                    </h2>
+                </div>
+                
+                <div class="w-full max-w-5xl mx-auto text-left grid grid-cols-1 md:grid-cols-2 gap-6">
+    
+    <div class="rounded-2xl p-[1px] bg-gradient-to-b from-red-600/50 via-red-900/10 to-transparent relative shadow-[0_0_40px_rgba(220,38,38,0.08)]">
+        <div class="bg-gradient-to-b from-[#1a0202]/90 to-transparent rounded-2xl p-8 relative h-full flex flex-col">
+            <div class="mb-6 w-12 h-12 flex items-center justify-center rounded-xl bg-black border border-red-900/30">
+                <svg class="w-6 h-6 text-red-500/80" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                </svg>
+            </div>
+            <h3 class="font-body font-normal text-2xl text-white mb-4 tracking-tight">El voluntariado cansado</h3>
+            <p class="text-red-100/60 text-lg leading-relaxed font-light mb-8 flex-grow">
+                300 vecinos indignados salen a protestar a las 7 PM, agotados. Hacen ruido y vuelven a dormir.
+            </p>
+            <div class="bg-black border border-white/5 rounded-xl p-6 relative mt-auto">
+                <span class="flex items-center gap-2 text-brand-red font-bold text-xs uppercase tracking-[0.2em] mb-3">
+                    <span class="w-2 h-2 rounded-full bg-brand-red animate-pulse"></span>
+                    El Resultado:
+                </span>
+                <p class="text-white text-base md:text-lg font-medium leading-snug">
+                    El Intendente apaga el teléfono y gana por desgaste.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="rounded-2xl p-[1px] bg-gradient-to-b from-red-600/50 via-red-900/10 to-transparent relative shadow-[0_0_40px_rgba(220,38,38,0.08)]">
+        <div class="bg-gradient-to-b from-[#1a0202]/90 to-transparent rounded-2xl p-8 relative h-full flex flex-col">
+            <div class="mb-6 w-12 h-12 flex items-center justify-center rounded-xl bg-black border border-red-900/30">
+                <svg class="w-6 h-6 text-red-500/80" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
+                </svg>
+            </div>
+            <h3 class="font-body font-normal text-2xl text-white mb-4 tracking-tight">El joven revolucionario</h3>
+            <p class="text-red-100/60 text-lg leading-relaxed font-light mb-8 flex-grow">
+                Empieza a moverse, gana apoyo genuino y construye autoridad en las calles para cambiar las cosas.
+            </p>
+            <div class="bg-black border border-white/5 rounded-xl p-6 relative mt-auto">
+                <span class="flex items-center gap-2 text-brand-red font-bold text-xs uppercase tracking-[0.2em] mb-3">
+                    <span class="w-2 h-2 rounded-full bg-brand-red animate-pulse"></span>
+                    El Resultado:
+                </span>
+                <p class="text-white text-base md:text-lg font-medium leading-snug">
+                    La casta le pone precio a su cabeza: lo terminan comprando con un buen sueldo, o lo amenazan hasta apagarlo.
+                </p>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+        </section>
+        <div class="w-full flex justify-center items-center h-[2px] bg-[#030303] relative z-20">
+            <div class="absolute w-full h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
+            <div class="absolute w-64 md:w-96 h-[1px] bg-gradient-to-r from-transparent via-yellow-500/80 to-transparent shadow-[0_0_20px_2px_rgba(234,179,8,0.3)]"></div>
+            <div class="absolute w-16 h-[2px] bg-yellow-400 rounded-full shadow-[0_0_10px_rgba(250,204,21,0.8)] z-10"></div>
+        </div>
+
+        <section class="pt-12 pb-16 px-6 lg:px-12 bg-[#030303] relative overflow-hidden">
+            <div class="max-w-6xl mx-auto relative z-10">
+                
+    <div class="max-w-6xl mx-auto relative z-10">
+                
+    <div class="mb-16 text-center max-w-3xl mx-auto">
+        <span class="text-brand-yellow font-body font-bold text-[10px] uppercase tracking-[0.3em] mb-4 block text-yellow-500">Operación Civil</span>
+        <h2 class="font-body text-3xl md:text-5xl font-bold text-white tracking-tight mb-6">
+            El Plan Katueté: <span class="text-yellow-500">Que no duerman.</span>
+        </h2>
+        <p class="text-brand-textGray text-base md:text-lg leading-relaxed">
+            El objetivo de este proyecto es claro: <strong class="text-white font-medium">preparar a una nueva legión de ciudadanos y jóvenes que vivan del activismo estratégico.</strong> Gente que entienda a la perfección dónde y cómo atacar, forjando una autoridad implacable que no dependa jamás de los sueldos y cargos del oficialismo.
+        </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 mb-8">
+        
+        <div class="bg-[#080808] border border-yellow-500/20 rounded-3xl p-8 relative overflow-hidden shadow-[0_10px_30px_rgba(250,204,21,0.02)]">
+            <div class="absolute -right-2 -top-6 text-8xl font-black text-yellow-500/10 pointer-events-none select-none">01</div>
+            
+            <h3 class="font-body font-bold text-xl text-white mb-3 tracking-tight relative z-10">Pipoca y sofá</h3>
+            <p class="text-brand-textGray text-sm leading-relaxed relative z-10">
+                Queremos que tu única preocupación sea disfrutar de tu familia. Mientras comés pipoca en tu casa, verás en vivo cómo la presión táctica le hace perder votos y credibilidad al político que te mintió.
+            </p>
+        </div>
+
+        <div class="bg-[#080808] border border-yellow-500/20 rounded-3xl p-8 relative overflow-hidden shadow-[0_10px_30px_rgba(250,204,21,0.02)]">
+            <div class="absolute -right-2 -top-6 text-8xl font-black text-yellow-500/10 pointer-events-none select-none">02</div>
+            
+            <h3 class="font-body font-bold text-xl text-white mb-3 tracking-tight relative z-10">Dignidad sin precio</h3>
+            <p class="text-brand-textGray text-sm leading-relaxed relative z-10">
+                La casta cree que toda dignidad tiene un precio. Nuestra misión es blindar a esta nueva generación para que operen en las calles com total independencia, sin venderse por las migajas de un intendente.
+            </p>
+        </div>
+
+        <div class="bg-[#080808] border border-yellow-500/20 rounded-3xl p-8 relative overflow-hidden shadow-[0_10px_30px_rgba(250,204,21,0.02)]">
+            <div class="absolute -right-2 -top-6 text-8xl font-black text-yellow-500/10 pointer-events-none select-none">03</div>
+            
+            <h3 class="font-body font-bold text-xl text-white mb-3 tracking-tight relative z-10">El asado arruinado</h3>
+            <p class="text-brand-textGray text-sm leading-relaxed relative z-10">
+                Aplicando este modelo, sabremos exactamente cómo rastrear la plata robada. El objetivo final es arruinarles la paz y destapar sus esquemas fantasmas frente a la cara de sus propios vecinos.
+            </p>
+        </div>
+
+    </div>
+
+    <div class="bg-[#0a0a0a] border border-yellow-500/20 rounded-3xl p-8 md:p-12 flex flex-col md:flex-row items-start md:items-center gap-6 md:gap-10 relative overflow-hidden mb-12">
+        <div class="absolute left-0 top-0 w-1/2 h-full bg-yellow-500/5 blur-3xl pointer-events-none"></div>
+        
+        <div class="flex-shrink-0 relative z-10">
+            <span class="text-yellow-500 font-bold text-[10px] uppercase tracking-[0.3em] mb-2 block">El Motor del Proyecto</span>
+            <h3 class="font-body font-bold text-3xl md:text-4xl text-white tracking-tight">¿Cómo lo financiamos?</h3>
+        </div>
+        
+        <div class="hidden md:block w-px h-24 bg-white/10 mx-4 relative z-10"></div>
+        
+        <div class="relative z-10 border-t border-white/10 pt-6 md:border-none md:pt-0">
+            <p class="text-brand-textGray text-base leading-relaxed">
+                No dependemos de padrinos políticos. <strong class="text-white font-semibold">El 100% de los fondos para sostener y expandir a esta legión operativa proviene directamente de la venta de este manual y nuestros cursos.</strong> Al adquirirlo, no solo obtenés el conocimiento táctico, sino que te convertís en el inversor que hace posible esta limpieza.
+            </p>
+        </div>
+    </div>
+
+    <div class="flex flex-col items-center justify-center relative z-10">
+        <a href="AQUI_COLOCA_TU_LINK_DE_HOTMART" target="_blank" class="inline-block bg-yellow-500 hover:bg-yellow-400 text-black font-body font-bold py-4 px-10 rounded-xl text-lg uppercase tracking-wider transition-all shadow-[0_0_20px_rgba(250,204,21,0.2)] hover:shadow-[0_0_30px_rgba(250,204,21,0.4)] hover:-translate-y-1 text-center">
+            ADQUIRIR EL MANUAL Y APOYAR
+        </a>
+        <p class="text-brand-textGray text-xs mt-3 opacity-60">Acceso inmediato al arsenal táctico y apoyo directo a la causa.</p>
+    </div>
+
+</div>
+        </section>
+
+        <div class="w-full flex justify-center items-center h-[2px] bg-[#030303] relative z-20">
+            <div class="absolute w-full h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
+            <div class="absolute w-64 md:w-96 h-[1px] bg-gradient-to-r from-transparent via-red-600/80 to-transparent shadow-[0_0_20px_2px_rgba(220,38,38,0.3)]"></div>
+            <div class="absolute w-16 h-[2px] bg-red-500 rounded-full shadow-[0_0_10px_rgba(239,68,68,0.8)] z-10"></div>
+        </div>
+
+        <section class="py-16 px-6 lg:px-12 bg-[#050505] relative overflow-hidden border-b border-[#1a1a1a]">
+            
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-red-600/5 blur-[120px] rounded-full pointer-events-none z-0"></div>
+
+            <div class="max-w-6xl mx-auto relative z-10">
+                
+                <div class="text-center mb-12 max-w-4xl mx-auto">
+                    <span class="text-red-500 font-body font-bold text-[10px] uppercase tracking-[0.3em] mb-4 block">El Eslabón Débil</span>
+                    <h2 class="font-body text-3xl md:text-4xl font-bold text-white tracking-tight leading-tight">
+                        Todos me preguntan: ¿Por qué ataco a los <span class="text-red-500">12 peones</span> y no directo a la cabeza?
+                    </h2>
+                </div>
+
+                <div class="bg-[#0a0a0a] border border-red-900/30 rounded-3xl p-8 md:p-12 text-left relative shadow-[0_20px_50px_rgba(220,38,38,0.05)] overflow-hidden">
+                    
+                    <div class="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-red-600 to-transparent"></div>
+                    
+                    <div class="max-w-4xl mx-auto">
+                        <p class="text-brand-textGray text-base md:text-lg leading-relaxed mb-5">
+                            El Intendente (el Rey) está blindado por su billetera y sus abogados. Atacarlo de frente es inútil. Pero sus 12 peones... <span class="text-red-500 font-bold">ellos son frágiles.</span>
+                        </p>
+
+                        <p class="text-brand-textGray text-base md:text-lg leading-relaxed mb-6">
+                            Existe una falla psicológica documentada: <strong class="text-white">si exponés a un peón ante sus propios vecinos, entra en pánico.</strong> No tienen cómo resistir la humillación pública.
+                        </p>
+
+                        <div class="bg-black border border-red-900/20 rounded-xl p-5 md:p-6 relative mt-4">
+                            <span class="flex items-center gap-2 text-red-500 font-bold text-[10px] uppercase tracking-[0.3em] mb-2">
+                                <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span> El Secreto Clasificado
+                            </span>
+                            <p class="text-white text-base md:text-lg font-medium leading-snug">
+                                ¿Qué hace un peón asustado? <strong class="text-red-500">Traiciona a su jefe para salvarse.</strong> Este libro te enseña a gatillar ese pánico a tu favor.
+                            </p>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="mt-10 flex flex-col items-center justify-center relative z-10">
+                            <a href="AQUI_COLOCA_TU_LINK_DE_HOTMART" target="_blank" class="inline-block bg-yellow-500 hover:bg-yellow-400 text-black font-body font-bold py-4 px-8 md:px-10 rounded-xl text-base md:text-lg uppercase tracking-widest transition-all shadow-[0_0_20px_rgba(250,204,21,0.2)] hover:shadow-[0_0_30px_rgba(250,204,21,0.4)] hover:-translate-y-1 text-center">
+                                DESCUBRIR CÓMO QUEBRARLOS
+                            </a>
+                            <p class="text-brand-textGray text-xs mt-3 opacity-60 font-medium">Acceso al manual para gatillar la traición interna.</p>
+                        </div>
+        </section>
+        <div class="w-full flex justify-center items-center h-[2px] bg-[#030303] relative z-20">
+            <div class="absolute w-full h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
+            <div class="absolute w-64 md:w-96 h-[1px] bg-gradient-to-r from-transparent via-yellow-500/80 to-transparent shadow-[0_0_20px_2px_rgba(234,179,8,0.3)]"></div>
+            <div class="absolute w-16 h-[2px] bg-yellow-400 rounded-full shadow-[0_0_10px_rgba(250,204,21,0.8)] z-10"></div>
+        </div>
+                
+    <section class="bg-black w-full py-10">
+    <div class="max-w-6xl mx-auto px-4">
+        
+        <div class="text-center mb-16 max-w-4xl mx-auto">
+            <div class="font-body font-semibold text-xs tracking-[0.2em] text-yellow-500 uppercase mb-4">El Motor en Marcha</div>
+            <h2 class="font-body text-3xl md:text-4xl font-bold mb-6 text-white tracking-tight">No es teoría. Mirá la presión en vivo.</h2>
+            <p class="text-brand-textGray text-lg mx-auto leading-relaxed">
+                Probé este modelo. Desde que audito la Municipalidad y expongo los rubros oscuros, esto es lo que logramos con la presión masiva de las redes:
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+            
+            <div class="bg-black p-6 rounded-2xl flex flex-col text-left h-full border border-yellow-500/20 shadow-[0_10px_30px_rgba(250,204,21,0.08)] relative overflow-hidden">
+                <div class="absolute -top-20 -right-20 w-40 h-40 bg-yellow-500/10 rounded-full blur-[50px] pointer-events-none"></div>
+                
+                <div class="carousel-wrapper w-full h-48 rounded-xl mb-6 relative border border-white/5 overflow-hidden bg-black cursor-pointer z-10" data-target="carousel-1">
+                    
+                    <div class="absolute left-2 top-1/2 -translate-y-1/2 z-20 w-8 h-8 bg-black/60 text-yellow-500/70 rounded-full flex items-center justify-center backdrop-blur-sm border border-yellow-500/30 shadow-lg pointer-events-none opacity-80 transition-colors duration-300">
+                        <svg class="w-5 h-5 mr-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"></path></svg>
+                    </div>
+                    <div class="absolute right-2 top-1/2 -translate-y-1/2 z-20 w-8 h-8 bg-black/60 text-yellow-500/70 rounded-full flex items-center justify-center backdrop-blur-sm border border-yellow-500/30 shadow-lg pointer-events-none opacity-80 transition-colors duration-300">
+                        <svg class="w-5 h-5 ml-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
+                    </div>
+
+                    <div id="carousel-1" class="absolute inset-0 w-full h-full flex overflow-hidden scroll-smooth">
+                        <div class="w-full h-full flex items-center justify-center flex-shrink-0 relative bg-black select-none pointer-events-none">
+                            <img src="img/Screenshot_88.png" alt="Antes Salud" class="w-full h-full object-cover opacity-80">
+                        </div>
+                        <div class="w-full h-full flex items-center justify-center flex-shrink-0 relative border-l border-white/10 bg-black select-none pointer-events-none">
+                            <img src="img/Screenshot_87.png" alt="Después Salud" class="w-full h-full object-cover opacity-80">
+                        </div>
+                    </div>
+                </div>
+                
+                <h4 class="text-white font-bold text-lg mb-2 relative z-10">Presión Inmediata</h4>
+                <p class="text-sm text-brand-textGray leading-relaxed relative z-10">Expusimos los gastos fantasmas en combustible. ¿El resultado? Solo 24 horas después de la presión viral, se vieron forzados a entregar equipos de salud.</p>
+            </div>
+            
+            <div class="bg-black p-6 rounded-2xl flex flex-col text-left h-full border border-yellow-500/20 shadow-[0_10px_30px_rgba(250,204,21,0.08)] relative overflow-hidden">
+                <div class="absolute -top-20 -right-20 w-40 h-40 bg-yellow-500/10 rounded-full blur-[50px] pointer-events-none"></div>
+                
+                <div class="carousel-wrapper w-full h-48 rounded-xl mb-6 relative border border-white/5 overflow-hidden bg-black cursor-pointer z-10" data-target="carousel-2">
+                    
+                    <div class="absolute left-2 top-1/2 -translate-y-1/2 z-20 w-8 h-8 bg-black/60 text-yellow-500/70 rounded-full flex items-center justify-center backdrop-blur-sm border border-yellow-500/30 shadow-lg pointer-events-none opacity-80 transition-colors duration-300">
+                        <svg class="w-5 h-5 mr-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"></path></svg>
+                    </div>
+                    <div class="absolute right-2 top-1/2 -translate-y-1/2 z-20 w-8 h-8 bg-black/60 text-yellow-500/70 rounded-full flex items-center justify-center backdrop-blur-sm border border-yellow-500/30 shadow-lg pointer-events-none opacity-80 transition-colors duration-300">
+                        <svg class="w-5 h-5 ml-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
+                    </div>
+
+                    <div id="carousel-2" class="absolute inset-0 w-full h-full flex overflow-hidden scroll-smooth">
+                        <div class="w-full h-full flex items-center justify-center flex-shrink-0 relative bg-black select-none pointer-events-none">
+                            <img src="img/Screenshot_90.png" alt="Antes Iluminación" class="w-full h-full object-cover opacity-80">
+                        </div>
+                        <div class="w-full h-full flex items-center justify-center flex-shrink-0 relative border-l border-white/10 bg-black select-none pointer-events-none">
+                            <img src="img/Screenshot_95.png" alt="Después Iluminación" class="w-full h-full object-cover opacity-80">
+                        </div>
+                    </div>
+                </div>
+                
+                <h4 class="text-white font-bold text-lg mb-2 relative z-10">Acción Reactiva</h4>
+                <p class="text-sm text-brand-textGray leading-relaxed relative z-10">Expusimos la analogía del cajero y el vuelto frente a nuestras calles a oscuras. Días después de la presión masiva, instalaron la iluminación.</p>
+            </div>
+            
+            <div class="bg-black p-6 rounded-2xl flex flex-col text-left h-full border border-yellow-500/20 shadow-[0_10px_30px_rgba(250,204,21,0.08)] relative overflow-hidden">
+                <div class="absolute -top-20 -right-20 w-40 h-40 bg-yellow-500/10 rounded-full blur-[50px] pointer-events-none"></div>
+
+                <div class="w-full h-48 bg-black border border-white/5 rounded-xl mb-6 relative overflow-hidden flex flex-col items-center justify-center z-10">
+                    <div class="absolute top-4 left-4 flex items-center gap-2 bg-black border border-white/10 px-3 py-1.5 rounded-lg shadow-md">
+                        <span class="relative flex h-2 w-2">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-yellow-500 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2 w-2 bg-yellow-500"></span>
+                        </span>
+                        <span class="text-[9px] font-bold text-white uppercase tracking-widest">Impacto Medido</span>
+                    </div>
+
+                    <div class="relative z-10 text-center flex flex-col items-center justify-center mt-3">
+                        <div class="font-body text-5xl md:text-[4rem] font-black tracking-tighter text-white drop-shadow-md leading-none">
+                            +500<span class="text-yellow-500">K</span>
+                        </div>
+                        <div class="text-yellow-500 font-bold text-[10px] uppercase tracking-[0.2em] mt-3 border border-yellow-500/30 px-3 py-1.5 rounded-sm bg-yellow-500/10">
+                            Visualizaciones Totales
+                        </div>
+                    </div>
+                </div>
+
+                <h4 class="text-white font-bold text-lg mb-2 relative z-10">La condena del silencio</h4>
+                <p class="text-sm text-brand-textGray leading-relaxed relative z-10">
+                    Si replicamos esta presión en cada barrio, Katueté será la capital del desarrollo. <strong class="text-white">El silencio de un pueblo es la armadura de un político; organizarnos es su condena.</strong>
+                </p>
+            </div>
+
+        </div>
+
+        <div class="mt-4 flex flex-col items-center justify-center relative z-10">
+            <a href="AQUI_COLOCA_TU_LINK_DE_HOTMART" target="_blank" class="bg-yellow-500 hover:bg-yellow-400 text-black font-body font-bold py-4 px-10 rounded-xl text-lg uppercase tracking-wider transition-all shadow-[0_0_20px_rgba(250,204,21,0.2)] hover:shadow-[0_0_30px_rgba(250,204,21,0.4)] hover:-translate-y-1 text-center">
+                FINANCIAR ESTA LUCHA
+            </a>
+            <p class="text-brand-textGray text-xs mt-3 opacity-60">Acceso inmediato al Libro y los Anexos.</p>
+        </div>
+
+    </div>
+</section>
+
+<div class="w-full flex justify-center items-center h-[2px] bg-[#030303] relative z-20">
+            <div class="absolute w-full h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
+            <div class="absolute w-64 md:w-96 h-[1px] bg-gradient-to-r from-transparent via-yellow-500/80 to-transparent shadow-[0_0_20px_2px_rgba(234,179,8,0.3)]"></div>
+            <div class="absolute w-16 h-[2px] bg-yellow-400 rounded-full shadow-[0_0_10px_rgba(250,204,21,0.8)] z-10"></div>
+        </div>
+
+        <section class="py-16 px-6 lg:px-12 bg-[#030303] relative overflow-hidden flex flex-col items-center">
+            
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-yellow-500/10 blur-[130px] rounded-full pointer-events-none z-0"></div>
+
+            <div class="max-w-4xl mx-auto relative z-10 w-full">
+                
+                
+                <div class="mb-14 text-center">
+                    <span class="text-brand-yellow font-body font-bold text-[10px] uppercase tracking-[0.3em] mb-4 block text-yellow-500">Operación Civil</span>
+                    <h2 class="font-body text-3xl md:text-5xl font-bold text-white tracking-tight leading-tight">
+                        Mira lo que me <span class="text-yellow-500">dice la gente.</span>
+                    </h2>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16 max-w-4xl mx-auto">
+                    
+                    <div class="flex items-end gap-3 w-full">
+                        <div class="w-10 h-10 rounded-full bg-[#0a0a0a] flex-shrink-0 flex items-center justify-center border border-white/10 shadow-lg">
+                            <span class="text-yellow-500 font-bold text-lg leading-none">?</span>
+                        </div>
+                        <div class="bg-[#f1f2f6] text-[#050505] px-5 py-4 rounded-[20px] rounded-bl-sm text-left max-w-[85%] shadow-md">
+                            <p class="font-sans text-[15px] leading-snug mb-3">
+                                Siiii...<br>Así hacen para afectarte!<br>Te juro que estás como una luz para todos nosotros!
+                            </p>
+                            <p class="font-sans text-[15px] leading-snug">
+                                Estamos cansados de todo...<br>Queremos el cambio!<br>Y nos estás inspirando
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-end gap-3 w-full">
+                        <div class="w-10 h-10 rounded-full bg-[#0a0a0a] flex-shrink-0 flex items-center justify-center border border-white/10 shadow-lg">
+                            <span class="text-yellow-500 font-bold text-lg leading-none">?</span>
+                        </div>
+                        <div class="bg-[#f1f2f6] text-[#050505] px-5 py-4 rounded-[20px] rounded-bl-sm text-left max-w-[85%] shadow-md">
+                            <p class="font-sans text-[15px] leading-snug">
+                                Parabens<br>A coragem de se expor assim vai entusiasmar outros a fazer o mesmo, comentar repostar e isso é o inicio de um movimento grande Parabens!
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-end gap-3 w-full">
+                        <div class="w-10 h-10 rounded-full bg-[#0a0a0a] flex-shrink-0 flex items-center justify-center border border-white/10 shadow-lg">
+                            <span class="text-yellow-500 font-bold text-lg leading-none">?</span>
+                        </div>
+                        <div class="bg-[#f1f2f6] text-[#050505] px-5 py-4 rounded-[20px] rounded-bl-sm text-left max-w-[85%] shadow-md">
+                            <p class="font-sans text-[15px] leading-snug">
+                                Fuerza Daniel, la ciudad realmente necesita un cambio, realmente da rabia la gente conformista de acá
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-end gap-3 w-full">
+                        <div class="w-10 h-10 rounded-full bg-[#0a0a0a] flex-shrink-0 flex items-center justify-center border border-white/10 shadow-lg">
+                            <span class="text-yellow-500 font-bold text-lg leading-none">?</span>
+                        </div>
+                        <div class="bg-[#f1f2f6] text-[#050505] px-5 py-4 rounded-[20px] rounded-bl-sm text-left max-w-[85%] shadow-md">
+                            <p class="font-sans text-[15px] leading-snug">
+                                Parabéns pela coragem Hermano, Katuete precisa de mais pessoas como você, Dios te bendiga
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="max-w-2xl mx-auto px-4 text-center border-t border-white/10 pt-10">
+                    <p class="font-body text-lg md:text-xl text-brand-textGray font-normal leading-relaxed mb-8">
+                        Entiendo que no puedas aparecer. <strong class="text-white">Tu miedo es el blindaje de ellos.</strong> Asumimos las consecuencias de dar la cara por vos.
+                    </p>
+                    
+                    <a href="AQUI_COLOCA_TU_LINK_DE_HOTMART" target="_blank" class="inline-block bg-yellow-500 hover:bg-yellow-400 text-black font-body font-bold py-4 px-8 md:px-12 rounded-xl text-lg uppercase tracking-wider transition-all shadow-[0_0_20px_rgba(250,204,21,0.2)] hover:shadow-[0_0_30px_rgba(250,204,21,0.4)] hover:-translate-y-1">
+                        APOYAR DESDE EL ANONIMATO
+                    </a>
+                    <p class="text-brand-textGray text-xs mt-3 opacity-60">Tu identidad estará 100% protegida.</p>
+                </div>
+
+            </div>
+        </section>
+
+        <div class="w-full flex justify-center items-center h-[2px] bg-[#030303] relative z-20">
+            <div class="absolute w-full h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
+            <div class="absolute w-64 md:w-96 h-[1px] bg-gradient-to-r from-transparent via-yellow-500/80 to-transparent shadow-[0_0_20px_2px_rgba(234,179,8,0.3)]"></div>
+            <div class="absolute w-16 h-[2px] bg-yellow-400 rounded-full shadow-[0_0_10px_rgba(250,204,21,0.8)] z-10"></div>
+        </div>
+
+        <section class="pt-20 pb-16 px-6 lg:px-12 bg-[#030303] relative overflow-hidden">
+    <div class="max-w-6xl mx-auto relative z-10">
+        
+        <div class="text-center mb-16 max-w-4xl mx-auto">
+            <div class="font-body font-semibold text-xs tracking-[0.2em] text-yellow-500 uppercase mb-4">Acceso Inmediato</div>
+            <h2 class="font-body text-3xl md:text-4xl font-bold mb-4 text-white tracking-tight">¿Qué vas a descubrir acá adentro?</h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12 max-w-4xl mx-auto">
+            
+            <div class="bento-bonus rounded-2xl p-8 shadow-[0_20px_50px_rgba(234,179,8,0.05)] bg-[#0a0a0a] border border-yellow-500/30 transition-transform hover:-translate-y-1">
+                <div class="inline-flex items-center justify-center px-3 py-1 rounded-full bg-yellow-500/10 border border-yellow-500/30 text-yellow-500 text-[10px] font-bold uppercase tracking-widest mb-5">
+                    LIBRO PRINCIPAL
+                </div>
+                <h3 class="font-body text-xl font-bold mb-3 text-white leading-tight uppercase">12 PEONES ACORRALADOS HUNDEN AL INTENDENTE</h3>
+                <p class="text-brand-textGray text-sm leading-relaxed">
+                    La falla oculta que hace que sus operadores se hundan por su propio peso.
+                </p>
+            </div>
+
+            <div class="bento-bonus rounded-2xl p-8 shadow-[0_20px_50px_rgba(234,179,8,0.05)] bg-[#0a0a0a] border border-white/5 transition-transform hover:-translate-y-1">
+                <div class="inline-flex items-center justify-center px-3 py-1 rounded-full bg-yellow-500/10 border border-yellow-500/30 text-yellow-500 text-[10px] font-bold uppercase tracking-widest mb-5">
+                    BONO #1
+                </div>
+                <h3 class="font-body text-xl font-bold mb-3 text-white leading-tight uppercase">EL ATAJO DE LOS 3 CLICS</h3>
+                <p class="text-brand-textGray text-sm leading-relaxed">
+                    El método exacto y a prueba de tontos para extraer los números públicos y rastrear dónde terminó el dinero de tu barrio. Diseñado en pasos tan simples que hasta un niño de 5 años podría auditar al municipio desde su celular.
+                </p>
+            </div>
+
+        </div>
+
+        <div class="flex flex-col items-center justify-center relative z-10">
+            <a href="AQUI_COLOCA_TU_LINK_DE_HOTMART" target="_blank" class="inline-block bg-yellow-500 hover:bg-yellow-400 text-black font-body font-bold py-4 px-10 rounded-xl text-lg uppercase tracking-wider transition-all shadow-[0_0_20px_rgba(250,204,21,0.2)] hover:shadow-[0_0_30px_rgba(250,204,21,0.4)] hover:-translate-y-1 text-center">
+                ACCEDER AL ARSENAL AHORA
+            </a>
+        </div>
+
+    </div>
+</section>
+
+        <div class="w-full flex justify-center items-center h-[2px] bg-[#030303] relative z-20">
+            <div class="absolute w-full h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
+            <div class="absolute w-64 md:w-96 h-[1px] bg-gradient-to-r from-transparent via-yellow-500/80 to-transparent shadow-[0_0_20px_2px_rgba(234,179,8,0.3)]"></div>
+            <div class="absolute w-16 h-[2px] bg-yellow-400 rounded-full shadow-[0_0_10px_rgba(250,204,21,0.8)] z-10"></div>
+        </div>
+
+        <section class="py-16 px-6 lg:px-12 bg-[#030303] border-b border-[#1a1a1a] flex justify-center">
+            <div class="max-w-3xl w-full">
+                
+                <div class="p-8 md:p-10 rounded-3xl bg-[#080808] border border-white/5 flex flex-col md:flex-row items-center gap-6 shadow-2xl relative overflow-hidden group">
+                    
+                    <div class="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-brand-yellow/30 to-transparent"></div>
+                    
+                    <div class="flex-shrink-0">
+                        <div class="w-16 h-16 rounded-full bg-white/5 border border-white/10 flex items-center justify-center transition-transform group-hover:scale-105">
+                            <svg class="w-8 h-8 text-brand-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    
+                    <div class="text-center md:text-left">
+                        <h3 class="font-body font-bold text-xl text-white mb-2 tracking-tight uppercase">
+                            Garantía de 7 Días. Cero Riesgos.
+                        </h3>
+                        <p class="text-brand-textGray text-sm md:text-base leading-relaxed">
+                            Si este libro no resulta ser el arma exacta que necesitás para exponer a este sistema podrido, pedí tu reembolso. <strong class="text-white font-semibold">Si preferís seguir tolerando el abandono, te devuelvo tu aporte. Vos elegís.</strong>
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section id="oferta" class="py-20 px-6 lg:px-12 bg-[#030303] border-b border-[#1a1a1a] relative overflow-hidden flex justify-center">
+            
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-yellow-500/5 blur-[120px] rounded-full pointer-events-none"></div>
+
+            <div class="max-w-4xl w-full relative z-10">
+                
+                <div class="text-center mb-12">
+                    <div class="font-body font-semibold text-xs tracking-[0.2em] text-yellow-500 uppercase mb-4">La Decisión Final</div>
+                    <h2 class="font-body text-3xl md:text-5xl font-bold mb-3 text-white tracking-tight">Último paso para iniciar.</h2>
+                </div>
+
+                <div class="bg-[#080808] border border-brand-yellow/20 rounded-[2rem] shadow-[0_0_50px_rgba(250,204,21,0.05)] overflow-hidden flex flex-col md:flex-row group">
+                    
+                    <div class="p-8 md:p-10 md:w-1/2 border-b md:border-b-0 md:border-r border-white/5 bg-[#050505] flex flex-col justify-center">
+                        
+                        <div class="w-full bg-black rounded-xl border border-white/10 flex items-center justify-center mb-8 relative overflow-hidden group">
+                            <div class="absolute inset-0 bg-gradient-to-t from-yellow-500/20 to-transparent opacity-50 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-10"></div>
+                            
+                            <img src="img/foto-libro1.png" alt="Libro 12 Mulas Acorraladas" loading="lazy" decoding="async" class="w-full h-auto relative z-0 transform transition-transform duration-700 group-hover:scale-[1.02]">
+                        </div>
+
+                        <h3 class="text-xs font-bold text-white uppercase tracking-widest mb-5">Tu Arsenal incluye:</h3>
+                        
+                        <ul class="space-y-4">
+                            <li class="flex items-start gap-3">
+                                <svg class="w-5 h-5 text-yellow-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span class="text-white text-sm font-medium">Libro: 12 Peones Acorralados</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <svg class="w-5 h-5 text-yellow-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span class="text-brand-textGray text-sm">Bono #1: El Atajo de los 3 Clics</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <svg class="w-5 h-5 text-yellow-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span class="text-brand-textGray text-sm">Bono #2: El Efecto Dominó</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="p-8 md:p-12 md:w-1/2 flex flex-col justify-center items-center text-center relative overflow-hidden">
+                        
+                        <div class="absolute inset-0 bg-yellow-500/0 group-hover:bg-yellow-500/5 transition-colors duration-500"></div>
+
+                        <p class="text-brand-textGray text-xs font-bold mb-2 uppercase tracking-[0.2em] relative z-10">Aporte de Fundación</p>
+                        
+                        <div class="flex items-start justify-center gap-1 mb-8 relative z-10">
+                            <span class="text-brand-textGray text-xl font-medium mt-2">Gs.</span>
+                            <span class="font-body text-6xl md:text-7xl font-black text-white tracking-tighter">37.000</span>
+                        </div>
+
+                        <a href="AQUI_COLOCA_TU_LINK_DE_HOTMART" target="_blank" class="w-full bg-yellow-500 hover:bg-yellow-400 text-black font-body font-bold py-4 px-6 rounded-xl text-lg uppercase tracking-wider transition-all shadow-[0_0_20px_rgba(250,204,21,0.2)] hover:shadow-[0_0_30px_rgba(250,204,21,0.4)] hover:-translate-y-1 relative z-10">
+                            Comprar y Apoyar
+                        </a>
+
+                        <div class="mt-8 flex flex-col items-center gap-4 relative z-10">
+                            
+                            <div class="inline-flex items-center gap-2 bg-white/5 border border-white/10 px-4 py-2 rounded-full">
+                                <span class="relative flex h-2 w-2">
+                                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-yellow-500 opacity-75"></span>
+                                    <span class="relative inline-flex rounded-full h-2 w-2 bg-yellow-500"></span>
+                                </span>
+                                <p class="text-[10px] text-white font-bold uppercase tracking-widest">Lote de Fundación Activo</p>
+                            </div>
+                            
+                            <div class="flex items-center gap-2 opacity-40 hover:opacity-100 transition-opacity">
+                                <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg>
+                                <span class="text-[9px] uppercase tracking-widest font-bold text-white">Pago 100% Seguro • Hotmart</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="py-20 px-6 lg:px-12 bg-[#030303] border-b border-[#1a1a1a]">
+            <div class="max-w-3xl mx-auto">
+                
+                <div class="text-center mb-12">
+                    <span class="text-brand-textGray font-body font-bold text-[10px] uppercase tracking-[0.3em] mb-4 block">Transparencia Total</span>
+                    <h2 class="font-body text-3xl md:text-4xl font-bold text-white tracking-tight">Preguntas frecuentes.</h2>
+                </div>
+
+                <div class="space-y-4">
+                    
+                    <details class="group bg-[#080808] border border-white/5 rounded-2xl cursor-pointer hover:border-yellow-500/20 transition-colors">
+                        <summary class="font-body font-bold text-base md:text-lg outline-none flex justify-between items-center p-6 text-white list-none [&::-webkit-details-marker]:hidden">
+                            ¿Mi aporte es anónimo y seguro?
+                            <span class="text-yellow-500 group-open:rotate-180 transition-transform duration-300">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </span>
+                        </summary>
+                        <div class="px-6 pb-6 text-brand-textGray text-sm md:text-base leading-relaxed border-t border-white/5 pt-4">
+                            Absolutamente. Todos los pagos son procesados externamente por Hotmart, la plataforma más segura de productos digitales en Latinoamérica. Nosotros no guardamos tu información financiera y tu identidad de comprador se mantiene en estricto secreto.
+                        </div>
+                    </details>
+
+                    <details class="group bg-[#080808] border border-white/5 rounded-2xl cursor-pointer hover:border-yellow-500/20 transition-colors">
+                        <summary class="font-body font-bold text-base md:text-lg outline-none flex justify-between items-center p-6 text-white list-none [&::-webkit-details-marker]:hidden">
+                            ¿Qué métodos de pago aceptan en Paraguay?
+                            <span class="text-yellow-500 group-open:rotate-180 transition-transform duration-300">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </span>
+                        </summary>
+                        <div class="px-6 pb-6 text-brand-textGray text-sm md:text-base leading-relaxed border-t border-white/5 pt-4">
+                            Hotmart acepta cualquier tarjeta con procesador Visa o Mastercard. Si no tenés tarjeta de crédito tradicional, <strong class="text-white">podés usar sin problemas las tarjetas de débito o prepagas locales como ueno bank, Mango, eko, eClub o Banco Familiar.</strong> Solo asegurate de tener habilitada la opción de compras por internet en tu app.
+                        </div>
+                    </details>
+
+                    <details class="group bg-[#080808] border border-white/5 rounded-2xl cursor-pointer hover:border-yellow-500/20 transition-colors">
+                        <summary class="font-body font-bold text-base md:text-lg outline-none flex justify-between items-center p-6 text-white list-none [&::-webkit-details-marker]:hidden">
+                            ¿Es un libro físico o digital?
+                            <span class="text-yellow-500 group-open:rotate-180 transition-transform duration-300">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </span>
+                        </summary>
+                        <div class="px-6 pb-6 text-brand-textGray text-sm md:text-base leading-relaxed border-t border-white/5 pt-4">
+                            Es un material <strong class="text-white">100% digital</strong>. Lo diseñamos así para que tengas acceso inmediato a la información desde tu celular sin dejar rastros de envíos físicos que puedan ser interceptados.
+                        </div>
+                    </details>
+
+                    <details class="group bg-[#080808] border border-white/5 rounded-2xl cursor-pointer hover:border-yellow-500/20 transition-colors">
+                        <summary class="font-body font-bold text-base md:text-lg outline-none flex justify-between items-center p-6 text-white list-none [&::-webkit-details-marker]:hidden">
+                            ¿Cómo y cuándo recibo los manuales?
+                            <span class="text-yellow-500 group-open:rotate-180 transition-transform duration-300">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </span>
+                        </summary>
+                        <div class="px-6 pb-6 text-brand-textGray text-sm md:text-base leading-relaxed border-t border-white/5 pt-4">
+                            Inmediatamente después de confirmar tu aporte en el checkout, recibirás un correo automático de Hotmart con el link oficial para descargar el Libro Principal y los 2 Anexos Tácticos directamente a tu dispositivo.
+                        </div>
+                    </details>
+
+                    <details class="group bg-[#080808] border border-white/5 rounded-2xl cursor-pointer hover:border-yellow-500/20 transition-colors">
+                        <summary class="font-body font-bold text-base md:text-lg outline-none flex justify-between items-center p-6 text-white list-none [&::-webkit-details-marker]:hidden">
+                            ¿Qué pasa si el material no cumple mis expectativas?
+                            <span class="text-yellow-500 group-open:rotate-180 transition-transform duration-300">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </span>
+                        </summary>
+                        <div class="px-6 pb-6 text-brand-textGray text-sm md:text-base leading-relaxed border-t border-white/5 pt-4">
+                            Tenés el respaldo de nuestra Garantía Incondicional de 7 días procesada por Hotmart. Si el contenido no te convence, solicitás el reembolso desde tu correo con un clic y el sistema te devuelve el 100% de tu dinero automáticamente, sin tener que hablar con nosotros.
+                        </div>
+                    </details>
+
+                </div>
+            </div>
+        </section>
+
+    <footer class="py-10 bg-[#030303] text-center border-t border-brand-borderDark mt-auto">
+        <div class="max-w-4xl mx-auto px-6 flex flex-col items-center relative z-10">
+            <div class="flex flex-wrap justify-center items-center gap-4 md:gap-6 mb-6 text-xs font-bold text-brand-textGray uppercase tracking-wider">
+                <a href="legal/privacidad.html" class="hover:text-brand-yellow transition-colors">Políticas de Privacidad</a>
+                <span class="hidden md:inline text-brand-borderDark">|</span>
+                <a href="legal/terminos.html" class="hover:text-brand-yellow transition-colors">Términos de Uso</a>
+            </div>
+            <p class="text-brand-textGray/60 text-xs font-bold uppercase tracking-wider mb-4">
+                &copy; 2026 DANIEL FRANCO. TODOS LOS DERECHOS RESERVADOS.
+            </p>
+            <p class="text-brand-textGray/40 text-[10px] max-w-2xl mx-auto font-normal leading-relaxed text-center">
+                Este sitio no es parte del sitio web de Meta, Facebook o Instagram. FACEBOOK es una marca comercial de META PLATFORMS, Inc.
+            </p>
+        </div>
+    </footer>
+    
+    <script src="js/script.js"></script>
+</body>
+</html>
