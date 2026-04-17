@@ -5,116 +5,80 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aporte Confirmado | Operación Civil</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Montserrat:wght@800;900&display=swap" rel="stylesheet">
-    
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        brand: {
-                            yellow: '#FACC15',
-                            success: '#10B981',
-                            borderDark: '#1F1F22',
-                            textGray: '#8B8B93',
-                            textWhite: '#F4F4F5'
-                        },
-                        dark: {
-                            void: '#000000',
-                            surface: '#030303',
-                            card: '#09090B'
-                        }
-                    },
-                    fontFamily: {
-                        title: ['Montserrat', 'sans-serif'],
-                        body: ['Inter', 'sans-serif']
-                    }
-                }
-            }
-        }
-    </script>
-
-    <style type="text/tailwindcss">
-        @layer components {
-            .bento-card {
-                @apply bg-dark-card border border-brand-borderDark rounded-xl p-6 md:p-8 transition-all duration-300;
-            }
-            
-            .btn-primary {
-                @apply bg-brand-success text-dark-void font-title font-black py-4 px-6 rounded-lg text-xs uppercase tracking-[0.15em] hover:bg-white transition-all shadow-[0_0_25px_rgba(16,185,129,0.2)];
-            }
-
-            .btn-secondary {
-                @apply border border-brand-borderDark text-white font-title font-bold py-4 px-6 rounded-lg text-xs uppercase tracking-[0.15em] hover:bg-white/5 transition-all;
-            }
-        }
-
-        body {
-            background-color: #000000;
-            -webkit-font-smoothing: antialiased;
-        }
-    </style>
+    <script src="js/tailwind-config.js"></script>
+    <link rel="stylesheet" href="css/styles.css">
 </head>
-<body class="bg-dark-void text-white min-h-screen flex flex-col">
+<body class="bg-[#030303] text-white">
 
-    <nav class="w-full py-8 px-6 flex justify-center border-b border-brand-borderDark bg-dark-surface">
-        <div class="font-title text-[10px] md:text-xs tracking-[0.4em] text-white/50 uppercase">
-            Daniel Franco — Operación Civil
+    <nav class="w-full py-6 px-6 border-b border-white/5 bg-[#030303]">
+        <div class="max-w-6xl mx-auto flex justify-center">
+            <span class="text-white font-body font-bold text-[10px] uppercase tracking-[0.4em] opacity-40">Daniel Franco</span>
         </div>
     </nav>
 
-    <main class="flex-grow flex items-center justify-center py-12 px-6 relative overflow-hidden">
-        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-brand-success/10 filter blur-[120px] rounded-full pointer-events-none"></div>
+    <section class="pt-12 pb-16 px-6 lg:px-12 bg-[#030303] relative overflow-hidden min-h-screen">
+        <div class="absolute -left-20 top-20 w-96 h-96 bg-yellow-500/5 blur-[120px] rounded-full pointer-events-none"></div>
+        <div class="absolute -right-20 bottom-20 w-96 h-96 bg-yellow-500/5 blur-[120px] rounded-full pointer-events-none"></div>
 
-        <div class="max-w-4xl w-full mx-auto relative z-10">
+        <div class="max-w-6xl mx-auto relative z-10">
             
-            <div class="flex justify-center mb-8">
-                <div class="w-16 h-16 rounded-full bg-brand-success/10 border border-brand-success/20 flex items-center justify-center text-brand-success">
-                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
-                </div>
-            </div>
-
-            <div class="text-center mb-12">
-                <span class="text-brand-success font-body font-bold text-[10px] tracking-[0.3em] uppercase mb-4 block">Operación Confirmada</span>
-                <h1 class="font-title text-3xl md:text-6xl font-black uppercase tracking-tighter leading-none mb-6">
-                    TU ACCESO HA SIDO <span class="text-brand-success">ACTIVADO</span>
-                </h1>
-                <p class="text-brand-textGray text-base md:text-lg max-w-2xl mx-auto font-body leading-relaxed">
-                    El sistema ha procesado tu aporte. El eBook "12 Peones Acorralados" está en camino a tu correo, pero tu entrenamiento comienza ahora mismo.
+            <div class="mb-12 text-center max-w-3xl mx-auto">
+                <span class="text-yellow-500 font-body font-bold text-[10px] uppercase tracking-[0.3em] mb-4 block">Transacción Confirmada</span>
+                <h2 class="font-body text-4xl md:text-6xl font-bold text-white tracking-tighter mb-6">
+                    Aporte Recibido. <span class="text-yellow-500">Acceso Total.</span>
+                </h2>
+                <p class="text-brand-textGray text-base md:text-lg leading-relaxed">
+                    Has financiado la inteligencia táctica de la <strong class="text-white font-medium">Oposición Permanente.</strong> Tu eBook ya está en tu correo, pero tu entrenamiento interactivo empieza aquí.
                 </p>
             </div>
 
-            <div class="bento-card bg-gradient-to-b from-dark-card to-dark-void mb-8">
-                <div class="flex flex-col md:flex-row items-center justify-between gap-8">
-                    <div class="text-left">
-                        <h3 class="font-title text-xl font-black uppercase mb-2 tracking-tight">Módulo 1: El Curso Táctico</h3>
-                        <p class="text-brand-textGray text-sm md:text-base mb-0">
-                            Hacé clic abajo para reclamar tu BONUS y empezar a auditar facturas municipales hoy mismo. No pierdas este enlace.
-                        </p>
-                    </div>
-                    <a href="https://operacioncivil.org/curso-tactico/modulo1.html" class="btn-primary w-full md:w-auto text-center whitespace-nowrap">
-                        ACCEDER AL BONUS AHORA
+            <div class="bento-card-main mb-8">
+                <div class="absolute -right-4 -top-10 text-[10rem] font-black text-yellow-500/5 pointer-events-none select-none">+</div>
+                
+                <div class="relative z-10">
+                    <span class="text-yellow-500 font-bold text-[10px] uppercase tracking-[0.3em] mb-2 block">Bonus Exclusivo</span>
+                    <h3 class="font-body font-bold text-3xl md:text-4xl text-white mb-6 tracking-tight">El Curso Táctico: Módulo 1</h3>
+                    <p class="text-brand-textGray text-base md:text-lg leading-relaxed mb-8 max-w-2xl">
+                        No esperes al correo electrónico. Accedé ahora mismo a la plataforma de fiscalización y aprendé a arrinconar al oficialismo usando sus propios datos de ejecución presupuestaria.
+                    </p>
+                    
+                    <a href="https://operacioncivil.org/curso-tactico/modulo1.html" class="btn-yellow">
+                        INICIAR ENTRENAMIENTO AHORA
                     </a>
                 </div>
             </div>
 
-            <div class="flex flex-col md:flex-row items-center justify-center gap-6 pt-4 border-t border-brand-borderDark/50">
-                <a href="https://operacioncivil.org/" class="btn-secondary w-full md:w-auto text-center">
-                    VOLVER AL INICIO
-                </a>
-                <a href="https://www.instagram.com/danielfranco.py/" target="_blank" class="flex items-center gap-2 text-brand-textGray hover:text-white text-[10px] uppercase font-bold tracking-widest transition-all">
-                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.20 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
-                    Seguir lucha en Redes
+            <div class="bento-card-alt flex flex-col md:flex-row items-start md:items-center gap-6 md:gap-10 mb-12">
+                <div class="absolute left-0 top-0 w-1/2 h-full bg-yellow-500/5 blur-3xl pointer-events-none"></div>
+                
+                <div class="flex-shrink-0 relative z-10">
+                    <span class="text-yellow-500 font-bold text-[10px] uppercase tracking-[0.3em] mb-2 block">Entrega Inmediata</span>
+                    <h3 class="font-body font-bold text-2xl md:text-3xl text-white tracking-tight">Manual Táctico</h3>
+                </div>
+                
+                <div class="hidden md:block w-px h-24 bg-white/10 mx-4 relative z-10"></div>
+                
+                <div class="relative z-10 border-t border-white/10 pt-6 md:border-none md:pt-0">
+                    <p class="text-brand-textGray text-sm leading-relaxed">
+                        Hotmart ha enviado el PDF a tu bandeja de entrada. Si no lo ves, revisá la carpeta de <strong class="text-white">Spam</strong>. Ese archivo contiene la base teórica; el link de arriba es la herramienta práctica. Usá ambos para blindar tu estructura.
+                    </p>
+                </div>
+            </div>
+
+            <div class="flex flex-col items-center justify-center gap-6 relative z-10">
+                <a href="https://operacioncivil.org/" class="text-brand-textGray hover:text-white font-body font-bold text-[10px] uppercase tracking-[0.3em] transition-all">
+                    Volver a la Portada
                 </a>
             </div>
 
         </div>
-    </main>
+    </section>
 
-    <footer class="py-12 bg-dark-surface border-t border-brand-borderDark mt-auto text-center px-6">
-        <p class="text-[9px] md:text-[10px] text-brand-textGray/40 uppercase font-bold tracking-[0.3em]">
+    <footer class="py-12 bg-[#030303] border-t border-white/5 text-center px-6">
+        <p class="text-brand-textGray text-[9px] font-bold uppercase tracking-[0.3em] opacity-40">
             © 2026 MOVIMIENTO CANINDEYÚ LIBRE. FISCALIZACIÓN CIVIL ACTIVA.
         </p>
     </footer>

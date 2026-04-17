@@ -3,21 +3,19 @@ tailwind.config = {
         extend: {
             colors: {
                 brand: {
-                    yellow: '#FACC15',
-                    success: '#10B981',
+                    yellow: '#EAB308', // Amarillo-500 exacto
                     borderDark: '#1F1F22',
                     textGray: '#8B8B93',
-                    textWhite: '#F4F4F5'
+                    cardBg: '#080808',
+                    cardBgAlt: '#0A0A0A'
                 },
                 dark: {
-                    void: '#000000',
-                    surface: '#030303',
-                    card: '#09090B'
+                    void: '#030303'
                 }
             },
             fontFamily: {
-                title: ['Montserrat', 'sans-serif'],
-                body: ['Inter', 'sans-serif']
+                body: ['Inter', 'sans-serif'],
+                title: ['Inter', 'sans-serif'] // Eliminado Montserrat por Inter Bold
             }
         }
     }
