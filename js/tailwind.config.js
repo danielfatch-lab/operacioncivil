@@ -11,7 +11,7 @@ tailwind.config = {
                     card: '#0d1322',      
                     borderDark: '#1a233a', 
                     yellow: '#facc15',    
-                    red: '#DC2626',       
+                    red: '#DC2626',        
                     textGray: '#cbd5e1', 
                     textWhite: '#f8fafc'
                 }
