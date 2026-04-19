@@ -12,12 +12,6 @@
         .logo-text { font-weight: 700; letter-spacing: 0.3em; color: #facc15; text-transform: uppercase; }
         .insult-box { border-left: 3px solid #dc2626; background: linear-gradient(90deg, rgba(220, 38, 38, 0.05) 0%, transparent 100%); }
         .nav-link-active { background: rgba(255, 255, 255, 0.05); color: #ffffff; border-left: 2px solid #ffffff; }
-        
-        .column-grid { display: grid; gap: 1rem; }
-        @media (min-width: 768px) {
-            .column-grid { grid-template-columns: repeat(4, 1fr); }
-            .col-span-full-custom { grid-column: span 4 / span 4; }
-        }
     </style>
 </head>
 <body class="antialiased min-h-screen">
@@ -60,15 +54,16 @@
             </div>
 
             <h2 class="text-xl font-bold text-white mb-6 uppercase tracking-wider">Las 5 columnas del poder que leerás</h2>
-            <div class="column-grid mb-16">
-            <div class="bento-card p-5 border border-white/20">
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-16">
+                
+                <div class="bento-card p-5 border border-white/20 md:col-span-3">
                     <p class="text-[10px] text-white font-black uppercase mb-2">Columna 3</p>
                     <p class="text-base font-bold text-yellow-500 mb-1">Objeto del Gasto</p>
                     <p class="text-[11px] text-gray-400 font-mono">Es el número de 3 dígitos que define el destino del dinero. Para no escribir en la planilla el detalle exacto de en qué se gastó, lo simplifican en un código.</p>
                 </div>
-            </div>
 
-                <div class="col-span-full-custom bento-card p-6 border-b-2 border-yellow-500/50">
+                <div class="bento-card p-6 border-b-2 border-yellow-500/50 md:col-span-3">
                     <p class="text-[10px] text-yellow-500 font-black uppercase tracking-widest mb-1">Columna 10 (El Origen)</p>
                     <p class="text-xl font-black text-white mb-2">Presupuesto Vigente</p>
                     <p class="text-sm text-gray-400 leading-relaxed">Es la promesa oficial. Representa el monto total que las autoridades declararon que iban a gastar en cada rubro al inicio del año.</p>
@@ -79,17 +74,20 @@
                     <p class="text-base font-bold text-white mb-1">Total Obligado</p>
                     <p class="text-[11px] text-gray-400">El compromiso legal. Plata que ya tiene un dueño asignado por contrato.</p>
                 </div>
+                
                 <div class="bento-card p-5">
                     <p class="text-[10px] text-gray-500 font-black uppercase mb-2">Columna 12</p>
                     <p class="text-base font-bold text-white mb-1">Saldo Presupuestario</p>
                     <p class="text-[11px] text-gray-400">La inoperancia. Lo que no se usó. Si sobra mucho en áreas clave, hubo falta de gestión.</p>
                 </div>
+                
                 <div class="bento-card p-5 border border-red-500/30 bg-red-900/5">
                     <p class="text-[10px] text-red-500 font-black uppercase mb-2">Columna 13</p>
                     <p class="text-base font-bold text-red-400 mb-1">Total Pagado</p>
                     <p class="text-[11px] text-gray-300 italic">La salida real. Acá el cheque ya se cobró. Es el desembolso consumado.</p>
                 </div>
-        
+            </div>
+
             <div class="bento-card p-6 md:p-10 border border-yellow-500/20 mb-12">
                 <h2 class="text-2xl font-black text-white mb-6">Táctica de Extracción de Datos</h2>
                 <div class="space-y-6 text-sm text-gray-300 leading-relaxed">
@@ -114,55 +112,86 @@
                     </a>
                 </div>
                 
-                <div class="bento-card p-5 mt-6 mb-8">
-    <h3 class="text-white font-bold text-sm mb-2 flex items-center gap-2">
-        <svg class="w-4 h-4 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-        Los Códigos de Fuga
-    </h3>
-    <p class="text-gray-400 text-xs mb-5">Usá "Buscar" en el PDF y escribí estos números. Preparate.</p>
-    
-    <div class="space-y-4">
-        <div class="flex items-start gap-3 border-b border-white/5 pb-3">
-            <span class="bg-red-500 text-black font-bold text-[10px] px-2 py-0.5 rounded mt-0.5">144</span>
-            <div>
-                <h4 class="text-white text-xs font-bold uppercase tracking-wider">Jornales</h4>
-                <p class="text-gray-400 text-xs mt-1 leading-relaxed">Más de 12.000 millones desde 2021. Plata suficiente para asfaltar media ciudad. Buscalo.</p>
-            </div>
-        </div>
-        
-        <div class="flex items-start gap-3 border-b border-white/5 pb-3">
-            <span class="bg-yellow-500 text-black font-bold text-[10px] px-2 py-0.5 rounded mt-0.5">266</span>
-            <div>
-                <h4 class="text-white text-xs font-bold uppercase tracking-wider">Consultorías</h4>
-                <p class="text-gray-400 text-xs mt-1 leading-relaxed">Superó los 2.000 millones. ¿Viste ese nivel de "asesoramiento" reflejado en tu barrio?</p>
-            </div>
-        </div>
+                <div class="bento-card p-6 mt-6 mb-8">
+                    <h3 class="text-white font-bold text-base mb-2 flex items-center gap-2">
+                        <svg class="w-5 h-5 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                        Los Códigos de Fuga
+                    </h3>
+                    <p class="text-gray-400 text-sm mb-6">Usá "Buscar" en el PDF y escribí estos números. Preparate.</p>
+                    
+                    <div class="space-y-5">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/5 pb-5">
+                            <div class="flex items-start gap-4">
+                                <span class="bg-red-500 text-black font-black text-sm px-2.5 py-1 rounded shadow-[0_0_10px_rgba(239,68,68,0.2)] mt-0.5">144</span>
+                                <div>
+                                    <h4 class="text-white text-sm font-bold uppercase tracking-wider">Jornales</h4>
+                                    <p class="text-gray-400 text-xs mt-1.5 leading-relaxed">Más de 12.000 millones desde 2021. Plata suficiente para asfaltar media ciudad. Buscalo.</p>
+                                </div>
+                            </div>
+                            <button onclick="copyCode('144', this)" class="shrink-0 bg-white/5 hover:bg-white/10 border border-white/10 text-gray-300 hover:text-white text-[10px] font-bold uppercase px-4 py-2 rounded-lg transition-all flex items-center justify-center gap-2 w-full sm:w-auto">
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                                <span>Copiar</span>
+                            </button>
+                        </div>
+                        
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/5 pb-5">
+                            <div class="flex items-start gap-4">
+                                <span class="bg-yellow-500 text-black font-black text-sm px-2.5 py-1 rounded shadow-[0_0_10px_rgba(234,179,8,0.2)] mt-0.5">266</span>
+                                <div>
+                                    <h4 class="text-white text-sm font-bold uppercase tracking-wider">Consultorías</h4>
+                                    <p class="text-gray-400 text-xs mt-1.5 leading-relaxed">Superó los 2.000 millones. ¿Viste ese nivel de "asesoramiento" reflejado en tu barrio?</p>
+                                </div>
+                            </div>
+                            <button onclick="copyCode('266', this)" class="shrink-0 bg-white/5 hover:bg-white/10 border border-white/10 text-gray-300 hover:text-white text-[10px] font-bold uppercase px-4 py-2 rounded-lg transition-all flex items-center justify-center gap-2 w-full sm:w-auto">
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                                <span>Copiar</span>
+                            </button>
+                        </div>
 
-        <div class="flex items-start gap-3 border-b border-white/5 pb-3">
-            <span class="bg-white text-black font-bold text-[10px] px-2 py-0.5 rounded mt-0.5">243</span>
-            <div>
-                <h4 class="text-white text-xs font-bold uppercase tracking-wider">Mantenimiento</h4>
-                <p class="text-gray-400 text-xs mt-1 leading-relaxed">Más de 500 millones en reparar máquinas. Gasto nivel flota de Fórmula 1. Rastrealo.</p>
-            </div>
-        </div>
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/5 pb-5">
+                            <div class="flex items-start gap-4">
+                                <span class="bg-white text-black font-black text-sm px-2.5 py-1 rounded shadow-[0_0_10px_rgba(255,255,255,0.2)] mt-0.5">243</span>
+                                <div>
+                                    <h4 class="text-white text-sm font-bold uppercase tracking-wider">Mantenimiento</h4>
+                                    <p class="text-gray-400 text-xs mt-1.5 leading-relaxed">Más de 500 millones en reparar máquinas. Gasto nivel flota de Fórmula 1. Rastrealo.</p>
+                                </div>
+                            </div>
+                            <button onclick="copyCode('243', this)" class="shrink-0 bg-white/5 hover:bg-white/10 border border-white/10 text-gray-300 hover:text-white text-[10px] font-bold uppercase px-4 py-2 rounded-lg transition-all flex items-center justify-center gap-2 w-full sm:w-auto">
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                                <span>Copiar</span>
+                            </button>
+                        </div>
 
-        <div class="flex items-start gap-3 border-b border-white/5 pb-3">
-            <span class="bg-gray-400 text-black font-bold text-[10px] px-2 py-0.5 rounded mt-0.5">361</span>
-            <div>
-                <h4 class="text-white text-xs font-bold uppercase tracking-wider">Combustibles</h4>
-                <p class="text-gray-400 text-xs mt-1 leading-relaxed">El agujero negro clásico. Comprobá cuántos surtidores se podrían haber comprado.</p>
-            </div>
-        </div>
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/5 pb-5">
+                            <div class="flex items-start gap-4">
+                                <span class="bg-gray-400 text-black font-black text-sm px-2.5 py-1 rounded shadow-[0_0_10px_rgba(156,163,175,0.2)] mt-0.5">361</span>
+                                <div>
+                                    <h4 class="text-white text-sm font-bold uppercase tracking-wider">Combustibles</h4>
+                                    <p class="text-gray-400 text-xs mt-1.5 leading-relaxed">El agujero negro clásico. Comprobá cuántos surtidores se podrían haber comprado.</p>
+                                </div>
+                            </div>
+                            <button onclick="copyCode('361', this)" class="shrink-0 bg-white/5 hover:bg-white/10 border border-white/10 text-gray-300 hover:text-white text-[10px] font-bold uppercase px-4 py-2 rounded-lg transition-all flex items-center justify-center gap-2 w-full sm:w-auto">
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                                <span>Copiar</span>
+                            </button>
+                        </div>
 
-        <div class="flex items-start gap-3">
-            <span class="bg-gray-400 text-black font-bold text-[10px] px-2 py-0.5 rounded mt-0.5">800</span>
-            <div>
-                <h4 class="text-white text-xs font-bold uppercase tracking-wider">Transferencias</h4>
-                <p class="text-gray-400 text-xs mt-1 leading-relaxed">Millones derivados a "comisiones" y entidades. El mecanismo perfecto para evadir control directo.</p>
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                            <div class="flex items-start gap-4">
+                                <span class="bg-purple-500 text-white font-black text-sm px-2.5 py-1 rounded shadow-[0_0_10px_rgba(168,85,247,0.3)] mt-0.5">874</span>
+                                <div>
+                                    <h4 class="text-white text-sm font-bold uppercase tracking-wider">Transferencias</h4>
+                                    <p class="text-gray-400 text-xs mt-1.5 leading-relaxed">Millones derivados a "comisiones" y entidades. El mecanismo perfecto para evadir control directo.</p>
+                                </div>
+                            </div>
+                            <button onclick="copyCode('874', this)" class="shrink-0 bg-white/5 hover:bg-white/10 border border-white/10 text-gray-300 hover:text-white text-[10px] font-bold uppercase px-4 py-2 rounded-lg transition-all flex items-center justify-center gap-2 w-full sm:w-auto">
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                                <span>Copiar</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-</div>
 
             <div class="hidden lg:flex justify-between mt-8">
                 <a href="modulo1.html" class="bg-transparent border border-white/20 hover:bg-white/5 text-gray-300 font-bold text-sm px-6 py-4 rounded-xl transition-colors flex items-center gap-2">
@@ -205,8 +234,8 @@
                 const originalText = btnElement.innerHTML;
                 const originalClasses = btnElement.className;
                 
-                btnElement.innerHTML = "¡COPIADO!";
-                btnElement.className = "bg-green-500 text-black text-[10px] font-bold uppercase px-3 py-1.5 rounded transition-all";
+                btnElement.innerHTML = `<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg><span>¡COPIADO!</span>`;
+                btnElement.className = "shrink-0 bg-green-500 text-black text-[10px] font-bold uppercase px-4 py-2 rounded-lg transition-all flex items-center justify-center gap-2 w-full sm:w-auto";
                 
                 setTimeout(() => {
                     btnElement.innerHTML = originalText;
