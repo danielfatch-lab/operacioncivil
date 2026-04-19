@@ -113,94 +113,64 @@
                     </a>
                 </div>
                 
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    
-                    <div class="bg-[#111114] border border-white/5 rounded-xl p-5 flex flex-col justify-between hover:border-white/20 transition-colors">
-                        <div class="flex justify-between items-start mb-4">
-                            <div class="bg-black border border-white/10 px-3 py-1 rounded-lg">
-                                <span class="text-lg font-black text-white">144</span>
-                            </div>
-                            <button onclick="copyCode('144', this)" class="bg-white/5 hover:bg-yellow-500 hover:text-black text-gray-300 text-[10px] font-bold uppercase px-3 py-1.5 rounded transition-all active:scale-95">Copiar</button>
-                        </div>
-                        <div>
-                            <h3 class="text-sm font-bold text-white mb-1 uppercase">Jornales</h3>
-                            <p class="text-[11px] text-gray-400 leading-relaxed mb-2">Remuneración a personal contratado para tareas temporales o estacionales.</p>
-                            <p class="text-[10px] text-yellow-500/80 font-medium italic">Tip: Útil para cruzar datos de aumentos de personal en años electorales.</p>
-                        </div>
-                    </div>
+                <div class="mt-10 mb-8">
+    <h3 class="text-white font-semibold text-lg mb-3 flex items-center gap-2">
+        <svg class="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+        Los 3 Códigos de la Indignación
+    </h3>
+    <p class="text-gray-400 text-sm leading-relaxed mb-5">
+        No navegues a ciegas en la planilla. Te voy a dar los 3 códigos exactos donde la burocracia concentra el grueso de tus impuestos. Usá la opción "Buscar" en tu PDF, escribí estos números y preparate para lo que vas a encontrar.
+    </p>
 
-                    <div class="bg-[#111114] border border-white/5 rounded-xl p-5 flex flex-col justify-between hover:border-white/20 transition-colors">
-                        <div class="flex justify-between items-start mb-4">
-                            <div class="bg-black border border-white/10 px-3 py-1 rounded-lg">
-                                <span class="text-lg font-black text-white">284</span>
-                            </div>
-                            <button onclick="copyCode('284', this)" class="bg-white/5 hover:bg-yellow-500 hover:text-black text-gray-300 text-[10px] font-bold uppercase px-3 py-1.5 rounded transition-all active:scale-95">Copiar</button>
-                        </div>
-                        <div>
-                            <h3 class="text-sm font-bold text-white mb-1 uppercase">Servicios de Catering</h3>
-                            <p class="text-[11px] text-gray-400 leading-relaxed mb-2">Gastos por provisión de comidas y bebidas para eventos o reuniones oficiales.</p>
-                            <p class="text-[10px] text-yellow-500/80 font-medium italic">Tip: Compara el gasto total en este rubro contra inversiones en salud primaria.</p>
-                        </div>
+    <div class="space-y-3">
+        
+        <div class="group bg-black/40 border border-white/10 hover:border-red-500/50 p-4 rounded-xl transition-all cursor-pointer relative overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-r from-red-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 relative z-10">
+                <div>
+                    <div class="flex items-center gap-2 mb-1">
+                        <span class="bg-red-500 text-black font-bold text-xs px-2 py-0.5 rounded">144</span>
+                        <h4 class="text-white font-semibold text-sm uppercase">Jornales</h4>
                     </div>
-
-                    <div class="bg-[#111114] border border-white/5 rounded-xl p-5 flex flex-col justify-between hover:border-white/20 transition-colors">
-                        <div class="flex justify-between items-start mb-4">
-                            <div class="bg-black border border-white/10 px-3 py-1 rounded-lg">
-                                <span class="text-lg font-black text-white">352</span>
-                            </div>
-                            <button onclick="copyCode('352', this)" class="bg-white/5 hover:bg-yellow-500 hover:text-black text-gray-300 text-[10px] font-bold uppercase px-3 py-1.5 rounded transition-all active:scale-95">Copiar</button>
-                        </div>
-                        <div>
-                            <h3 class="text-sm font-bold text-white mb-1 uppercase">Productos Farmacéuticos</h3>
-                            <p class="text-[11px] text-gray-400 leading-relaxed mb-2">Adquisición de medicamentos e insumos médicos para dispensarios locales.</p>
-                            <p class="text-[10px] text-yellow-500/80 font-medium italic">Tip: Auditar si la ejecución financiera coincide con el stock físico del centro de salud municipal.</p>
-                        </div>
-                    </div>
-
-                    <div class="bg-[#111114] border border-white/5 rounded-xl p-5 flex flex-col justify-between hover:border-white/20 transition-colors">
-                        <div class="flex justify-between items-start mb-4">
-                            <div class="bg-black border border-white/10 px-3 py-1 rounded-lg">
-                                <span class="text-lg font-black text-white">361</span>
-                            </div>
-                            <button onclick="copyCode('361', this)" class="bg-white/5 hover:bg-yellow-500 hover:text-black text-gray-300 text-[10px] font-bold uppercase px-3 py-1.5 rounded transition-all active:scale-95">Copiar</button>
-                        </div>
-                        <div>
-                            <h3 class="text-sm font-bold text-white mb-1 uppercase">Combustibles</h3>
-                            <p class="text-[11px] text-gray-400 leading-relaxed mb-2">Provisión de nafta, diésel o lubricantes para el parque automotor de la institución.</p>
-                            <p class="text-[10px] text-yellow-500/80 font-medium italic">Tip: Calcular si el volumen en litros pagados es lógicamente consumible por la flota existente.</p>
-                        </div>
-                    </div>
-
-                    <div class="bg-[#111114] border border-white/5 rounded-xl p-5 flex flex-col justify-between hover:border-white/20 transition-colors">
-                        <div class="flex justify-between items-start mb-4">
-                            <div class="bg-black border border-white/10 px-3 py-1 rounded-lg">
-                                <span class="text-lg font-black text-white">520</span>
-                            </div>
-                            <button onclick="copyCode('520', this)" class="bg-white/5 hover:bg-yellow-500 hover:text-black text-gray-300 text-[10px] font-bold uppercase px-3 py-1.5 rounded transition-all active:scale-95">Copiar</button>
-                        </div>
-                        <div>
-                            <h3 class="text-sm font-bold text-white mb-1 uppercase">Construcciones</h3>
-                            <p class="text-[11px] text-gray-400 leading-relaxed mb-2">Obras públicas, pavimentación, empedrados, puentes y mantenimiento edilicio.</p>
-                            <p class="text-[10px] text-yellow-500/80 font-medium italic">Tip: El rubro más intensivo en capital. Requiere fiscalización in situ del avance físico de las obras.</p>
-                        </div>
-                    </div>
-
-                    <div class="bg-[#111114] border border-white/5 rounded-xl p-5 flex flex-col justify-between hover:border-white/20 transition-colors">
-                        <div class="flex justify-between items-start mb-4">
-                            <div class="bg-black border border-white/10 px-3 py-1 rounded-lg">
-                                <span class="text-lg font-black text-white">842</span>
-                            </div>
-                            <button onclick="copyCode('842', this)" class="bg-white/5 hover:bg-yellow-500 hover:text-black text-gray-300 text-[10px] font-bold uppercase px-3 py-1.5 rounded transition-all active:scale-95">Copiar</button>
-                        </div>
-                        <div>
-                            <h3 class="text-sm font-bold text-white mb-1 uppercase">Aportes a Inst. sin Fines de Lucro</h3>
-                            <p class="text-[11px] text-gray-400 leading-relaxed mb-2">Transferencias directas a comisiones vecinales, fundaciones o asociaciones civiles.</p>
-                            <p class="text-[10px] text-yellow-500/80 font-medium italic">Tip: Rastrea la existencia real y la directiva de las comisiones que reciben estas transferencias.</p>
-                        </div>
-                    </div>
-
+                    <p class="text-gray-400 text-xs leading-relaxed mt-2 sm:max-w-[90%]">
+                        El agujero negro. Si sumás lo que figura en este código desde el 2021 hasta hoy, vas a ver que el gasto superó cómodamente los <strong class="text-red-400">12.000 millones de guaraníes</strong>. Con esa plata iluminábamos Katueté de punta a punta y nos sobraba para asfaltar media ciudad. Buscalo.
+                    </p>
                 </div>
             </div>
+        </div>
+
+        <div class="group bg-black/40 border border-white/10 hover:border-yellow-500/50 p-4 rounded-xl transition-all cursor-pointer relative overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-r from-yellow-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 relative z-10">
+                <div>
+                    <div class="flex items-center gap-2 mb-1">
+                        <span class="bg-yellow-500 text-black font-bold text-xs px-2 py-0.5 rounded">266</span>
+                        <h4 class="text-white font-semibold text-sm uppercase">Consultorías y Asesorías</h4>
+                    </div>
+                    <p class="text-gray-400 text-xs leading-relaxed mt-2 sm:max-w-[90%]">
+                        El concepto más abstracto del diccionario. Solo en "consejos técnicos" pasaron sobradamente la barrera de los <strong class="text-yellow-400">2.000 millones</strong> en pocos años. Buscalo en el PDF y preguntate si viste el resultado de esos asesoramientos en tu barrio.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="group bg-black/40 border border-white/10 hover:border-white/50 p-4 rounded-xl transition-all cursor-pointer relative overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-r from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 relative z-10">
+                <div>
+                    <div class="flex items-center gap-2 mb-1">
+                        <span class="bg-white text-black font-bold text-xs px-2 py-0.5 rounded">243</span>
+                        <h4 class="text-white font-semibold text-sm uppercase">Mantenimiento de Maquinarias</h4>
+                    </div>
+                    <p class="text-gray-400 text-xs leading-relaxed mt-2 sm:max-w-[90%]">
+                        Cualquiera pensaría que operan una flota de Transformers. En poco tiempo declararon más de <strong class="text-white">500 millones</strong> solo en reparaciones. Rastrea este código y sacá tus propias conclusiones.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
 
             <div class="hidden lg:flex justify-between mt-8">
                 <a href="modulo1.html" class="bg-transparent border border-white/20 hover:bg-white/5 text-gray-300 font-bold text-sm px-6 py-4 rounded-xl transition-colors flex items-center gap-2">
