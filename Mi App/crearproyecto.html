@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Katuete - Redactar Proyecto Ciudadano</title>
+    <style>
+        /* =========================================
+           SISTEMA DE DISEÑO (Soft UI Corporativo)
+           ========================================= */
+        :root {
+            --text-main: #1F2937;
+            --text-muted: #6B7280;
+            --bg-body: #F9FAFB;
+            --bg-card: #FFFFFF;
+            --border-light: #E5E7EB;
+            --border-mid: #D1D5DB;
+            --yellow: #FFC700;
+            --yellow-hover: #F5B800;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+            --transition: all 0.25s ease;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', -apple-system, sans-serif; }
+        body { background-color: var(--bg-body); color: var(--text-main); -webkit-font-smoothing: antialiased; }
+
+        /* =========================================
+           NAVEGACIÓN SUPERIOR MINIMALISTA
+           ========================================= */
+        .main-navbar {
+            height: 72px; background-color: var(--bg-card); border-bottom: 1px solid var(--border-light);
+            display: flex; justify-content: space-between; align-items: center; padding: 0 5%;
+            position: sticky; top: 0; z-index: 1000; box-shadow: var(--shadow-sm);
+        }
+        .brand-container { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+        .brand-logo-svg {
+            width: 36px; height: 36px; background-color: var(--text-main); display: flex; align-items: center; justify-content: center;
+            border-radius: 8px; transition: var(--transition); flex-shrink: 0; color: var(--bg-card);
+        }
+        .brand-text { display: flex; flex-direction: column; justify-content: center; }
+        .brand-title { color: var(--text-main); font-size: 16px; font-weight: 800; letter-spacing: -0.5px; line-height: 1; margin-bottom: 2px; }
+        .brand-subtitle { color: var(--text-muted); font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+
+        .btn-outline {
+            display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; font-size: 13px; font-weight: 700;
+            color: var(--text-main); text-decoration: none; border: 1px solid var(--border-mid); border-radius: 6px;
+            background-color: var(--bg-card); transition: var(--transition);
+        }
+        .btn-outline:hover { background-color: var(--bg-body); border-color: var(--text-main); }
+
+        /* =========================================
+           WIZARD CONTAINER (Formulario por Pasos)
+           ========================================= */
+        .wizard-wrapper { max-width: 760px; margin: 40px auto 80px; padding: 0 5%; }
+        
+        .wizard-header { margin-bottom: 32px; text-align: center; }
+        .wizard-title { font-size: 24px; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 8px; }
+        .wizard-desc { font-size: 14px; color: var(--text-muted); }
+
+        /* Progress Bar */
+        .progress-tracker { display: flex; justify-content: space-between; position: relative; margin-bottom: 40px; }
+        .progress-tracker::before {
+            content: ''; position: absolute; top: 14px; left: 0; width: 100%; height: 2px;
+            background-color: var(--border-light); z-index: 1;
+        }
+        .progress-line {
+            position: absolute; top: 14px; left: 0; height: 2px; background-color: var(--text-main);
+            z-index: 2; transition: width 0.3s ease; width: 0%;
+        }
+        .step-indicator {
+            position: relative; z-index: 3; display: flex; flex-direction: column; align-items: center; gap: 8px;
+            background-color: var(--bg-body); padding: 0 12px;
+        }
+        .step-dot {
+            width: 30px; height: 30px; border-radius: 50%; background-color: var(--bg-card); border: 2px solid var(--border-mid);
+            display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: var(--text-muted); transition: var(--transition);
+        }
+        .step-indicator.active .step-dot { border-color: var(--text-main); background-color: var(--text-main); color: var(--yellow); }
+        .step-indicator.completed .step-dot { border-color: var(--text-main); background-color: var(--bg-card); color: var(--text-main); }
+        .step-label { font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+        .step-indicator.active .step-label { color: var(--text-main); }
+
+        /* Contenedor de Formulario */
+        .wizard-card {
+            background-color: var(--bg-card); border: 1px solid var(--border-light); border-radius: 12px;
+            box-shadow: var(--shadow-sm); overflow: hidden; position: relative;
+        }
+        .step-content { padding: 32px; display: none; animation: fadeIn 0.4s ease; }
+        .step-content.active { display: block; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Formularios UI */
+        .form-group { margin-bottom: 24px; }
+        .form-label { display: block; font-size: 13px; font-weight: 700; margin-bottom: 8px; color: var(--text-main); }
+        .form-input, .form-select, .form-textarea {
+            width: 100%; background-color: var(--bg-body); border: 1px solid var(--border-mid); border-radius: 8px;
+            padding: 12px 16px; font-size: 14px; color: var(--text-main); transition: var(--transition); outline: none;
+        }
+        .form-input:focus, .form-select:focus, .form-textarea:focus {
+            border-color: var(--text-main); background-color: var(--bg-card); box-shadow: 0 0 0 3px rgba(255, 199, 0, 0.3);
+        }
+        .form-textarea { resize: vertical; min-height: 120px; }
+
+        /* Grilla de Evidencia (Upload Zones) */
+        .upload-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .upload-zone {
+            border: 2px dashed var(--border-mid); border-radius: 8px; padding: 24px 16px; text-align: center;
+            background-color: var(--bg-body); cursor: pointer; transition: var(--transition); display: flex; flex-direction: column; align-items: center; justify-content: center;
+        }
+        .upload-zone:hover, .upload-zone.active { border-color: var(--text-main); background-color: var(--bg-card); }
+        .upload-icon { width: 32px; height: 32px; color: var(--text-muted); margin-bottom: 12px; }
+        .upload-text { font-size: 13px; font-weight: 700; color: var(--text-main); margin-bottom: 4px; line-height: 1.2; }
+        .upload-sub { font-size: 11px; color: var(--text-muted); line-height: 1.3; }
+
+        /* Botonera de Control Inferior */
+        .wizard-footer {
+            padding: 20px 32px; border-top: 1px solid var(--border-light); background-color: var(--bg-body);
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .btn {
+            display: inline-flex; align-items: center; justify-content: center; padding: 10px 24px;
+            font-size: 13px; font-weight: 700; border-radius: 6px; cursor: pointer; transition: var(--transition); outline: none; border: none;
+        }
+        .btn-prev { background-color: transparent; color: var(--text-muted); padding: 10px 0; display: flex; align-items: center; gap: 6px; }
+        .btn-prev:hover { color: var(--text-main); }
+        .btn-next { background-color: var(--text-main); color: var(--bg-card); border: 1px solid var(--text-main); }
+        .btn-next:hover { background-color: var(--yellow); color: var(--text-main); border-color: var(--yellow); }
+        
+        /* Botón de Publicación Final */
+        .btn-publish-final { background-color: var(--yellow); color: var(--text-main); border: 1px solid var(--yellow); text-transform: uppercase; font-weight: 800; gap: 8px; display: inline-flex; align-items: center; }
+        .btn-publish-final:hover { background-color: var(--text-main); color: var(--yellow); border-color: var(--text-main); transform: translateY(-2px); box-shadow: var(--shadow-sm); }
+
+        /* =========================================
+           VISTA DE DOCUMENTO LEGAL (Simulación PDF)
+           ========================================= */
+        .legal-document {
+            background-color: #FFFFFF; border: 1px solid var(--border-mid); box-shadow: var(--shadow-md);
+            padding: 40px; border-radius: 4px; font-family: 'Times New Roman', Times, serif; color: #000; margin-bottom: 24px;
+        }
+        .doc-header { text-align: center; border-bottom: 2px solid #000; padding-bottom: 16px; margin-bottom: 24px; }
+        .doc-title { font-size: 18px; font-weight: bold; text-transform: uppercase; margin-bottom: 4px; }
+        .doc-subtitle { font-size: 12px; text-transform: uppercase; color: #333; }
+        .doc-meta { display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 32px; font-family: 'Inter', sans-serif; font-weight: 600; }
+        
+        .doc-body p { font-size: 14px; line-height: 1.6; margin-bottom: 16px; text-align: justify; }
+        .doc-signature { margin-top: 40px; display: flex; justify-content: flex-end; }
+        .signature-line { border-top: 1px solid #000; width: 200px; text-align: center; padding-top: 8px; font-size: 12px; font-family: 'Inter', sans-serif; font-weight: 600; }
+
+        .btn-download {
+            width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px;
+            padding: 12px; background-color: transparent; color: var(--text-main); font-size: 13px; font-weight: 700;
+            border-radius: 6px; text-decoration: none; border: 1px solid var(--border-mid); transition: var(--transition);
+        }
+        .btn-download:hover { background-color: var(--bg-body); border-color: var(--text-main); }
+
+        /* =========================================
+           HOJA DE ESTILOS DE IMPRESIÓN (PDF Nativo)
+           ========================================= */
+        @media print {
+            body * { visibility: hidden; }
+            .legal-document, .legal-document * { visibility: visible; }
+            .legal-document { position: absolute; left: 0; top: 0; width: 100%; box-shadow: none; border: none; padding: 0; }
+            .wizard-wrapper { margin: 0; padding: 0; }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .step-label { display: none; }
+            .step-content { padding: 24px; }
+            .wizard-footer { padding: 16px 20px; }
+            .legal-document { padding: 20px; }
+            .upload-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- CABECERA ISOLADA (Focus Mode con Retorno) -->
+    <header class="main-navbar">
+        <a href="index.html" class="brand-container">
+            <div class="brand-logo-svg"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2v20M4 12h8M12 2l8 10-8 10"/></svg></div>
+            <div class="brand-text">
+                <span class="brand-title">KATUETE</span>
+                <span class="brand-subtitle">Redacción de Proyecto</span>
+            </div>
+        </a>
+        <a href="index.html" class="btn-outline">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            Volver al Inicio
+        </a>
+    </header>
+
+    <main class="wizard-wrapper">
+        <div class="wizard-header">
+            <h1 class="wizard-title">Iniciativa Popular Digital</h1>
+            <p class="wizard-desc">Redacta tu propuesta. El sistema generará el expediente legal automáticamente.</p>
+        </div>
+
+        <!-- PROGRESS TRACKER -->
+        <div class="progress-tracker">
+            <div class="progress-line" id="progressLine" style="width: 0%;"></div>
+            <div class="step-indicator active" id="indicator-1">
+                <div class="step-dot">1</div>
+                <span class="step-label">Identificación</span>
+            </div>
+            <div class="step-indicator" id="indicator-2">
+                <div class="step-dot">2</div>
+                <span class="step-label">Justificación</span>
+            </div>
+            <div class="step-indicator" id="indicator-3">
+                <div class="step-dot">3</div>
+                <span class="step-label">Documento Legal</span>
+            </div>
+        </div>
+
+        <!-- WIZARD CARD -->
+        <div class="wizard-card">
+            
+            <!-- PASO 1: Identificación -->
+            <div class="step-content active" id="step-1">
+                <div class="form-group">
+                    <label class="form-label">Título de la Propuesta</label>
+                    <input type="text" id="inputTitulo" class="form-input" placeholder="Ej: Reparación de asfalto en Calle 14 de Mayo" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Área de Intervención</label>
+                    <select id="inputCategoria" class="form-select" required>
+                        <option value="" disabled selected>Selecciona una categoría técnica...</option>
+                        <option value="Obras de Infraestructura">Obras de Infraestructura</option>
+                        <option value="Salubridad e Higiene">Salubridad e Higiene</option>
+                        <option value="Tránsito y Seguridad">Tránsito y Seguridad Vial</option>
+                        <option value="Medio Ambiente">Gestión Ambiental</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Ubicación (Barrio/Fracción)</label>
+                    <input type="text" id="inputBarrio" class="form-input" placeholder="Ej: Barrio Santa Librada" required>
+                </div>
+            </div>
+
+            <!-- PASO 2: Justificación y Evidencia Fotográfica -->
+            <div class="step-content" id="step-2">
+                <div class="form-group">
+                    <label class="form-label">Exposición de Motivos</label>
+                    <textarea id="inputMotivo" class="form-textarea" placeholder="Describe el problema actual y por qué es necesaria esta intervención. Sé claro y objetivo."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Evidencia Fotográfica y Anexos</label>
+                    <div class="upload-grid">
+                        <!-- Caja 1: Estado Actual -->
+                        <div class="upload-zone" id="uploadActual">
+                            <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+                            <div class="upload-text">Estado Actual del Lugar</div>
+                            <div class="upload-sub">Sube una foto del problema (Requerido)</div>
+                        </div>
+                        <!-- Caja 2: Referencia Proyectada -->
+                        <div class="upload-zone" id="uploadPropuesto">
+                            <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                            <div class="upload-text">Referencia o Plano</div>
+                            <div class="upload-sub">Esquema de cómo debería quedar (Opcional)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PASO 3: Previsualización Legal -->
+            <div class="step-content" id="step-3">
+                <div class="legal-document" id="printableArea">
+                    <div class="doc-header">
+                        <div class="doc-title">MINUTA DE INICIATIVA CIUDADANA</div>
+                        <div class="doc-subtitle">Junta Municipal de Katuete</div>
+                    </div>
+                    <div class="doc-meta">
+                        <span><strong>CÓDIGO:</strong> <span id="docCodigo">PRE-2026-XXXX</span></span>
+                        <span><strong>FECHA:</strong> <span id="docFecha"></span></span>
+                    </div>
+                    <div class="doc-body">
+                        <p><strong>A LA HONORABLE JUNTA MUNICIPAL:</strong></p>
+                        <p>Quien suscribe, ciudadano verificado a través de la plataforma de Participación Digital, se dirige a ustedes a fin de presentar el siguiente proyecto de resolución en el marco del derecho a la Iniciativa Popular.</p>
+                        
+                        <p><strong>I. OBJETO DEL PROYECTO:</strong><br>
+                        <span id="docTitulo">[TITULO_PROYECTO]</span>, correspondiente al área de <span id="docCategoria">[CATEGORIA]</span>, a ser ejecutado en la jurisdicción de <span id="docBarrio">[BARRIO]</span>.</p>
+                        
+                        <p><strong>II. EXPOSICIÓN DE MOTIVOS:</strong><br>
+                        <span id="docMotivo">[MOTIVO_PROYECTO]</span></p>
+
+                        <p><strong>III. ANEXOS:</strong><br>
+                        Se adjuntan a la presente <span id="docAnexos">0</span> registros fotográficos que documentan el estado actual y la referencia de la intervención solicitada de forma digital al expediente.</p>
+
+                        <p>Por lo expuesto, solicito a este colegiado se sirva dar ingreso a la presente minuta para su estudio, dictamen y posterior aprobación.</p>
+                    </div>
+                    <div class="doc-signature">
+                        <div class="signature-line">
+                            Firma Electrónica Validada<br>Valeria Lucia Acosta
+                        </div>
+                    </div>
+                </div>
+                
+                <button onclick="window.print()" class="btn-download">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                    Descargar Copia en PDF
+                </button>
+            </div>
+
+            <!-- CONTROLES WIZARD PERMANENTES -->
+            <div class="wizard-footer" id="wizardFooter">
+                <button class="btn btn-prev" id="btnPrev" style="visibility: hidden;">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                    Volver
+                </button>
+                <button class="btn btn-next" id="btnNext">Continuar al Paso 2</button>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        let currentStep = 1;
+        const totalSteps = 3;
+        let imagesUploaded = 0; // Contador de imágenes anexadas
+
+        const btnPrev = document.getElementById('btnPrev');
+        const btnNext = document.getElementById('btnNext');
+        const progressLine = document.getElementById('progressLine');
+
+        // Motor de Navegación del Wizard
+        function updateWizard() {
+            // Ocultar todos los paneles
+            for (let i = 1; i <= totalSteps; i++) {
+                document.getElementById(`step-${i}`).classList.remove('active');
+                
+                // Actualizar UI del Tracker Superior
+                const indicator = document.getElementById(`indicator-${i}`);
+                if (i < currentStep) {
+                    indicator.className = 'step-indicator completed';
+                } else if (i === currentStep) {
+                    indicator.className = 'step-indicator active';
+                } else {
+                    indicator.className = 'step-indicator';
+                }
+            }
+            
+            // Mostrar panel actual
+            document.getElementById(`step-${currentStep}`).classList.add('active');
+            progressLine.style.width = ((currentStep - 1) / (totalSteps - 1)) * 100 + '%';
+
+            // Comportamiento Condicional de Botones según el Paso
+            if (currentStep === 1) {
+                btnPrev.style.visibility = 'hidden';
+                btnNext.textContent = 'Continuar al Paso 2';
+                btnNext.className = 'btn btn-next';
+            } else if (currentStep === 2) {
+                btnPrev.style.visibility = 'visible';
+                btnPrev.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg> Volver a Editar';
+                btnNext.textContent = 'Generar Documento Legal';
+                btnNext.className = 'btn btn-next';
+            } else if (currentStep === 3) {
+                btnPrev.style.visibility = 'visible';
+                btnPrev.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg> Corregir Datos';
+                btnNext.innerHTML = 'Publicar Proyecto <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>';
+                btnNext.className = 'btn btn-publish-final';
+                compileDocument(); // Inyecta los datos al llegar al último paso
+            }
+        }
+
+        // Flujo Hacia Adelante
+        btnNext.addEventListener('click', () => {
+            // Validaciones HTML5 del paso actual
+            const currentContainer = document.getElementById(`step-${currentStep}`);
+            const inputs = currentContainer.querySelectorAll('input[required], select[required]');
+            let isValid = true;
+            
+            inputs.forEach(input => {
+                if(!input.value) {
+                    input.style.borderColor = 'var(--red-text)';
+                    isValid = false;
+                } else {
+                    input.style.borderColor = 'var(--border-mid)';
+                }
+            });
+
+            if(isValid) {
+                if (currentStep < totalSteps) {
+                    currentStep++;
+                    updateWizard();
+                } else {
+                    // Acción Final: Enviar a Base de Datos (Simulado)
+                    alert('Operación Exitosa: Expediente generado y publicado en el Dashboard Ciudadano para recolección de adhesiones.');
+                    window.location.href = "index.html"; // Redirige al inicio tras publicar
+                }
+            }
+        });
+
+        // Flujo Hacia Atrás
+        btnPrev.addEventListener('click', () => {
+            if (currentStep > 1) {
+                currentStep--;
+                updateWizard();
+            }
+        });
+
+        // Compilador Legal (Inyecta datos al PDF virtual)
+        function compileDocument() {
+            const titulo = document.getElementById('inputTitulo').value;
+            const categoria = document.getElementById('inputCategoria').value;
+            const barrio = document.getElementById('inputBarrio').value;
+            const motivo = document.getElementById('inputMotivo').value;
+
+            // Generación de Código Pre-Expediente
+            const randomCode = Math.floor(1000 + Math.random() * 9000);
+            document.getElementById('docCodigo').textContent = `PRE-2026-${randomCode}`;
+            
+            // Inyección de Fecha
+            const today = new Date();
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('docFecha').textContent = today.toLocaleDateString('es-ES', options);
+
+            // Inyección de Textos
+            document.getElementById('docTitulo').textContent = titulo || '[Sin Título]';
+            document.getElementById('docCategoria').textContent = categoria || '[Sin Categoría]';
+            document.getElementById('docBarrio').textContent = barrio || '[Sin Barrio]';
+            document.getElementById('docMotivo').textContent = motivo || 'Antecedentes y justificación técnica no especificados.';
+            document.getElementById('docAnexos').textContent = imagesUploaded;
+        }
+
+        // Simulación interactiva de Upload de Imágenes
+        const uploadActual = document.getElementById('uploadActual');
+        const uploadPropuesto = document.getElementById('uploadPropuesto');
+
+        function simulateUpload(element, text) {
+            element.addEventListener('click', () => {
+                element.classList.add('active');
+                element.querySelector('.upload-text').textContent = 'Imagen Adjuntada Exitosamente';
+                element.querySelector('.upload-sub').textContent = 'Archivo: IMG_8829.jpg';
+                element.style.borderColor = 'var(--yellow)';
+                imagesUploaded++;
+            });
+        }
+
+        simulateUpload(uploadActual);
+        simulateUpload(uploadPropuesto);
+    </script>
+</body>
+</html>

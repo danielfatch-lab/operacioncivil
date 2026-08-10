@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Katuete - Rendimiento Legislativo</title>
+    <style>
+        /* =========================================
+           SISTEMA DE DISEÑO (Corporativo Estricto)
+           ========================================= */
+        :root {
+            --black: #111111;
+            --gray-dark: #4B5563;
+            --gray-mid: #9CA3AF;
+            --gray-light: #E5E7EB;
+            --bg-body: #F4F5F7;
+            --bg-card: #FFFFFF;
+            --yellow: #FFC700;
+            --yellow-hover: #E5B300;
+            
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+        body { background-color: var(--bg-body); color: var(--black); -webkit-font-smoothing: antialiased; }
+
+        /* =========================================
+           NAVEGACIÓN SUPERIOR
+           ========================================= */
+        .main-navbar {
+            height: 72px; background-color: var(--bg-card); border-bottom: 1px solid var(--gray-light);
+            display: flex; justify-content: space-between; align-items: center; padding: 0 4%;
+            position: sticky; top: 0; z-index: 1000; box-shadow: var(--shadow-sm);
+        }
+
+        .brand-container { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+        .brand-logo-svg {
+            width: 40px; height: 40px; background-color: #1F2937; display: flex; align-items: center; justify-content: center;
+            border-radius: 6px; transition: var(--transition); flex-shrink: 0; color: var(--bg-card);
+        }
+        .brand-container:hover .brand-logo-svg { background-color: var(--yellow); color: var(--black); }
+        .brand-text { display: flex; flex-direction: column; justify-content: center; margin-top: 2px; }
+        .brand-title { color: #1F2937; font-size: 17px; font-weight: 800; letter-spacing: -0.5px; line-height: 1.1; }
+        .brand-subtitle { color: var(--gray-mid); font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+
+        .nav-wrapper { display: flex; align-items: center; gap: 24px; flex: 1; justify-content: flex-end; }
+        .nav-links { display: flex; gap: 24px; }
+        .nav-links a { color: var(--gray-dark); text-decoration: none; font-size: 14px; font-weight: 600; padding: 24px 0; transition: var(--transition); border-bottom: 3px solid transparent; }
+        .nav-links a:hover { color: var(--black); }
+        .nav-links a.active { color: var(--black); border-bottom-color: var(--yellow); }
+
+        .search-component {
+            display: flex; align-items: center; background: var(--bg-body); border: 1px solid var(--gray-light);
+            border-radius: 6px; padding: 0 12px; height: 38px; width: 220px; transition: var(--transition);
+        }
+        .search-component:focus-within { border-color: var(--gray-mid); background: var(--bg-card); box-shadow: 0 0 0 3px rgba(229, 231, 235, 0.5); }
+        .search-icon { width: 14px; height: 14px; color: var(--gray-mid); flex-shrink: 0; }
+        .search-component input { border: none; background: transparent; width: 100%; outline: none; font-size: 13px; margin-left: 8px; color: var(--black); }
+
+        .nav-transactional { display: flex; gap: 12px; align-items: center; }
+        .btn-outline {
+            display: inline-flex; align-items: center; justify-content: center; padding: 0 20px; height: 38px;
+            font-size: 13px; font-weight: 700; color: var(--black); border: 1px solid var(--gray-mid); border-radius: 6px;
+            text-decoration: none; transition: var(--transition); background-color: var(--bg-card);
+        }
+        .btn-outline:hover { background-color: var(--bg-body); }
+        
+        .btn-primary {
+            display: inline-flex; align-items: center; justify-content: center; padding: 0 20px; height: 38px; gap: 8px;
+            font-size: 13px; font-weight: 800; color: var(--black); background-color: var(--yellow); border: 1px solid var(--yellow);
+            border-radius: 6px; text-decoration: none; transition: var(--transition); text-transform: uppercase;
+        }
+        .btn-primary:hover { background-color: var(--black); color: var(--yellow); border-color: var(--black); transform: translateY(-1px); }
+
+        /* =========================================
+           ENCABEZADO DE DIRECTORIO Y FILTROS
+           ========================================= */
+        .page-header { max-width: 1200px; margin: 40px auto 24px; padding: 0 5%; }
+        .page-title { font-size: 24px; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 6px; }
+        .page-desc { font-size: 13px; color: var(--gray-dark); margin-bottom: 24px; }
+
+        .toolbar {
+            display: flex; gap: 16px; background-color: var(--bg-card); padding: 12px 16px; 
+            border-radius: 8px; border: 1px solid var(--gray-light); box-shadow: var(--shadow-sm);
+        }
+        .toolbar-search {
+            display: flex; align-items: center; background: var(--bg-body); border: 1px solid var(--gray-light);
+            border-radius: 4px; padding: 0 12px; height: 36px; flex: 1; transition: var(--transition);
+        }
+        .toolbar-search:focus-within { border-color: var(--black); background: var(--bg-card); }
+        .toolbar-search input { border: none; background: transparent; width: 100%; outline: none; font-size: 13px; margin-left: 8px; color: var(--black); }
+        
+        .filter-select {
+            height: 36px; padding: 0 12px; border: 1px solid var(--gray-light); border-radius: 4px;
+            background: var(--bg-body); font-size: 13px; font-weight: 600; color: var(--black); outline: none; cursor: pointer; min-width: 200px;
+        }
+
+        /* =========================================
+           GRILLA CORPORATIVA DE AUTORIDADES
+           ========================================= */
+        .directory-grid {
+            max-width: 1200px; margin: 0 auto 60px; padding: 0 5%;
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 20px;
+        }
+
+        .auth-card {
+            background-color: var(--bg-card); border: 1px solid var(--gray-light); border-radius: 8px;
+            overflow: hidden; transition: var(--transition); display: flex; flex-direction: column; position: relative;
+        }
+        .auth-card:hover { box-shadow: var(--shadow-md); border-color: var(--gray-mid); transform: translateY(-2px); }
+        .auth-card.is-user { border-left: 4px solid var(--yellow); }
+
+        /* Identidad y Perfil */
+        .auth-profile { padding: 20px; display: flex; gap: 16px; align-items: center; border-bottom: 1px solid var(--gray-light); }
+        
+        .auth-avatar {
+            width: 56px; height: 56px; background-color: var(--black); color: var(--yellow);
+            border-radius: 8px; display: flex; align-items: center; justify-content: center;
+            font-size: 18px; font-weight: 800; flex-shrink: 0; position: relative; overflow: hidden;
+            background-size: cover; background-position: center; border: 1px solid var(--border-light);
+        }
+        
+        /* Motor de Upload en Avatar Propio */
+        .user-avatar-upload { cursor: pointer; }
+        .user-avatar-upload .avatar-overlay {
+            position: absolute; inset: 0; background: rgba(0,0,0,0.6); display: flex; align-items: center; justify-content: center;
+            opacity: 0; transition: opacity 0.2s ease; color: #FFF;
+        }
+        .user-avatar-upload:hover .avatar-overlay { opacity: 1; }
+        .user-avatar-upload input { display: none; }
+
+        .auth-info { flex: 1; min-width: 0; }
+        .auth-role { font-size: 10px; font-weight: 700; color: var(--gray-dark); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 2px; }
+        .auth-name { font-size: 16px; font-weight: 800; color: var(--black); margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .auth-party { display: inline-block; font-size: 10px; font-weight: 600; padding: 3px 6px; background-color: var(--bg-body); border: 1px solid var(--gray-light); border-radius: 4px; color: var(--gray-dark); }
+
+        /* Matriz de Productividad */
+        .auth-metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background-color: var(--gray-light); border-bottom: 1px solid var(--gray-light); }
+        .metric-group { background-color: var(--bg-card); padding: 16px 20px; display: flex; flex-direction: column; gap: 4px; }
+        .metric-val { font-size: 20px; font-weight: 800; color: var(--black); line-height: 1; }
+        .metric-lbl { font-size: 10px; font-weight: 600; color: var(--gray-dark); text-transform: uppercase; letter-spacing: 0.5px; }
+
+        .sub-metrics { background-color: var(--bg-body); display: grid; grid-template-columns: 1fr 1fr; padding: 12px 20px; gap: 16px; border-bottom: 1px solid var(--gray-light); }
+        .sub-metric { display: flex; justify-content: space-between; align-items: center; }
+        .sub-lbl { font-size: 11px; font-weight: 600; color: var(--gray-dark); }
+        .sub-val { font-size: 13px; font-weight: 800; color: var(--black); background: var(--bg-card); border: 1px solid var(--gray-light); padding: 2px 8px; border-radius: 4px; }
+
+        /* Métrica de Transparencia Financiera (Gastos) */
+        .auth-finance { background-color: #FFFBEB; padding: 12px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--gray-light); }
+        .finance-lbl { font-size: 11px; font-weight: 700; color: #B45309; text-transform: uppercase; display: flex; align-items: center; gap: 6px; }
+        .finance-val { font-size: 15px; font-weight: 800; color: var(--black); font-family: monospace; letter-spacing: -0.5px; }
+
+        /* Acción Final */
+        .auth-action { padding: 16px 20px; background-color: var(--bg-card); margin-top: auto; }
+        .btn-audit {
+            display: flex; align-items: center; justify-content: center; width: 100%; padding: 10px;
+            background-color: var(--bg-body); color: var(--black); font-size: 12px; font-weight: 700;
+            text-transform: uppercase; text-decoration: none; border-radius: 4px; transition: var(--transition); gap: 8px; border: 1px solid var(--gray-light);
+        }
+        .btn-audit:hover { background-color: var(--black); color: var(--yellow); border-color: var(--black); }
+
+        @media (max-width: 768px) {
+            .toolbar { flex-direction: column; }
+            .filter-select { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- CABECERA -->
+    <header class="main-navbar">
+        <a href="../index.html" class="brand-container">
+            <div class="brand-logo-svg"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2v20M4 12h8M12 2l8 10-8 10"/></svg></div>
+            <div class="brand-text">
+                <span class="brand-title">KATUETE</span>
+                <span class="brand-subtitle">Gestión Corporativa</span>
+            </div>
+        </a>
+        <div class="nav-wrapper">
+            <nav class="nav-links">
+                <a href="../index.html">Inicio</a>
+                <a href="#" class="active">Junta Municipal</a>
+                <a href="#">Directorio de Proyectos</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ENCABEZADO Y FILTROS -->
+    <section class="page-header">
+        <h1 class="page-title">Rendimiento Legislativo y Auditoría</h1>
+        <p class="page-desc">Panel de control de productividad y fiscalización de fondos públicos (Viáticos y Combustibles) del pleno municipal.</p>
+        
+        <div class="toolbar">
+            <div class="toolbar-search">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                <input type="text" id="searchInput" placeholder="Buscar por nombre o apellido...">
+            </div>
+            <select class="filter-select" id="partyFilter">
+                <option value="all">Todos los Movimientos</option>
+                <option value="Independiente">Independiente</option>
+                <option value="Partido Innovación">Partido Innovación</option>
+                <option value="Frente Ciudadano">Frente Ciudadano</option>
+                <option value="Movimiento Sur">Movimiento Sur</option>
+            </select>
+        </div>
+    </section>
+
+    <!-- GRILLA DE DATOS -->
+    <main class="directory-grid" id="directoryGrid">
+        <!-- Renderizado dinámico vía JavaScript -->
+    </main>
+
+    <script>
+        // Formateador de moneda en Guaraníes
+        const formatPYG = (value) => new Intl.NumberFormat('es-PY', { style: 'currency', currency: 'PYG', maximumFractionDigits: 0 }).format(value);
+
+        // Matriz de Datos Estricta: Inyección de perfiles solicitados.
+        const autoridadesData = [
+            { 
+                id: "CON-00", 
+                nombre: "Valeria Lucia Acosta", 
+                cargo: "Concejal Titular", 
+                partido: "Independiente", 
+                metricas: { asistencia: "100%", presentados: 24, aprobados: 20, rechazados: 4, gastos: 0 },
+                isUser: true // Bandera lógica para activar motor de upload
+            },
+            { 
+                id: "CON-01", 
+                nombre: "Daniel Franco", 
+                cargo: "Concejal Titular", 
+                partido: "Partido Innovación", 
+                metricas: { asistencia: "100%", presentados: 40, aprobados: 40, rechazados: 0, gastos: 14500000 } 
+            },
+            { id: "CON-02", nombre: "Laura Gómez", cargo: "Concejal Municipal", partido: "Frente Ciudadano", metricas: { asistencia: "100%", presentados: 31, aprobados: 20, rechazados: 11, gastos: 8200000 } },
+            { id: "CON-03", nombre: "Carlos Franco", cargo: "Concejal Municipal", partido: "Movimiento Sur", metricas: { asistencia: "82%", presentados: 12, aprobados: 4, rechazados: 8, gastos: 12350000 } },
+            { id: "CON-04", nombre: "María Silva", cargo: "Concejal Municipal", partido: "Partido Innovación", metricas: { asistencia: "95%", presentados: 28, aprobados: 25, rechazados: 3, gastos: 4500000 } },
+            { id: "CON-05", nombre: "Roberto Núñez", cargo: "Concejal Municipal", partido: "Frente Ciudadano", metricas: { asistencia: "90%", presentados: 15, aprobados: 10, rechazados: 5, gastos: 23000000 } },
+            { id: "CON-06", nombre: "Elena Rojas", cargo: "Concejal Municipal", partido: "Partido Innovación", metricas: { asistencia: "99%", presentados: 40, aprobados: 35, rechazados: 5, gastos: 6100000 } },
+            { id: "CON-07", nombre: "Diego Bernal", cargo: "Concejal Municipal", partido: "Movimiento Sur", metricas: { asistencia: "75%", presentados: 6, aprobados: 1, rechazados: 5, gastos: 18400000 } },
+            { id: "CON-08", nombre: "Sofía Mendoza", cargo: "Concejal Municipal", partido: "Partido Innovación", metricas: { asistencia: "100%", presentados: 19, aprobados: 18, rechazados: 1, gastos: 1100000 } },
+            { id: "CON-09", nombre: "Jorge Ayala", cargo: "Concejal Municipal", partido: "Frente Ciudadano", metricas: { asistencia: "88%", presentados: 14, aprobados: 7, rechazados: 7, gastos: 9800000 } },
+            { id: "CON-10", nombre: "Ana Portillo", cargo: "Concejal Municipal", partido: "Partido Innovación", metricas: { asistencia: "96%", presentados: 22, aprobados: 20, rechazados: 2, gastos: 4300000 } },
+            { id: "CON-11", nombre: "Luis Galeano", cargo: "Concejal Municipal", partido: "Movimiento Sur", metricas: { asistencia: "85%", presentados: 9, aprobados: 3, rechazados: 6, gastos: 10500000 } }
+        ];
+
+        const grid = document.getElementById('directoryGrid');
+        const searchInput = document.getElementById('searchInput');
+        const partyFilter = document.getElementById('partyFilter');
+
+        // Motor de Renderizado (Componente de Tarjeta)
+        function renderGrid(data) {
+            grid.innerHTML = '';
+            data.forEach(auth => {
+                const initials = auth.nombre.split(' ').map(n => n[0]).join('').substring(0, 2);
+                
+                // Lógica de Avatar (Fijo o Interactuable)
+                let avatarHTML = '';
+                if (auth.isUser) {
+                    avatarHTML = `
+                        <label class="auth-avatar user-avatar-upload" id="avatar-${auth.id}" title="Haz clic para actualizar tu foto de perfil">
+                            <input type="file" accept="image/*" onchange="updateProfileImage(event, '${auth.id}')">
+                            <span class="avatar-initials">${initials}</span>
+                            <div class="avatar-overlay">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
+                            </div>
+                        </label>
+                    `;
+                } else {
+                    avatarHTML = `<div class="auth-avatar">${initials}</div>`;
+                }
+
+                const card = document.createElement('article');
+                card.className = auth.isUser ? 'auth-card is-user' : 'auth-card';
+                card.innerHTML = `
+                    <div class="auth-profile">
+                        ${avatarHTML}
+                        <div class="auth-info">
+                            <div class="auth-role">${auth.cargo}</div>
+                            <h2 class="auth-name">${auth.nombre}</h2>
+                            <div class="auth-party">${auth.partido}</div>
+                        </div>
+                    </div>
+                    
+                    <div class="auth-metrics">
+                        <div class="metric-group">
+                            <span class="metric-val">${auth.metricas.presentados}</span>
+                            <span class="metric-lbl">Total Presentados</span>
+                        </div>
+                        <div class="metric-group">
+                            <span class="metric-val">${auth.metricas.asistencia}</span>
+                            <span class="metric-lbl">Tasa Asistencia</span>
+                        </div>
+                    </div>
+                    
+                    <div class="sub-metrics">
+                        <div class="sub-metric">
+                            <span class="sub-lbl">Aprobados</span>
+                            <span class="sub-val">${auth.metricas.aprobados}</span>
+                        </div>
+                        <div class="sub-metric">
+                            <span class="sub-lbl">Rechazados</span>
+                            <span class="sub-val" style="color: var(--gray-dark);">${auth.metricas.rechazados}</span>
+                        </div>
+                    </div>
+
+                    <!-- Métrica Financiera de Alta Trazabilidad -->
+                    <div class="auth-finance">
+                        <span class="finance-lbl">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                            Gastos (Viáticos/Comb.)
+                        </span>
+                        <span class="finance-val">${formatPYG(auth.metricas.gastos)}</span>
+                    </div>
+
+                    <div class="auth-action">
+                        <a href="perfil.html?id=${auth.id}" class="btn-audit">
+                            Ver Perfil y Votaciones &rarr;
+                        </a>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // Lógica de Renderizado Dinámico de Imagen (Base64)
+        window.updateProfileImage = function(event, id) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const avatarContainer = document.getElementById(`avatar-${id}`);
+                    avatarContainer.style.backgroundImage = `url(${e.target.result})`;
+                    avatarContainer.querySelector('.avatar-initials').style.display = 'none';
+                };
+                reader.readAsDataURL(file);
+            }
+        };
+
+        // Lógica de Filtrado Transaccional
+        function filterData() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const party = partyFilter.value;
+
+            const filtered = autoridadesData.filter(auth => {
+                const matchSearch = auth.nombre.toLowerCase().includes(searchTerm);
+                const matchParty = party === 'all' || auth.partido === party;
+                return matchSearch && matchParty;
+            });
+
+            renderGrid(filtered);
+        }
+
+        searchInput.addEventListener('input', filterData);
+        partyFilter.addEventListener('change', filterData);
+
+        // Bootstrap
+        renderGrid(autoridadesData);
+    </script>
+</body>
+</html>

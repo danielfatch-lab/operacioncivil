@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Katuete - Centro de Votación Ciudadana</title>
+    <style>
+        /* =========================================
+           SISTEMA DE DISEÑO (Soft UI Corporativo)
+           ========================================= */
+        :root {
+            --text-main: #1F2937;
+            --text-title: #111827;
+            --text-muted: #6B7280;
+            --bg-body: #F9FAFB;
+            --bg-card: #FFFFFF;
+            --border-light: #E5E7EB;
+            --border-mid: #D1D5DB;
+            --border-dark: #9CA3AF;
+            --yellow: #FFC700;
+            --yellow-hover: #F5B800;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+            --transition: all 0.25s ease;
+        }
+
+        /* Bloqueo estricto de herencias del navegador */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', -apple-system, sans-serif; }
+        body { background-color: var(--bg-body); color: var(--text-main); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+        a { text-decoration: none; color: inherit; cursor: pointer; }
+        svg { display: block; }
+
+        /* =========================================
+           NAVEGACIÓN SUPERIOR ESTANDARIZADA
+           ========================================= */
+        .main-navbar {
+            height: 72px; background-color: var(--bg-card); border-bottom: 1px solid var(--border-mid);
+            display: flex; justify-content: space-between; align-items: center; padding: 0 5%;
+            position: sticky; top: 0; z-index: 1000; box-shadow: var(--shadow-sm);
+        }
+        
+        .brand-container { display: flex; align-items: center; gap: 12px; }
+        .brand-logo-svg {
+            width: 40px; height: 40px; background-color: var(--text-title); display: flex; align-items: center; justify-content: center;
+            border-radius: 8px; transition: var(--transition); flex-shrink: 0; color: var(--bg-card);
+        }
+        .brand-container:hover .brand-logo-svg { background-color: var(--yellow); color: var(--text-title); }
+        .brand-text { display: flex; flex-direction: column; justify-content: center; margin-top: 2px; }
+        .brand-title { color: var(--text-title); font-size: 16px; font-weight: 800; letter-spacing: -0.5px; line-height: 1; margin-bottom: 2px; }
+        .brand-subtitle { color: var(--text-muted); font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+
+        .nav-wrapper { display: flex; align-items: center; gap: 24px; flex: 1; justify-content: flex-end; }
+        .nav-links { display: flex; gap: 20px; align-items: center; }
+        .nav-links > a, .nav-item-dropdown > a { 
+            color: var(--text-muted); font-size: 13px; font-weight: 600; 
+            padding: 26px 0; transition: var(--transition); display: flex; align-items: center; gap: 6px; position: relative; 
+        }
+        .nav-links > a:hover, .nav-item-dropdown > a:hover, .nav-links > a.active { color: var(--text-title); }
+        
+        .nav-links > a::after, .nav-item-dropdown > a::after { 
+            content: ''; position: absolute; bottom: -1px; left: 0; width: 0%; height: 3px; 
+            background-color: var(--yellow); transition: var(--transition); border-radius: 3px 3px 0 0; 
+        }
+        .nav-links > a:hover::after, .nav-item-dropdown > a:hover::after, .nav-links > a.active::after { width: 100%; }
+
+        /* Dropdown Transparencia */
+        .nav-item-dropdown { position: relative; }
+        .dropdown-menu {
+            position: absolute; top: 100%; left: 50%; transform: translateX(-50%) translateY(10px);
+            background-color: var(--bg-card); border: 1px solid var(--border-mid); border-radius: 12px;
+            width: 320px; box-shadow: var(--shadow-md); opacity: 0; visibility: hidden; pointer-events: none;
+            transition: var(--transition); display: flex; flex-direction: column; padding: 12px; z-index: 1050;
+        }
+        .dropdown-menu::before {
+            content: ''; position: absolute; top: -6px; left: 50%; transform: translateX(-50%) rotate(45deg);
+            width: 10px; height: 10px; background-color: var(--bg-card); border-top: 1px solid var(--border-mid); border-left: 1px solid var(--border-mid);
+        }
+        .nav-item-dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); pointer-events: auto; }
+        
+        .dropdown-item { display: flex; align-items: flex-start; gap: 12px; padding: 12px; border-radius: 8px; transition: var(--transition); }
+        .dropdown-item:hover { background-color: var(--bg-body); transform: translateX(4px); }
+        .dropdown-icon { width: 36px; height: 36px; background-color: var(--bg-body); border: 1px solid var(--border-mid); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--text-title); flex-shrink: 0; }
+        .dropdown-item:hover .dropdown-icon { background-color: var(--yellow); border-color: var(--yellow); }
+        .dropdown-text { display: flex; flex-direction: column; }
+        .dropdown-text strong { color: var(--text-title); font-size: 13px; font-weight: 700; margin-bottom: 2px; }
+        .dropdown-text span { color: var(--text-muted); font-size: 11px; line-height: 1.3; }
+
+        /* Componente de Búsqueda */
+        .search-component {
+            display: flex; align-items: center; background-color: var(--bg-body); border: 1px solid var(--border-mid);
+            border-radius: 6px; padding: 0 12px; height: 38px; width: 220px; transition: var(--transition);
+        }
+        .search-component:focus-within { border-color: var(--border-dark); background-color: var(--bg-card); box-shadow: 0 0 0 3px rgba(229, 231, 235, 0.4); }
+        .search-icon { width: 14px; height: 14px; color: var(--text-muted); flex-shrink: 0; }
+        .search-component input { border: none; background: transparent; padding: 0 8px; font-size: 13px; outline: none; width: 100%; color: var(--text-title); }
+
+        /* Botonera Transaccional */
+        .nav-transactional { display: flex; gap: 12px; align-items: center; }
+        .btn-header { display: inline-flex; align-items: center; justify-content: center; padding: 0 16px; height: 38px; font-size: 13px; font-weight: 700; border-radius: 6px; transition: var(--transition); gap: 6px; }
+        .btn-outline { background-color: var(--bg-card); border: 1px solid var(--border-mid); color: var(--text-title); }
+        .btn-outline:hover { background-color: var(--bg-body); border-color: var(--border-dark); }
+        .btn-primary { background-color: var(--yellow); border: 1px solid var(--yellow); color: var(--text-title); }
+        .btn-primary:hover { background-color: var(--text-title); color: var(--yellow); border-color: var(--text-title); }
+
+        /* Avatar de Usuario */
+        .user-profile-widget { margin-left: 8px; padding-left: 20px; border-left: 1px solid var(--border-mid); display: flex; align-items: center; height: 40px; position: relative; }
+        .avatar-btn {
+            width: 38px; height: 38px; border-radius: 50%; background-color: var(--text-title); color: var(--bg-card);
+            border: 2px solid var(--bg-card); box-shadow: 0 0 0 2px var(--border-dark); display: flex; align-items: center; justify-content: center;
+            font-size: 13px; font-weight: 800; cursor: pointer; outline: none; transition: var(--transition);
+        }
+        .avatar-btn:hover { box-shadow: 0 0 0 2px var(--yellow); color: var(--yellow); }
+
+        .user-dropdown-menu {
+            position: absolute; top: calc(100% + 15px); right: 0; width: 240px; background: var(--bg-card); border: 1px solid var(--border-light);
+            border-radius: 8px; box-shadow: var(--shadow-md); opacity: 0; visibility: hidden; transform: translateY(10px); transition: var(--transition); z-index: 2000;
+        }
+        .user-profile-widget:hover .user-dropdown-menu, .user-dropdown-menu.active { opacity: 1; visibility: visible; transform: translateY(0); }
+        
+        .user-nav-grid { padding: 8px; display: grid; gap: 4px; }
+        .user-nav-link { display: flex; align-items: center; gap: 10px; padding: 8px 12px; border-radius: 6px; text-decoration: none; color: var(--text-main); font-size: 12px; font-weight: 600; transition: var(--transition); }
+        .user-nav-link:hover { background-color: var(--bg-body); }
+        .user-nav-link svg { width: 14px; height: 14px; color: var(--text-muted); }
+        .user-nav-link:hover svg { color: var(--text-main); }
+
+        .mobile-menu-btn { display: none; background: none; border: none; padding: 8px; cursor: pointer; z-index: 2001; }
+        .hamburger-line { width: 20px; height: 2px; background-color: var(--text-title); margin: 4px 0; border-radius: 2px; transition: var(--transition); }
+
+        /* =========================================
+           CABECERA DEL CENTRO DE VOTACIÓN
+           ========================================= */
+        .page-container { max-width: 1100px; margin: 40px auto 80px; padding: 0 5%; }
+        
+        .btn-link-highlight {
+            font-size: 12px; font-weight: 700; color: var(--text-muted); text-decoration: none; display: inline-flex; align-items: center; gap: 6px;
+            background-color: var(--bg-card); border: 1px solid var(--border-mid); padding: 8px 16px; border-radius: 6px; transition: var(--transition); margin-bottom: 32px;
+        }
+        .btn-link-highlight:hover { color: var(--text-title); border-color: var(--text-title); }
+
+        .hero-header { margin-bottom: 40px; display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 1px solid var(--border-light); padding-bottom: 24px; }
+        .hero-text { max-width: 600px; }
+        .hero-title { font-size: 28px; font-weight: 900; letter-spacing: -0.5px; margin-bottom: 8px; color: var(--text-title); }
+        .hero-desc { font-size: 14px; color: var(--text-muted); line-height: 1.5; }
+        
+        .filter-controls { display: flex; gap: 12px; }
+        .filter-btn { padding: 8px 16px; font-size: 12px; font-weight: 700; border: 1px solid var(--border-mid); border-radius: 20px; background: var(--bg-card); color: var(--text-muted); cursor: pointer; transition: var(--transition); }
+        .filter-btn.active, .filter-btn:hover { background: var(--text-main); color: var(--yellow); border-color: var(--text-main); }
+
+        /* =========================================
+           GRILLA DE PROYECTOS (VOTACIÓN)
+           ========================================= */
+        .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 24px; }
+        
+        .vote-card {
+            background-color: var(--bg-card); border: 1px solid var(--border-light); border-radius: 12px;
+            overflow: hidden; transition: var(--transition); display: flex; flex-direction: column;
+            box-shadow: var(--shadow-sm);
+        }
+        .vote-card:hover { border-color: var(--border-mid); box-shadow: var(--shadow-md); transform: translateY(-4px); }
+        
+        .card-header { padding: 20px 24px 16px; border-bottom: 1px solid var(--border-light); }
+        .meta-tags { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .badge-category { font-size: 10px; font-weight: 800; padding: 4px 8px; background: var(--bg-body); border: 1px solid var(--border-mid); border-radius: 4px; text-transform: uppercase; color: var(--text-main); }
+        .time-left { font-size: 11px; font-weight: 600; color: #D97706; background: #FFFBEB; padding: 4px 8px; border-radius: 4px; display: inline-flex; align-items: center; gap: 4px; }
+        
+        .card-title { font-size: 18px; font-weight: 800; color: var(--text-main); line-height: 1.2; margin-bottom: 8px; }
+        .card-location { font-size: 12px; color: var(--text-muted); font-weight: 600; display: flex; align-items: center; gap: 4px; margin-bottom: 12px; }
+        .card-desc { font-size: 13px; color: var(--text-muted); line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+
+        /* Bloque de Progreso y Presión Legal */
+        .card-progress { padding: 20px 24px; background-color: var(--bg-body); border-bottom: 1px solid var(--border-light); }
+        .progress-meta { display: flex; justify-content: space-between; font-size: 12px; font-weight: 700; margin-bottom: 8px; }
+        .signatures-count { color: var(--text-main); font-size: 16px; font-weight: 900; }
+        .signatures-target { color: var(--text-muted); font-size: 11px; font-weight: 600; }
+        
+        .progress-bar-bg { height: 6px; background-color: var(--border-mid); border-radius: 3px; overflow: hidden; margin-bottom: 8px; }
+        .progress-fill { height: 100%; background-color: var(--text-main); transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+        .progress-warning { font-size: 10px; font-weight: 600; color: var(--text-muted); }
+        .progress-warning strong { color: var(--text-main); }
+
+        /* Bloque Inferior: Prueba Social (Facepile) y Botón */
+        .card-footer { padding: 20px 24px; display: flex; justify-content: space-between; align-items: center; background: var(--bg-card); gap: 16px; }
+        
+        /* FACEPILE COMPONENT (Avatares Superpuestos) */
+        .avatar-group { display: flex; align-items: center; }
+        .avatar {
+            width: 32px; height: 32px; border-radius: 50%; border: 2px solid var(--bg-card);
+            background-color: var(--border-light); display: flex; align-items: center; justify-content: center;
+            font-size: 10px; font-weight: 800; color: var(--text-main); margin-left: -10px;
+            box-shadow: var(--shadow-sm); z-index: 1; transition: var(--transition);
+        }
+        .avatar:hover { transform: translateY(-2px); z-index: 10; }
+        .avatar:first-child { margin-left: 0; background-color: var(--text-main); color: var(--yellow); z-index: 4; }
+        .avatar:nth-child(2) { background-color: #E5E7EB; z-index: 3; }
+        .avatar:nth-child(3) { background-color: #D1D5DB; z-index: 2; }
+        .avatar-count { font-size: 12px; font-weight: 800; color: var(--text-muted); margin-left: 8px; }
+
+        /* Botón Transaccional */
+        .btn-vote {
+            padding: 10px 20px; font-size: 13px; font-weight: 800; text-transform: uppercase;
+            border-radius: 6px; background-color: var(--yellow); color: var(--text-main);
+            border: 2px solid var(--yellow); cursor: pointer; transition: var(--transition); outline: none;
+            display: inline-flex; align-items: center; gap: 6px; flex-shrink: 0;
+        }
+        .btn-vote:hover { background-color: var(--text-main); color: var(--yellow); border-color: var(--text-main); transform: translateY(-2px); }
+        
+        /* Estado Votado (Rigor Estético: Sin Verde) */
+        .btn-vote.voted {
+            background-color: var(--text-main); color: var(--bg-card); border-color: var(--text-main);
+            cursor: not-allowed; transform: none; box-shadow: none; pointer-events: none;
+        }
+        .btn-vote.voted svg { color: var(--yellow); }
+
+        /* =========================================
+           RESPONSIVE
+           ========================================= */
+        @media (max-width: 1024px) {
+            .nav-wrapper {
+                position: fixed; top: 0; right: -100%; width: 100%; max-width: 350px;
+                height: 100dvh; background-color: var(--bg-card); flex-direction: column; justify-content: flex-start; padding: 90px 24px 40px; 
+                box-shadow: -4px 0 24px rgba(0,0,0,0.1); transition: var(--transition); overflow-y: auto; z-index: 2000;
+            }
+            .nav-wrapper.active { right: 0; }
+            .nav-links { flex-direction: column; width: 100%; gap: 0; margin-bottom: 24px; align-items: flex-start; }
+            .nav-links > a, .nav-item-dropdown > a { padding: 16px 0; font-size: 16px; border-bottom: 1px solid var(--border-light); width: 100%; justify-content: space-between; }
+            .nav-links > a::after { display: none; }
+            
+            .nav-item-dropdown { width: 100%; }
+            .dropdown-menu {
+                position: relative; top: 0; left: 0; transform: none; width: 100%; box-shadow: none; border: none; border-bottom: 1px solid var(--border-light);
+                border-radius: 0; opacity: 1; visibility: visible; pointer-events: auto; padding: 8px 0 16px 16px; display: none;
+            }
+            .dropdown-menu::before { display: none; }
+            .nav-item-dropdown.mobile-open .dropdown-menu { display: flex; }
+
+            .search-component { width: 100%; margin-bottom: 24px; height: 48px; }
+            .nav-transactional { flex-direction: column; width: 100%; gap: 12px; }
+            .btn-header { width: 100%; height: 48px; }
+
+            .user-profile-widget { display: none; }
+            .mobile-menu-btn { display: block; }
+        }
+
+        @media (max-width: 768px) {
+            .hero-header { flex-direction: column; align-items: flex-start; gap: 20px; }
+            .filter-controls { width: 100%; overflow-x: auto; padding-bottom: 8px; }
+            .filter-btn { flex-shrink: 0; }
+            .card-footer { flex-direction: column; align-items: stretch; gap: 20px; }
+            .avatar-group { justify-content: center; }
+            .btn-vote { width: 100%; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- CABECERA PRINCIPAL ESTANDARIZADA -->
+    <header class="main-navbar">
+        <a href="index.html" class="brand-container">
+            <div class="brand-logo-svg"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2v20M4 12h8M12 2l8 10-8 10"/></svg></div>
+            <div class="brand-text">
+                <span class="brand-title">KATUETE</span>
+                <span class="brand-subtitle">Gestión Pública</span>
+            </div>
+        </a>
+        
+        <div class="nav-wrapper" id="nav-wrapper">
+            <nav class="nav-links">
+                <a href="autoridades.html">Autoridades</a>
+                
+                <div class="nav-item-dropdown">
+                    <a href="#">Transparencia <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></a>
+                    <div class="dropdown-menu">
+                        <a href="#" class="dropdown-item">
+                            <div class="dropdown-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg></div>
+                            <div class="dropdown-text">
+                                <strong>Presupuesto y Ejecución</strong>
+                                <span>Fonacide, Royalties y Rendición de Cuentas.</span>
+                            </div>
+                        </a>
+                        <a href="#" class="dropdown-item">
+                            <div class="dropdown-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg></div>
+                            <div class="dropdown-text">
+                                <strong>Nómina y Salarios</strong>
+                                <span>Sueldos y viáticos (Ley 5189/14).</span>
+                            </div>
+                        </a>
+                        <a href="donaciones.html" class="dropdown-item">
+                            <div class="dropdown-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg></div>
+                            <div class="dropdown-text">
+                                <strong>Licitaciones y Contratos</strong>
+                                <span>Adjudicaciones y fideicomiso de obras.</span>
+                            </div>
+                        </a>
+                        <a href="#" class="dropdown-item">
+                            <div class="dropdown-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></div>
+                            <div class="dropdown-text">
+                                <strong>Acceso a la Información</strong>
+                                <span>Portal oficial de solicitudes (Ley 5282/14).</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <a href="japaga.html">Recaudaciones</a>
+                <a href="proyectos.html">Proyectos</a>
+            </nav>
+
+            <!-- Buscador Central -->
+            <div class="search-component">
+                <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                <input type="text" placeholder="Buscar expediente...">
+            </div>
+
+            <!-- Botones Transaccionales -->
+            <div class="nav-transactional">
+                <a href="japaga.html" class="btn-header btn-outline">Japaga</a>
+                <a href="donaciones.html" class="btn-header btn-primary">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                    JADONATA
+                </a>
+            </div>
+
+            <!-- Avatar de Usuario -->
+            <div class="user-profile-widget">
+                <button class="avatar-btn" onclick="window.location.href='Mi-perfil.html'">VA</button>
+                <div class="user-dropdown-menu">
+                    <div class="user-nav-grid">
+                        <a href="Mi-perfil.html" class="user-nav-link" style="color: var(--text-title); font-weight: 800;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg> Mi Perfil</a>
+                        <a href="crearproyecto.html" class="user-nav-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg> Redactar Proyecto</a>
+                        <a href="#" class="user-nav-link" style="color: var(--red-text); border-top: 1px solid var(--border-light); margin-top: 4px; padding-top: 12px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg> Cerrar Sesión</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="mobile-menu-btn"><div class="hamburger-line"></div><div class="hamburger-line"></div><div class="hamburger-line"></div></button>
+    </header>
+
+    <main class="page-container">
+        
+        <!-- BOTÓN VOLVER DINÁMICO (History Back) -->
+        <a href="javascript:history.back()" class="btn-link-highlight">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            Volver
+        </a>
+
+        <div class="hero-header">
+            <div class="hero-text">
+                <h1 class="hero-title">Tu Barrio Decide: Royalties 2026</h1>
+                <p class="hero-desc">Ejerce presión pública adhiriéndote a los proyectos vecinales. Los expedientes que alcanzan la meta de firmas deben ser tratados obligatoriamente en la Junta Municipal.</p>
+            </div>
+            <div class="filter-controls">
+                <button class="filter-btn active">Tendencias</button>
+                <button class="filter-btn">Cerca de mí</button>
+                <button class="filter-btn">Recientes</button>
+            </div>
+        </div>
+
+        <div class="projects-grid">
+            
+            <!-- TARJETA 1: ALTO RENDIMIENTO (A punto de lograr meta) -->
+            <article class="vote-card">
+                <div class="card-header">
+                    <div class="meta-tags">
+                        <span class="badge-category">Obras Viales</span>
+                        <span class="time-left">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                            Cierra en 48hs
+                        </span>
+                    </div>
+                    <h2 class="card-title">Pavimentación e Iluminación del Acceso Norte</h2>
+                    <div class="card-location">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                        Barrio San Francisco
+                    </div>
+                    <p class="card-desc">Proyecto integral de asfaltado con instalación de columnas de aluminio y luminarias LED. Reemplazo urgente de la infraestructura obsoleta para garantizar seguridad vial.</p>
+                </div>
+                
+                <div class="card-progress">
+                    <div class="progress-meta">
+                        <div><span class="signatures-count" id="count-1">842</span> <span class="signatures-target">adhesiones</span></div>
+                        <div class="signatures-target">Meta Legal: 1.000</div>
+                    </div>
+                    <div class="progress-bar-bg">
+                        <div class="progress-fill" id="bar-1" style="width: 84.2%;"></div>
+                    </div>
+                    <div class="progress-warning">Faltan <strong>158 firmas</strong> para forzar tratamiento en plenaria.</div>
+                </div>
+
+                <div class="card-footer">
+                    <!-- Prueba Social: Facepile -->
+                    <div class="avatar-group">
+                        <div class="avatar" title="Valeria Acosta (Tú)">VA</div>
+                        <div class="avatar" title="Carlos M.">CM</div>
+                        <div class="avatar" title="Laura G.">LG</div>
+                        <div class="avatar-count" id="text-count-1">+839 vecinos</div>
+                    </div>
+                    
+                    <button class="btn-vote" id="btn-vote-1" onclick="castVote(1, 842, 1000)">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path></svg>
+                        Firmar
+                    </button>
+                </div>
+            </article>
+
+            <!-- TARJETA 2: SALUD PÚBLICA -->
+            <article class="vote-card">
+                <div class="card-header">
+                    <div class="meta-tags">
+                        <span class="badge-category">Salubridad</span>
+                        <span class="time-left" style="color: var(--text-muted); background: var(--bg-body);">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                            15 días restantes
+                        </span>
+                    </div>
+                    <h2 class="card-title">Construcción Puesto de Salud Satélite</h2>
+                    <div class="card-location">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                        Fracción Las Palmas
+                    </div>
+                    <p class="card-desc">Edificación de un dispensario médico de atención primaria para descongestionar el Hospital Distrital, financiado con fondos de Fonacide 2026.</p>
+                </div>
+                
+                <div class="card-progress">
+                    <div class="progress-meta">
+                        <div><span class="signatures-count" id="count-2">415</span> <span class="signatures-target">adhesiones</span></div>
+                        <div class="signatures-target">Meta Legal: 1.000</div>
+                    </div>
+                    <div class="progress-bar-bg">
+                        <div class="progress-fill" id="bar-2" style="width: 41.5%;"></div>
+                    </div>
+                    <div class="progress-warning">Faltan <strong>585 firmas</strong> para forzar tratamiento en plenaria.</div>
+                </div>
+
+                <div class="card-footer">
+                    <div class="avatar-group">
+                        <div class="avatar" title="Roberto F.">RF</div>
+                        <div class="avatar" title="Diego B.">DB</div>
+                        <div class="avatar" title="Ana P.">AP</div>
+                        <div class="avatar-count" id="text-count-2">+412 vecinos</div>
+                    </div>
+                    
+                    <button class="btn-vote" id="btn-vote-2" onclick="castVote(2, 415, 1000)">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path></svg>
+                        Firmar
+                    </button>
+                </div>
+            </article>
+
+            <!-- TARJETA 3: INFRAESTRUCTURA URBANA -->
+            <article class="vote-card">
+                <div class="card-header">
+                    <div class="meta-tags">
+                        <span class="badge-category">Obras Pluviales</span>
+                        <span class="time-left" style="color: var(--text-muted); background: var(--bg-body);">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                            22 días restantes
+                        </span>
+                    </div>
+                    <h2 class="card-title">Sistema de Drenaje y Canalización</h2>
+                    <div class="card-location">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                        Barrio Santa Ana Sur
+                    </div>
+                    <p class="card-desc">Construcción de alcantarillado pluvial para evitar inundaciones en la zona baja del barrio durante la temporada de precipitaciones intensas.</p>
+                </div>
+                
+                <div class="card-progress">
+                    <div class="progress-meta">
+                        <div><span class="signatures-count" id="count-3">128</span> <span class="signatures-target">adhesiones</span></div>
+                        <div class="signatures-target">Meta Legal: 1.000</div>
+                    </div>
+                    <div class="progress-bar-bg">
+                        <div class="progress-fill" id="bar-3" style="width: 12.8%;"></div>
+                    </div>
+                    <div class="progress-warning">Faltan <strong>872 firmas</strong> para forzar tratamiento en plenaria.</div>
+                </div>
+
+                <div class="card-footer">
+                    <div class="avatar-group">
+                        <div class="avatar" title="Silvia M.">SM</div>
+                        <div class="avatar" title="Jorge T.">JT</div>
+                        <div class="avatar" title="Pedro C.">PC</div>
+                        <div class="avatar-count" id="text-count-3">+125 vecinos</div>
+                    </div>
+                    
+                    <button class="btn-vote" id="btn-vote-3" onclick="castVote(3, 128, 1000)">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path></svg>
+                        Firmar
+                    </button>
+                </div>
+            </article>
+
+        </div>
+    </main>
+
+    <script>
+        // Funcionalidad de Menú Desplegable Responsivo
+        document.addEventListener('DOMContentLoaded', () => {
+            const mobileToggle = document.querySelector('.mobile-menu-btn');
+            const navWrapper = document.getElementById('nav-wrapper');
+            const body = document.body;
+            const dropdown = document.querySelector('.nav-item-dropdown');
+
+            if (mobileToggle) {
+                mobileToggle.addEventListener('click', () => {
+                    navWrapper.classList.toggle('active');
+                    body.classList.toggle('menu-open');
+                });
+            }
+
+            if (dropdown) {
+                dropdown.addEventListener('click', (e) => {
+                    if (window.innerWidth <= 1024) {
+                        if(e.target.tagName.toLowerCase() === 'a' && e.target.nextElementSibling) {
+                            e.preventDefault();
+                            dropdown.classList.toggle('mobile-open');
+                        }
+                    }
+                });
+            }
+        });
+
+        // Lógica de Interacción Transaccional (Gamificación Cívica)
+        function castVote(projectId, currentVotes, target) {
+            const btn = document.getElementById(`btn-vote-${projectId}`);
+            
+            // Prevenir doble voto simulado
+            if(btn.classList.contains('voted')) return;
+
+            // Actualizar datos aritméticos
+            const newVotes = currentVotes + 1;
+            const newPercentage = (newVotes / target) * 100;
+            const textCount = newVotes - 3; // Restando los 3 avatares visibles
+            
+            // Actualizar DOM
+            document.getElementById(`count-${projectId}`).innerText = newVotes.toLocaleString('es-ES');
+            document.getElementById(`bar-${projectId}`).style.width = `${newPercentage}%`;
+            document.getElementById(`text-count-${projectId}`).innerText = `+${textCount.toLocaleString('es-ES')} vecinos`;
+            
+            // Modificar el texto de advertencia (Meta Legal)
+            const warningElement = document.getElementById(`count-${projectId}`).closest('.card-progress').querySelector('.progress-warning strong');
+            const remaining = target - newVotes;
+            warningElement.innerText = `${remaining.toLocaleString('es-ES')} firmas`;
+
+            // Transformar Botón (Validación Visual Estricta: Sin Verdes)
+            btn.classList.add('voted');
+            btn.innerHTML = `
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                Auditado
+            `;
+            
+            // Inyectar el avatar del usuario (VA) en la primera posición para forzar la validación de pertenencia
+            const avatarGroup = btn.closest('.card-footer').querySelector('.avatar-group');
+            // Si la tarjeta no es la 1 (que ya tiene el avatar "VA" simulado), lo inyectamos visualmente
+            if(projectId !== 1) {
+                const firstAvatar = avatarGroup.querySelector('.avatar:first-child');
+                firstAvatar.innerText = 'VA';
+                firstAvatar.title = 'Valeria Acosta (Tú)';
+                firstAvatar.style.backgroundColor = 'var(--text-main)';
+                firstAvatar.style.color = 'var(--yellow)';
+                firstAvatar.style.zIndex = '4';
+            }
+        }
+    </script>
+</body>
+</html>

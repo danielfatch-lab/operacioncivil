@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Katuete - Portal de Becas Universitarias</title>
+    <style>
+        /* =========================================
+           SISTEMA DE DISEÑO (Corporate Clean Estricto)
+           ========================================= */
+        :root {
+            --text-main: #1F2937;
+            --text-title: #111827;
+            --text-muted: #6B7280;
+            --bg-body: #F9FAFB;
+            --bg-card: #FFFFFF;
+            --border-light: #E5E7EB;
+            --border-mid: #D1D5DB;
+            --border-dark: #9CA3AF;
+            --yellow: #FFC700;
+            --yellow-hover: #E5B300;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+            --transition: all 0.25s ease;
+        }
+
+        /* Bloqueo estricto de herencias del navegador */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', -apple-system, sans-serif; }
+        body { background-color: var(--bg-body); color: var(--text-main); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+        a { text-decoration: none; color: inherit; cursor: pointer; }
+        svg { display: block; }
+
+        /* =========================================
+           NAVEGACIÓN SUPERIOR ESTANDARIZADA
+           ========================================= */
+        .main-navbar {
+            height: 72px; background-color: var(--bg-card); border-bottom: 1px solid var(--border-mid);
+            display: flex; justify-content: space-between; align-items: center; padding: 0 5%;
+            position: sticky; top: 0; z-index: 1000; box-shadow: var(--shadow-sm);
+        }
+        
+        .brand-container { display: flex; align-items: center; gap: 12px; }
+        .brand-logo-svg {
+            width: 40px; height: 40px; background-color: var(--text-title); display: flex; align-items: center; justify-content: center;
+            border-radius: 8px; transition: var(--transition); flex-shrink: 0; color: var(--bg-card);
+        }
+        .brand-container:hover .brand-logo-svg { background-color: var(--yellow); color: var(--text-title); }
+        .brand-text { display: flex; flex-direction: column; justify-content: center; margin-top: 2px; }
+        .brand-title { color: var(--text-title); font-size: 16px; font-weight: 800; letter-spacing: -0.5px; line-height: 1; margin-bottom: 2px; }
+        .brand-subtitle { color: var(--text-muted); font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+
+        .nav-wrapper { display: flex; align-items: center; gap: 24px; flex: 1; justify-content: flex-end; }
+        .nav-links { display: flex; gap: 20px; align-items: center; }
+        .nav-links > a, .nav-item-dropdown > a { 
+            color: var(--text-muted); font-size: 13px; font-weight: 600; 
+            padding: 26px 0; transition: var(--transition); display: flex; align-items: center; gap: 6px; position: relative; 
+        }
+        .nav-links > a:hover, .nav-item-dropdown > a:hover, .nav-links > a.active { color: var(--text-title); }
+        
+        .nav-links > a::after, .nav-item-dropdown > a::after { 
+            content: ''; position: absolute; bottom: -1px; left: 0; width: 0%; height: 3px; 
+            background-color: var(--yellow); transition: var(--transition); border-radius: 3px 3px 0 0; 
+        }
+        .nav-links > a:hover::after, .nav-item-dropdown > a:hover::after, .nav-links > a.active::after { width: 100%; }
+
+        /* Dropdown Transparencia */
+        .nav-item-dropdown { position: relative; }
+        .dropdown-menu {
+            position: absolute; top: 100%; left: 50%; transform: translateX(-50%) translateY(10px);
+            background-color: var(--bg-card); border: 1px solid var(--border-mid); border-radius: 12px;
+            width: 320px; box-shadow: var(--shadow-md); opacity: 0; visibility: hidden; pointer-events: none;
+            transition: var(--transition); display: flex; flex-direction: column; padding: 12px; z-index: 1050;
+        }
+        .dropdown-menu::before {
+            content: ''; position: absolute; top: -6px; left: 50%; transform: translateX(-50%) rotate(45deg);
+            width: 10px; height: 10px; background-color: var(--bg-card); border-top: 1px solid var(--border-mid); border-left: 1px solid var(--border-mid);
+        }
+        .nav-item-dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); pointer-events: auto; }
+        
+        .dropdown-item { display: flex; align-items: flex-start; gap: 12px; padding: 12px; border-radius: 8px; transition: var(--transition); }
+        .dropdown-item:hover { background-color: var(--bg-body); transform: translateX(4px); }
+        .dropdown-icon { width: 36px; height: 36px; background-color: var(--bg-body); border: 1px solid var(--border-mid); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--text-title); flex-shrink: 0; }
+        .dropdown-item:hover .dropdown-icon { background-color: var(--yellow); border-color: var(--yellow); }
+        .dropdown-text { display: flex; flex-direction: column; }
+        .dropdown-text strong { color: var(--text-title); font-size: 13px; font-weight: 700; margin-bottom: 2px; }
+        .dropdown-text span { color: var(--text-muted); font-size: 11px; line-height: 1.3; }
+
+        /* Componente de Búsqueda */
+        .search-component {
+            display: flex; align-items: center; background-color: var(--bg-body); border: 1px solid var(--border-mid);
+            border-radius: 6px; padding: 0 12px; height: 38px; width: 220px; transition: var(--transition);
+        }
+        .search-component:focus-within { border-color: var(--border-dark); background-color: var(--bg-card); box-shadow: 0 0 0 3px rgba(229, 231, 235, 0.4); }
+        .search-icon { width: 14px; height: 14px; color: var(--text-muted); flex-shrink: 0; }
+        .search-component input { border: none; background: transparent; padding: 0 8px; font-size: 13px; outline: none; width: 100%; color: var(--text-title); }
+
+        /* Botonera Transaccional */
+        .nav-transactional { display: flex; gap: 12px; align-items: center; }
+        .btn-header { display: inline-flex; align-items: center; justify-content: center; padding: 0 16px; height: 38px; font-size: 13px; font-weight: 700; border-radius: 6px; transition: var(--transition); gap: 6px; }
+        .btn-outline { background-color: var(--bg-card); border: 1px solid var(--border-mid); color: var(--text-title); }
+        .btn-outline:hover { background-color: var(--bg-body); border-color: var(--border-dark); }
+        .btn-primary { background-color: var(--yellow); border: 1px solid var(--yellow); color: var(--text-title); }
+        .btn-primary:hover { background-color: var(--text-title); color: var(--yellow); border-color: var(--text-title); }
+
+        /* Avatar de Usuario */
+        .user-profile-widget { margin-left: 8px; padding-left: 20px; border-left: 1px solid var(--border-mid); display: flex; align-items: center; height: 40px; position: relative; }
+        .avatar-btn {
+            width: 38px; height: 38px; border-radius: 50%; background-color: var(--text-title); color: var(--bg-card);
+            border: 2px solid var(--bg-card); box-shadow: 0 0 0 2px var(--border-dark); display: flex; align-items: center; justify-content: center;
+            font-size: 13px; font-weight: 800; cursor: pointer; outline: none; transition: var(--transition);
+        }
+        .avatar-btn:hover, .avatar-btn.active { box-shadow: 0 0 0 2px var(--yellow); color: var(--yellow); }
+
+        .user-dropdown-menu {
+            position: absolute; top: calc(100% + 15px); right: 0; width: 240px; background: var(--bg-card); border: 1px solid var(--border-light);
+            border-radius: 8px; box-shadow: var(--shadow-md); opacity: 0; visibility: hidden; transform: translateY(10px); transition: var(--transition); z-index: 2000;
+        }
+        .user-profile-widget:hover .user-dropdown-menu, .user-dropdown-menu.active { opacity: 1; visibility: visible; transform: translateY(0); }
+        
+        .user-nav-grid { padding: 8px; display: grid; gap: 4px; }
+        .user-nav-link { display: flex; align-items: center; gap: 10px; padding: 8px 12px; border-radius: 6px; text-decoration: none; color: var(--text-main); font-size: 12px; font-weight: 600; transition: var(--transition); }
+        .user-nav-link:hover { background-color: var(--bg-body); }
+        .user-nav-link svg { width: 14px; height: 14px; color: var(--text-muted); }
+        .user-nav-link:hover svg { color: var(--text-main); }
+
+        .mobile-menu-btn { display: none; background: none; border: none; padding: 8px; cursor: pointer; z-index: 2001; }
+        .hamburger-line { width: 20px; height: 2px; background-color: var(--text-title); margin: 4px 0; border-radius: 2px; transition: var(--transition); }
+
+        /* =========================================
+           BOTÓN VOLVER
+           ========================================= */
+        .btn-link-highlight {
+            font-size: 12px; font-weight: 700; color: var(--text-muted); text-decoration: none; display: inline-flex; align-items: center; gap: 6px;
+            background-color: var(--bg-card); border: 1px solid var(--border-mid); padding: 8px 16px; border-radius: 6px; transition: var(--transition); margin-bottom: 32px;
+        }
+        .btn-link-highlight:hover { color: var(--text-title); border-color: var(--text-title); }
+
+        /* =========================================
+           SECCIÓN HERO Y REGLAS DE NEGOCIO
+           ========================================= */
+        .page-container { max-width: 1100px; margin: 40px auto 80px; padding: 0 5%; }
+        
+        .hero-header { margin-bottom: 40px; }
+        .hero-title { font-size: 28px; font-weight: 900; letter-spacing: -0.5px; margin-bottom: 12px; color: var(--text-title); }
+        .hero-desc { font-size: 15px; color: var(--text-muted); max-width: 700px; line-height: 1.5; }
+
+        /* Tarjetas de Categoría de Becas */
+        .tiers-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-bottom: 48px; }
+        .tier-card {
+            background-color: var(--bg-card); border: 1px solid var(--border-light); border-radius: 12px;
+            padding: 32px; position: relative; overflow: hidden; transition: var(--transition);
+        }
+        .tier-card:hover { border-color: var(--border-mid); box-shadow: var(--shadow-md); transform: translateY(-2px); }
+        .tier-card.premium { border-left: 4px solid var(--yellow); }
+        .tier-card.standard { border-left: 4px solid var(--text-main); }
+        
+        .tier-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; }
+        .tier-title { font-size: 18px; font-weight: 800; color: var(--text-title); }
+        .tier-badge { font-size: 11px; font-weight: 800; padding: 4px 10px; border-radius: 4px; text-transform: uppercase; }
+        .badge-premium { background-color: var(--yellow); color: var(--text-title); }
+        .badge-standard { background-color: var(--bg-body); color: var(--text-main); border: 1px solid var(--border-mid); }
+        
+        .tier-reqs { list-style: none; margin-top: 20px; }
+        .tier-reqs li { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--text-muted); margin-bottom: 8px; font-weight: 500; }
+        .tier-reqs li svg { color: var(--text-main); flex-shrink: 0; }
+
+        /* =========================================
+           DIRECTORIO DE BECADOS (Prueba Social)
+           ========================================= */
+        .directory-section { margin-bottom: 60px; }
+        .section-title { font-size: 18px; font-weight: 800; border-bottom: 2px solid var(--border-light); padding-bottom: 12px; margin-bottom: 24px; display: flex; justify-content: space-between; align-items: flex-end; color: var(--text-title); }
+        .section-title span { font-size: 12px; font-weight: 600; color: var(--text-muted); }
+
+        .table-container { background: var(--bg-card); border: 1px solid var(--border-light); border-radius: 12px; overflow-x: auto; box-shadow: var(--shadow-sm); }
+        .data-table { width: 100%; border-collapse: collapse; min-width: 600px; }
+        .data-table th { background: var(--bg-body); text-align: left; padding: 16px 20px; font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; border-bottom: 1px solid var(--border-mid); }
+        .data-table td { padding: 16px 20px; border-bottom: 1px solid var(--border-light); font-size: 13px; vertical-align: middle; }
+        .data-table tr:last-child td { border-bottom: none; }
+        .data-table tbody tr:hover { background-color: #FAFAFA; }
+
+        .user-cell { display: flex; align-items: center; gap: 12px; }
+        .user-avatar { width: 32px; height: 32px; background: var(--text-main); color: var(--yellow); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 12px; flex-shrink: 0; }
+        .user-name { font-weight: 700; color: var(--text-title); }
+        
+        .status-pill { padding: 4px 8px; border-radius: 4px; font-size: 10px; font-weight: 700; text-transform: uppercase; }
+        .status-active { background: var(--text-main); color: var(--bg-card); }
+
+        /* =========================================
+           WIZARD DE POSTULACIÓN
+           ========================================= */
+        .wizard-wrapper { max-width: 800px; margin: 0 auto; }
+        .wizard-card { background-color: var(--bg-card); border: 1px solid var(--border-mid); border-radius: 12px; box-shadow: var(--shadow-md); overflow: hidden; position: relative; }
+        
+        .progress-tracker { display: flex; justify-content: space-between; position: relative; margin-bottom: 0; padding: 24px 32px; background: var(--bg-body); border-bottom: 1px solid var(--border-light); }
+        .progress-tracker::before { content: ''; position: absolute; top: 40px; left: 40px; width: calc(100% - 80px); height: 2px; background-color: var(--border-mid); z-index: 1; }
+        .progress-line { position: absolute; top: 40px; left: 40px; height: 2px; background-color: var(--text-main); z-index: 2; transition: width 0.3s ease; width: 0%; }
+        .step-indicator { position: relative; z-index: 3; display: flex; flex-direction: column; align-items: center; gap: 8px; background-color: var(--bg-body); padding: 0 12px; }
+        .step-dot { width: 28px; height: 28px; border-radius: 50%; background-color: var(--bg-card); border: 2px solid var(--border-mid); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: var(--text-muted); transition: var(--transition); }
+        .step-indicator.active .step-dot { border-color: var(--text-main); background-color: var(--text-main); color: var(--yellow); }
+        .step-indicator.completed .step-dot { border-color: var(--text-main); background-color: var(--text-main); color: var(--bg-card); }
+        .step-label { font-size: 10px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+        .step-indicator.active .step-label { color: var(--text-title); }
+
+        .step-content { padding: 32px; display: none; animation: fadeIn 0.3s ease; }
+        .step-content.active { display: block; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .form-group { margin-bottom: 20px; }
+        .form-group.full-width { grid-column: 1 / -1; }
+        .form-label { display: block; font-size: 13px; font-weight: 700; margin-bottom: 8px; color: var(--text-title); }
+        .form-input, .form-select, .form-textarea { width: 100%; background-color: var(--bg-body); border: 1px solid var(--border-mid); border-radius: 6px; padding: 12px; font-size: 14px; color: var(--text-main); transition: var(--transition); outline: none; }
+        .form-input:focus, .form-select:focus, .form-textarea:focus { border-color: var(--yellow); background-color: var(--bg-card); box-shadow: 0 0 0 3px rgba(255, 199, 0, 0.2); }
+        .form-textarea { resize: vertical; min-height: 120px; }
+        .help-text { font-size: 11px; color: var(--text-muted); margin-top: 6px; display: block; }
+
+        /* Grilla de Uploads */
+        .upload-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .upload-zone { border: 2px dashed var(--border-mid); border-radius: 8px; padding: 24px 16px; text-align: center; background-color: var(--bg-body); cursor: pointer; transition: var(--transition); display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        .upload-zone:hover, .upload-zone.active { border-color: var(--text-title); background-color: var(--bg-card); }
+        .upload-icon { width: 32px; height: 32px; color: var(--text-muted); margin-bottom: 12px; transition: var(--transition); }
+        .upload-zone.active .upload-icon { color: var(--text-title); }
+        .upload-text { font-size: 12px; font-weight: 700; color: var(--text-title); margin-bottom: 4px; }
+        .upload-sub { font-size: 11px; color: var(--text-muted); }
+
+        .wizard-footer { padding: 20px 32px; border-top: 1px solid var(--border-light); background-color: var(--bg-body); display: flex; justify-content: space-between; align-items: center; }
+        .btn { display: inline-flex; align-items: center; justify-content: center; padding: 10px 24px; font-size: 13px; font-weight: 700; border-radius: 6px; cursor: pointer; transition: var(--transition); outline: none; border: none; }
+        .btn-prev { background-color: transparent; color: var(--text-muted); padding: 10px 0; display: flex; align-items: center; gap: 6px; }
+        .btn-prev:hover { color: var(--text-title); }
+        .btn-next { background-color: var(--yellow); color: var(--text-title); border: 1px solid var(--yellow); }
+        .btn-next:hover { background-color: var(--text-title); color: var(--yellow); border-color: var(--text-title); }
+
+        /* Comprobante Final */
+        .ticket-document { background-color: var(--bg-body); border: 1px dashed var(--border-mid); padding: 32px; border-radius: 8px; font-family: 'Courier New', Courier, monospace; color: #111; margin-bottom: 24px; position: relative; }
+        .ticket-header { text-align: center; border-bottom: 2px dashed var(--border-mid); padding-bottom: 16px; margin-bottom: 24px; }
+        .ticket-title { font-size: 16px; font-weight: bold; text-transform: uppercase; margin-bottom: 4px; font-family: 'Inter', sans-serif; letter-spacing: 1px; }
+        .ticket-row { display: flex; justify-content: space-between; margin-bottom: 12px; font-size: 13px; border-bottom: 1px solid rgba(0,0,0,0.05); padding-bottom: 4px; }
+        .ticket-label { font-weight: bold; text-transform: uppercase; font-size: 11px; color: #555; }
+        .ticket-value { font-weight: bold; text-align: right; }
+        
+        /* Botón de descarga de comprobante */
+        .btn-download { width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 12px; background-color: var(--yellow); color: var(--text-title); font-size: 13px; font-weight: 800; border-radius: 6px; text-decoration: none; border: 2px solid var(--yellow); transition: var(--transition); text-transform: uppercase; margin-top: 16px; cursor: pointer; }
+        .btn-download:hover { background-color: var(--text-title); color: var(--yellow); border-color: var(--text-title); }
+
+        /* =========================================
+           RESPONSIVE
+           ========================================= */
+        @media (max-width: 1024px) {
+            .nav-wrapper {
+                position: fixed; top: 0; right: -100%; width: 100%; max-width: 350px;
+                height: 100dvh; background-color: var(--bg-card); flex-direction: column; justify-content: flex-start; padding: 90px 24px 40px; 
+                box-shadow: -4px 0 24px rgba(0,0,0,0.1); transition: var(--transition); overflow-y: auto; z-index: 2000;
+            }
+            .nav-wrapper.active { right: 0; }
+            .nav-links { flex-direction: column; width: 100%; gap: 0; margin-bottom: 24px; align-items: flex-start; }
+            .nav-links > a, .nav-item-dropdown > a { padding: 16px 0; font-size: 16px; border-bottom: 1px solid var(--border-light); width: 100%; justify-content: space-between; }
+            .nav-links > a::after { display: none; }
+            
+            .nav-item-dropdown { width: 100%; }
+            .dropdown-menu {
+                position: relative; top: 0; left: 0; transform: none; width: 100%; box-shadow: none; border: none; border-bottom: 1px solid var(--border-light);
+                border-radius: 0; opacity: 1; visibility: visible; pointer-events: auto; padding: 8px 0 16px 16px; display: none;
+            }
+            .dropdown-menu::before { display: none; }
+            .nav-item-dropdown.mobile-open .dropdown-menu { display: flex; }
+
+            .search-component { width: 100%; margin-bottom: 24px; height: 48px; }
+            .nav-transactional { flex-direction: column; width: 100%; gap: 12px; }
+            .btn-header { width: 100%; height: 48px; }
+
+            .user-profile-widget { display: none; }
+            .mobile-menu-btn { display: block; }
+        }
+
+        @media (max-width: 768px) {
+            .step-label { display: none; }
+            .form-grid { grid-template-columns: 1fr; }
+            .upload-grid { grid-template-columns: 1fr; }
+            .step-content { padding: 24px 20px; }
+            .wizard-footer { padding: 16px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- CABECERA PRINCIPAL ESTANDARIZADA -->
+    <header class="main-navbar">
+        <a href="index.html" class="brand-container">
+            <div class="brand-logo-svg"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2v20M4 12h8M12 2l8 10-8 10"/></svg></div>
+            <div class="brand-text">
+                <span class="brand-title">KATUETE</span>
+                <span class="brand-subtitle">Gestión Pública</span>
+            </div>
+        </a>
+        
+        <div class="nav-wrapper" id="nav-wrapper">
+            <nav class="nav-links">
+                <a href="autoridades.html">Autoridades</a>
+                
+                <div class="nav-item-dropdown" id="transparencyDropdown">
+                    <a href="#">Transparencia <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></a>
+                    <div class="dropdown-menu">
+                        <a href="#" class="dropdown-item">
+                            <div class="dropdown-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg></div>
+                            <div class="dropdown-text">
+                                <strong>Presupuesto y Ejecución</strong>
+                                <span>Fonacide, Royalties y Rendición de Cuentas.</span>
+                            </div>
+                        </a>
+                        <a href="#" class="dropdown-item">
+                            <div class="dropdown-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg></div>
+                            <div class="dropdown-text">
+                                <strong>Nómina y Salarios</strong>
+                                <span>Sueldos y viáticos (Ley 5189/14).</span>
+                            </div>
+                        </a>
+                        <a href="donaciones.html" class="dropdown-item">
+                            <div class="dropdown-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg></div>
+                            <div class="dropdown-text">
+                                <strong>Licitaciones y Contratos</strong>
+                                <span>Adjudicaciones y fideicomiso de obras.</span>
+                            </div>
+                        </a>
+                        <a href="#" class="dropdown-item">
+                            <div class="dropdown-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></div>
+                            <div class="dropdown-text">
+                                <strong>Acceso a la Información</strong>
+                                <span>Portal oficial de solicitudes (Ley 5282/14).</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <a href="japaga.html">Recaudaciones</a>
+                <a href="proyectos.html">Proyectos</a>
+            </nav>
+
+            <!-- Buscador Central -->
+            <div class="search-component">
+                <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                <input type="text" placeholder="Buscar expediente...">
+            </div>
+
+            <!-- Botones Transaccionales -->
+            <div class="nav-transactional">
+                <a href="japaga.html" class="btn-header btn-outline">Japaga</a>
+                <a href="donaciones.html" class="btn-header btn-primary">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                    JADONATA
+                </a>
+            </div>
+
+            <!-- Avatar -->
+            <div class="user-profile-widget" id="userProfileDesktop">
+                <button class="avatar-btn" onclick="window.location.href='Mi-perfil.html'">VA</button>
+                <div class="user-dropdown-menu">
+                    <div class="user-nav-grid">
+                        <a href="Mi-perfil.html" class="user-nav-link" style="color: var(--text-title); font-weight: 800;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg> Mi Perfil</a>
+                        <a href="crearproyecto.html" class="user-nav-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg> Redactar Proyecto</a>
+                        <a href="#" class="user-nav-link" style="color: var(--red-text); border-top: 1px solid var(--border-light); margin-top: 4px; padding-top: 12px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg> Cerrar Sesión</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="mobile-menu-btn"><div class="hamburger-line"></div><div class="hamburger-line"></div><div class="hamburger-line"></div></button>
+    </header>
+
+    <main class="page-container">
+        
+        <!-- BOTÓN VOLVER DINÁMICO (History Back) -->
+        <a href="javascript:history.back()" class="btn-link-highlight" style="margin-bottom: 24px; display: inline-flex;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            Volver
+        </a>
+
+        <!-- HERO Y REGLAS -->
+        <div class="hero-header">
+            <h1 class="hero-title">Programa de Subsidio Universitario 2026</h1>
+            <p class="hero-desc">La Municipalidad de Katuete premia la excelencia académica. Conoce nuestros niveles de cobertura e inicia tu postulación en línea.</p>
+        </div>
+
+        <div class="tiers-grid">
+            <div class="tier-card premium">
+                <div class="tier-header">
+                    <div class="tier-title">Beca Integral</div>
+                    <span class="tier-badge badge-premium">Cobertura 100%</span>
+                </div>
+                <p style="font-size:13px; color:var(--text-muted); line-height:1.5;">Subsidio total de cuotas académicas destinado a estudiantes con excelencia comprobable.</p>
+                <ul class="tier-reqs">
+                    <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> Promedio Académico 5.0 (Absoluto)</li>
+                    <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> Medalla de Oro institucional</li>
+                    <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> Residencia en Katuete</li>
+                </ul>
+            </div>
+            
+            <div class="tier-card standard">
+                <div class="tier-header">
+                    <div class="tier-title">Beca Parcial</div>
+                    <span class="tier-badge badge-standard">Cobertura 50%</span>
+                </div>
+                <p style="font-size:13px; color:var(--text-muted); line-height:1.5;">Apoyo financiero para impulsar el desarrollo de perfiles técnicos e investigativos.</p>
+                <ul class="tier-reqs">
+                    <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> Promedio Académico Superior a 4.0</li>
+                    <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> Ensayo de Motivación Aprobado</li>
+                    <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> Residencia en Katuete</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- DIRECTORIO DE BECADOS -->
+        <div class="directory-section">
+            <h2 class="section-title">Directorio de Becarios Activos <span>Periodo 2025-2026</span></h2>
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Estudiante</th>
+                            <th>Carrera</th>
+                            <th>Universidad</th>
+                            <th>Tipo de Beca</th>
+                            <th>Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="user-cell">
+                                    <div class="user-avatar">MR</div>
+                                    <span class="user-name">Marcos Rojas</span>
+                                </div>
+                            </td>
+                            <td>Ingeniería Agronómica</td>
+                            <td>Universidad Nacional (UNC)</td>
+                            <td><strong>Integral (100%)</strong></td>
+                            <td><span class="status-pill status-active">Activo</span></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="user-cell">
+                                    <div class="user-avatar">CV</div>
+                                    <span class="user-name">Camila Vargas</span>
+                                </div>
+                            </td>
+                            <td>Análisis de Sistemas</td>
+                            <td>Universidad Politécnica</td>
+                            <td><strong>Parcial (50%)</strong></td>
+                            <td><span class="status-pill status-active">Activo</span></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="user-cell">
+                                    <div class="user-avatar">DB</div>
+                                    <span class="user-name">Daniel Benítez</span>
+                                </div>
+                            </td>
+                            <td>Medicina</td>
+                            <td>UNINORTE</td>
+                            <td><strong>Integral (100%)</strong></td>
+                            <td><span class="status-pill status-active">Activo</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- WIZARD DE POSTULACIÓN -->
+        <div class="section-title" style="border:none; justify-content:center; font-size:24px; margin-bottom:32px;">Iniciar Postulación Oficial</div>
+        
+        <div class="wizard-wrapper">
+            <div class="wizard-card">
+                
+                <div class="progress-tracker">
+                    <div class="progress-line" id="progressLine" style="width: 0%;"></div>
+                    <div class="step-indicator active" id="indicator-1">
+                        <div class="step-dot">1</div>
+                        <span class="step-label">Académico</span>
+                    </div>
+                    <div class="step-indicator" id="indicator-2">
+                        <div class="step-dot">2</div>
+                        <span class="step-label">Perfil</span>
+                    </div>
+                    <div class="step-indicator" id="indicator-3">
+                        <div class="step-dot">3</div>
+                        <span class="step-label">Evidencia</span>
+                    </div>
+                    <div class="step-indicator" id="indicator-4">
+                        <div class="step-dot">4</div>
+                        <span class="step-label">Confirmación</span>
+                    </div>
+                </div>
+
+                <!-- PASO 1: Datos Académicos -->
+                <div class="step-content active" id="step-1">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label class="form-label">Colegio de Egreso</label>
+                            <input type="text" id="inputColegio" class="form-input" placeholder="Ej: Colegio Nacional de Katuete" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Año de Promoción</label>
+                            <select id="inputAno" class="form-select" required>
+                                <option value="" disabled selected>Seleccionar...</option>
+                                <option value="2025">2025</option>
+                                <option value="2024">2024</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Promedio General Absoluto</label>
+                            <input type="number" id="inputPromedio" class="form-input" step="0.1" min="3.0" max="5.0" placeholder="Ej: 4.8" required>
+                            <span class="help-text">Utilice punto para decimales.</span>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Carrera de Interés</label>
+                            <input type="text" id="inputCarrera" class="form-input" placeholder="Ej: Ingeniería Civil" required>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PASO 2: Perfil y Motivación -->
+                <div class="step-content" id="step-2">
+                    <div class="form-group full-width">
+                        <label class="form-label">Ensayo de Motivación (Historia Personal)</label>
+                        <textarea id="inputEnsayo" class="form-textarea" placeholder="Describe brevemente tu trayectoria académica, logros obtenidos (olimpiadas, medallas, voluntariados) y por qué esta beca es fundamental para tu desarrollo profesional." required></textarea>
+                        <span class="help-text">Mínimo 50 palabras. Este documento será evaluado por la comisión directiva.</span>
+                    </div>
+                </div>
+
+                <!-- PASO 3: Anexos y Documentación -->
+                <div class="step-content" id="step-3">
+                    <div class="form-group full-width">
+                        <label class="form-label">Documentación Respaldatoria Obligatoria</label>
+                        <div class="upload-grid">
+                            <div class="upload-zone" id="uploadCertificado">
+                                <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                                <div class="upload-text">Certificado de Estudios</div>
+                                <div class="upload-sub">Frente y dorso visado (PDF/JPG)</div>
+                            </div>
+                            <div class="upload-zone" id="uploadMedalla">
+                                <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>
+                                <div class="upload-text">Medalla u Honores</div>
+                                <div class="upload-sub">Foto de diploma o medalla (Opcional)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PASO 4: Comprobante de Postulación -->
+                <div class="step-content" id="step-4">
+                    <div class="ticket-document">
+                        <div class="ticket-header">
+                            <div class="ticket-title">CONSTANCIA DE POSTULACIÓN</div>
+                            <div class="ticket-subtitle">Dirección de Educación - Katuete</div>
+                        </div>
+                        <div class="ticket-row">
+                            <span class="ticket-label">N° Expediente:</span>
+                            <span class="ticket-value" id="tckCodigo">BEC-2026-XXXX</span>
+                        </div>
+                        <div class="ticket-row">
+                            <span class="ticket-label">Postulante:</span>
+                            <span class="ticket-value">Valeria Lucia Acosta</span>
+                        </div>
+                        <div class="ticket-row">
+                            <span class="ticket-label">Promedio Declarado:</span>
+                            <span class="ticket-value" id="tckPromedio">0.0</span>
+                        </div>
+                        <div class="ticket-row">
+                            <span class="ticket-label">Carrera Solicitada:</span>
+                            <span class="ticket-value" id="tckCarrera">---</span>
+                        </div>
+                        <div class="ticket-row">
+                            <span class="ticket-label">Estado:</span>
+                            <span class="ticket-value" style="color:var(--text-title);">EN REVISIÓN DOCUMENTAL</span>
+                        </div>
+                    </div>
+                    <button onclick="window.print()" class="btn-download">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                        Descargar Constancia
+                    </button>
+                </div>
+
+                <!-- CONTROLES WIZARD -->
+                <div class="wizard-footer" id="wizardFooter">
+                    <button class="btn btn-prev" id="btnPrev" style="visibility: hidden;">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                        Volver
+                    </button>
+                    <button class="btn btn-next" id="btnNext">Continuar al Paso 2</button>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        // Funcionalidad de Menú Desplegable Responsivo
+        document.addEventListener('DOMContentLoaded', () => {
+            const mobileToggle = document.querySelector('.mobile-menu-btn');
+            const navWrapper = document.getElementById('nav-wrapper');
+            const body = document.body;
+            const dropdown = document.querySelector('.nav-item-dropdown');
+            const userProfileDesktop = document.getElementById('userProfileDesktop');
+
+            if (userProfileDesktop) {
+                userProfileDesktop.addEventListener('click', (e) => {
+                    if (!e.target.closest('.user-dropdown-menu')) {
+                        userProfileDesktop.querySelector('.user-dropdown-menu').classList.toggle('active');
+                        userProfileDesktop.querySelector('.avatar-btn').classList.toggle('active');
+                    }
+                });
+            }
+
+            if (mobileToggle) {
+                mobileToggle.addEventListener('click', () => {
+                    navWrapper.classList.toggle('active');
+                    body.classList.toggle('menu-open');
+                });
+            }
+
+            if (dropdown) {
+                dropdown.addEventListener('click', (e) => {
+                    if (window.innerWidth <= 1024) {
+                        if(e.target.tagName.toLowerCase() === 'a' && e.target.nextElementSibling) {
+                            e.preventDefault();
+                            dropdown.classList.toggle('mobile-open');
+                        }
+                    }
+                });
+            }
+        });
+
+        // Lógica del Wizard
+        let currentStep = 1;
+        const totalSteps = 4;
+        let docUploaded = false; 
+
+        const btnPrev = document.getElementById('btnPrev');
+        const btnNext = document.getElementById('btnNext');
+        const wizardFooter = document.getElementById('wizardFooter');
+        const progressLine = document.getElementById('progressLine');
+
+        function updateWizard() {
+            for (let i = 1; i <= totalSteps; i++) {
+                document.getElementById(`step-${i}`).classList.remove('active');
+                
+                const indicator = document.getElementById(`indicator-${i}`);
+                if (i < currentStep) {
+                    indicator.className = 'step-indicator completed';
+                } else if (i === currentStep) {
+                    indicator.className = 'step-indicator active';
+                } else {
+                    indicator.className = 'step-indicator';
+                }
+            }
+            
+            document.getElementById(`step-${currentStep}`).classList.add('active');
+            progressLine.style.width = ((currentStep - 1) / (totalSteps - 1)) * 100 + '%';
+
+            wizardFooter.style.display = 'flex';
+
+            if (currentStep === 1) {
+                btnPrev.style.visibility = 'hidden';
+                btnNext.textContent = 'Continuar al Paso 2';
+            } else if (currentStep === 2) {
+                btnPrev.style.visibility = 'visible';
+                btnNext.textContent = 'Subir Documentación';
+            } else if (currentStep === 3) {
+                btnPrev.style.visibility = 'visible';
+                btnNext.textContent = 'Finalizar Postulación';
+            } else if (currentStep === 4) {
+                wizardFooter.style.display = 'none';
+                compileTicket();
+            }
+        }
+
+        btnNext.addEventListener('click', () => {
+            const currentContainer = document.getElementById(`step-${currentStep}`);
+            const inputs = currentContainer.querySelectorAll('input[required], select[required], textarea[required]');
+            let isValid = true;
+            
+            inputs.forEach(input => {
+                if(!input.value) {
+                    input.style.borderColor = 'var(--red-text)';
+                    isValid = false;
+                } else {
+                    input.style.borderColor = 'var(--border-mid)';
+                }
+            });
+
+            if(currentStep === 3 && !docUploaded) {
+                document.getElementById('uploadCertificado').style.borderColor = 'var(--red-text)';
+                isValid = false;
+                alert("Debe adjuntar su certificado de estudios para validar la postulación.");
+            }
+
+            if(isValid && currentStep < totalSteps) {
+                currentStep++;
+                updateWizard();
+            }
+        });
+
+        btnPrev.addEventListener('click', () => {
+            if (currentStep > 1) {
+                currentStep--;
+                updateWizard();
+            }
+        });
+
+        // Simulación Upload de Certificado
+        const uploadCert = document.getElementById('uploadCertificado');
+        const uploadMedal = document.getElementById('uploadMedalla');
+
+        function simUpload(el, required) {
+            el.addEventListener('click', () => {
+                el.classList.add('active');
+                el.querySelector('.upload-text').textContent = 'Documento Cargado';
+                el.querySelector('.upload-sub').textContent = 'Validación criptográfica exitosa.';
+                el.style.borderColor = 'var(--text-title)';
+                if(required) docUploaded = true;
+            });
+        }
+        simUpload(uploadCert, true);
+        simUpload(uploadMedal, false);
+
+        function compileTicket() {
+            const prom = document.getElementById('inputPromedio').value;
+            const car = document.getElementById('inputCarrera').value;
+            const randomCode = `BEC-2026-${Math.floor(1000 + Math.random() * 9000)}`;
+            
+            document.getElementById('tckCodigo').textContent = randomCode;
+            document.getElementById('tckPromedio').textContent = prom;
+            document.getElementById('tckCarrera').textContent = car || 'No especificada';
+        }
+    </script>
+</body>
+</html>

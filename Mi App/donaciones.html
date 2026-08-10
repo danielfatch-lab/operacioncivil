@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Katuete - Inversión Privada y Fideicomiso</title>
+    <style>
+        /* =========================================
+           SISTEMA DE DISEÑO (Corporate Clean Estricto)
+           ========================================= */
+        :root {
+            --text-main: #1F2937;
+            --text-title: #111827;
+            --text-muted: #6B7280;
+            --bg-body: #F9FAFB;
+            --bg-card: #FFFFFF;
+            --border-light: #E5E7EB;
+            --border-mid: #D1D5DB;
+            --border-dark: #9CA3AF;
+            --yellow: #FFC700;
+            --yellow-hover: #E5B300;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 10px 15px -3px rgba(0,0,0,0.1);
+            --transition: all 0.3s ease;
+        }
+
+        /* Bloqueo estricto de herencias del navegador */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', -apple-system, sans-serif; }
+        body { background-color: var(--bg-body); color: var(--text-main); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+        a { text-decoration: none; color: inherit; cursor: pointer; }
+        svg { display: block; }
+
+        /* =========================================
+           NAVEGACIÓN SUPERIOR ESTANDARIZADA
+           ========================================= */
+        .main-navbar {
+            height: 72px; background-color: var(--bg-card); border-bottom: 1px solid var(--border-mid);
+            display: flex; justify-content: space-between; align-items: center; padding: 0 5%;
+            position: sticky; top: 0; z-index: 1000; box-shadow: var(--shadow-sm);
+        }
+        
+        .brand-container { display: flex; align-items: center; gap: 12px; }
+        .brand-logo-svg {
+            width: 40px; height: 40px; background-color: var(--text-title); display: flex; align-items: center; justify-content: center;
+            border-radius: 8px; transition: var(--transition); flex-shrink: 0; color: var(--bg-card);
+        }
+        .brand-container:hover .brand-logo-svg { background-color: var(--yellow); color: var(--text-title); }
+        .brand-text { display: flex; flex-direction: column; justify-content: center; margin-top: 2px; }
+        .brand-title { color: var(--text-title); font-size: 16px; font-weight: 800; letter-spacing: -0.5px; line-height: 1; margin-bottom: 2px; }
+        .brand-subtitle { color: var(--text-muted); font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+
+        .nav-wrapper { display: flex; align-items: center; gap: 24px; flex: 1; justify-content: flex-end; }
+        .nav-links { display: flex; gap: 20px; align-items: center; }
+        .nav-links > a, .nav-item-dropdown > a { 
+            color: var(--text-muted); font-size: 13px; font-weight: 600; 
+            padding: 26px 0; transition: var(--transition); display: flex; align-items: center; gap: 6px; position: relative; 
+        }
+        .nav-links > a:hover, .nav-item-dropdown > a:hover, .nav-links > a.active { color: var(--text-title); }
+        
+        .nav-links > a::after, .nav-item-dropdown > a::after { 
+            content: ''; position: absolute; bottom: -1px; left: 0; width: 0%; height: 3px; 
+            background-color: var(--yellow); transition: var(--transition); border-radius: 3px 3px 0 0; 
+        }
+        .nav-links > a:hover::after, .nav-item-dropdown > a:hover::after, .nav-links > a.active::after { width: 100%; }
+
+        .nav-item-dropdown { position: relative; }
+        .dropdown-menu {
+            position: absolute; top: 100%; left: 50%; transform: translateX(-50%) translateY(10px);
+            background-color: var(--bg-card); border: 1px solid var(--border-mid); border-radius: 12px;
+            width: 320px; box-shadow: var(--shadow-md); opacity: 0; visibility: hidden; pointer-events: none;
+            transition: var(--transition); display: flex; flex-direction: column; padding: 12px; z-index: 1050;
+        }
+        .dropdown-menu::before {
+            content: ''; position: absolute; top: -6px; left: 50%; transform: translateX(-50%) rotate(45deg);
+            width: 10px; height: 10px; background-color: var(--bg-card); border-top: 1px solid var(--border-mid); border-left: 1px solid var(--border-mid);
+        }
+        .nav-item-dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); pointer-events: auto; }
+        
+        .dropdown-item { display: flex; align-items: flex-start; gap: 12px; padding: 12px; border-radius: 8px; transition: var(--transition); }
+        .dropdown-item:hover { background-color: var(--bg-body); transform: translateX(4px); }
+        .dropdown-icon { width: 36px; height: 36px; background-color: var(--bg-body); border: 1px solid var(--border-mid); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--text-title); flex-shrink: 0; }
+        .dropdown-item:hover .dropdown-icon { background-color: var(--yellow); border-color: var(--yellow); }
+        .dropdown-text { display: flex; flex-direction: column; }
+        .dropdown-text strong { color: var(--text-title); font-size: 13px; font-weight: 700; margin-bottom: 2px; }
+        .dropdown-text span { color: var(--text-muted); font-size: 11px; line-height: 1.3; }
+
+        /* Componente de Búsqueda */
+        .search-component {
+            display: flex; align-items: center; background-color: var(--bg-body); border: 1px solid var(--border-mid);
+            border-radius: 6px; padding: 0 12px; height: 38px; width: 220px; transition: var(--transition);
+        }
+        .search-component:focus-within { border-color: var(--border-dark); background-color: var(--bg-card); box-shadow: 0 0 0 3px rgba(229, 231, 235, 0.4); }
+        .search-icon { width: 14px; height: 14px; color: var(--text-muted); flex-shrink: 0; }
+        .search-component input { border: none; background: transparent; padding: 0 8px; font-size: 13px; outline: none; width: 100%; color: var(--text-title); }
+
+        /* Botonera Transaccional */
+        .nav-transactional { display: flex; gap: 12px; align-items: center; }
+        .btn-header { display: inline-flex; align-items: center; justify-content: center; padding: 0 16px; height: 38px; font-size: 13px; font-weight: 700; border-radius: 6px; transition: var(--transition); gap: 6px; }
+        .btn-outline { background-color: var(--bg-card); border: 1px solid var(--border-mid); color: var(--text-title); }
+        .btn-outline:hover { background-color: var(--bg-body); border-color: var(--border-dark); }
+        .btn-primary { background-color: var(--yellow); border: 1px solid var(--yellow); color: var(--text-title); }
+        .btn-primary:hover { background-color: var(--text-title); color: var(--yellow); border-color: var(--text-title); }
+
+        /* Avatar de Usuario */
+        .user-profile-widget { margin-left: 8px; padding-left: 20px; border-left: 1px solid var(--border-mid); display: flex; align-items: center; height: 40px; }
+        .avatar-btn {
+            width: 38px; height: 38px; border-radius: 50%; background-color: var(--text-title); color: var(--bg-card);
+            border: 2px solid var(--bg-card); box-shadow: 0 0 0 2px var(--border-dark); display: flex; align-items: center; justify-content: center;
+            font-size: 13px; font-weight: 800; cursor: pointer; outline: none; transition: var(--transition);
+        }
+        .avatar-btn:hover { box-shadow: 0 0 0 2px var(--yellow); color: var(--yellow); }
+
+        .mobile-menu-btn { display: none; background: none; border: none; padding: 8px; cursor: pointer; }
+        .hamburger-line { width: 20px; height: 2px; background-color: var(--text-title); margin: 4px 0; border-radius: 2px; }
+
+        /* =========================================
+           ARQUITECTURA DE LA LANDING
+           ========================================= */
+        .page-container { max-width: 1200px; margin: 32px auto 80px; padding: 0 5%; }
+        
+        .btn-link-highlight {
+            font-size: 12px; font-weight: 700; color: var(--text-muted); text-decoration: none; display: inline-flex; align-items: center; gap: 6px;
+            background-color: var(--bg-card); border: 1px solid var(--border-mid); padding: 8px 16px; border-radius: 6px; transition: var(--transition); margin-bottom: 32px; cursor: pointer;
+        }
+        .btn-link-highlight:hover { color: var(--text-title); border-color: var(--text-title); }
+
+        .landing-header { margin-bottom: 56px; text-align: center; }
+        .landing-title { font-size: 36px; font-weight: 900; color: var(--text-title); letter-spacing: -1px; margin-bottom: 16px; }
+        .landing-subtitle { font-size: 18px; color: var(--text-muted); line-height: 1.6; max-width: 800px; margin: 0 auto; font-weight: 500; }
+
+        /* Matriz Educativa */
+        .edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 64px; }
+        .edu-card { background: var(--bg-card); border: 1px solid var(--border-mid); border-radius: 12px; padding: 40px; box-shadow: var(--shadow-sm); }
+        .edu-card h3 { font-size: 20px; font-weight: 800; margin-bottom: 20px; display: flex; align-items: center; gap: 12px; color: var(--text-title); }
+        .edu-card p { font-size: 15px; color: var(--text-main); line-height: 1.6; margin-bottom: 24px; }
+        
+        .edu-list { list-style: none; }
+        .edu-list li { display: flex; align-items: flex-start; gap: 12px; font-size: 14px; color: var(--text-main); margin-bottom: 16px; font-weight: 600; line-height: 1.5; }
+        .edu-list svg { flex-shrink: 0; margin-top: 2px; }
+
+        .guarantee-box {
+            background-color: var(--bg-body); border: 1px solid var(--border-mid); border-left: 6px solid var(--yellow);
+            padding: 32px; border-radius: 12px; text-align: center; margin-bottom: 64px;
+        }
+        .guarantee-box h2 { font-size: 24px; font-weight: 900; color: var(--text-title); margin-bottom: 12px; }
+        .guarantee-box p { font-size: 16px; color: var(--text-main); line-height: 1.5; max-width: 800px; margin: 0 auto; }
+
+        /* =========================================
+           SIMULADOR INTERACTIVO
+           ========================================= */
+        .simulator-section { background: var(--bg-card); border: 1px solid var(--border-mid); border-radius: 12px; box-shadow: var(--shadow-md); padding: 48px; max-width: 900px; margin: 0 auto; }
+        
+        .sim-config { text-align: center; }
+        .sim-header-title { font-size: 22px; font-weight: 800; color: var(--text-title); margin-bottom: 12px; }
+        .sim-header-desc { font-size: 14px; color: var(--text-muted); margin-bottom: 32px; line-height: 1.5; }
+
+        .input-wrapper { position: relative; display: flex; align-items: center; margin-bottom: 24px; max-width: 500px; margin-left: auto; margin-right: auto; }
+        .input-currency { position: absolute; left: 16px; font-size: 18px; font-weight: 800; color: var(--text-muted); }
+        .input-amount {
+            width: 100%; padding: 18px 16px 18px 56px; font-size: 24px; font-weight: 900; color: var(--text-title);
+            background: var(--bg-body); border: 2px solid var(--border-mid); border-radius: 8px; outline: none; transition: var(--transition); text-align: center;
+        }
+        .input-amount:focus { border-color: var(--yellow); background: var(--bg-card); box-shadow: 0 0 0 3px rgba(255,199,0,0.2); }
+
+        .btn-simulate {
+            width: 100%; max-width: 500px; margin: 0 auto 32px; padding: 16px; font-size: 14px; font-weight: 800; text-transform: uppercase;
+            background: var(--yellow); color: var(--text-title); border: 1px solid var(--yellow); border-radius: 8px;
+            cursor: pointer; transition: var(--transition); display: flex; align-items: center; justify-content: center; gap: 8px;
+        }
+        .btn-simulate:hover { background: var(--yellow-hover); border-color: var(--yellow-hover); transform: translateY(-2px); }
+        .btn-simulate:disabled { opacity: 0.7; cursor: not-allowed; transform: none; }
+
+        /* =========================================
+           PIPELINE DE RESULTADOS Y ANIMACIÓN
+           ========================================= */
+        .pipeline-container { display: none; border-top: 1px solid var(--border-light); margin-top: 40px; padding-top: 40px; animation: fadeIn 0.4s ease; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .bcp-vault-status {
+            background-color: var(--bg-card); border: 1px solid var(--border-mid); border-left: 4px solid var(--text-title); border-radius: 8px;
+            padding: 24px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; box-shadow: var(--shadow-sm);
+        }
+        .bcp-vault-info h4 { font-size: 12px; font-weight: 800; text-transform: uppercase; color: var(--text-muted); margin-bottom: 4px; }
+        .bcp-vault-info .val { font-size: 28px; font-weight: 900; color: var(--text-title); font-family: monospace; letter-spacing: -0.5px; }
+
+        .node-track { display: flex; flex-direction: column; gap: 24px; position: relative; padding-left: 20px; }
+        .node-track::before { content: ''; position: absolute; top: 20px; bottom: 40px; left: 33px; width: 4px; background-color: var(--border-light); z-index: 1; border-radius: 2px; }
+        .track-progress { position: absolute; top: 20px; left: 33px; width: 4px; height: 0%; background-color: var(--text-title); z-index: 2; transition: height 1s linear; border-radius: 2px; }
+
+        .m-node { display: flex; gap: 24px; position: relative; z-index: 3; opacity: 0.4; transition: opacity 0.4s ease; align-items: stretch; }
+        .m-node.active { opacity: 1; }
+        
+        .m-indicator {
+            width: 32px; height: 32px; background: var(--bg-card); border: 2px solid var(--border-mid); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; color: var(--text-muted); flex-shrink: 0; transition: var(--transition);
+            position: relative; z-index: 4; margin-top: 16px;
+        }
+        .m-indicator svg { width: 14px; height: 14px; }
+        .m-node.active .m-indicator { border-color: var(--text-title); background: var(--text-title); color: var(--yellow); }
+
+        .m-content {
+            background: var(--bg-body); border: 1px solid var(--border-mid); border-radius: 8px; padding: 24px; flex: 1;
+            display: flex; justify-content: space-between; align-items: center; transition: var(--transition);
+        }
+        .m-node.active .m-content { background: var(--bg-card); border-color: var(--border-mid); box-shadow: var(--shadow-sm); }
+        
+        .m-details { flex: 1; }
+        .m-title { font-size: 15px; font-weight: 800; color: var(--text-title); margin-bottom: 6px; }
+        
+        .m-status-text { font-size: 12px; font-weight: 700; color: var(--text-muted); display: flex; align-items: center; gap: 6px; margin-bottom: 12px; min-height: 18px; }
+        .m-status-text.processing { color: #D97706; }
+        .m-status-text.success { color: #059669; }
+        
+        .m-finance { text-align: right; padding-left: 24px; border-left: 1px solid var(--border-light); min-width: 160px; display: flex; flex-direction: column; justify-content: center; }
+        .m-finance-lbl { font-size: 11px; font-weight: 800; color: var(--text-muted); text-transform: uppercase; margin-bottom: 4px; }
+        .m-finance-val { font-size: 20px; font-weight: 900; color: var(--text-muted); font-family: monospace; transition: color 0.3s; }
+        .m-node.active .m-finance-val { color: var(--text-title); }
+
+        .audit-docs { display: flex; gap: 12px; margin-top: 12px; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
+        .m-node.active .audit-docs { opacity: 1; pointer-events: auto; }
+        .btn-audit-doc {
+            font-size: 11px; font-weight: 700; color: var(--text-main); background: var(--bg-body); border: 1px solid var(--border-mid); border-radius: 6px; padding: 6px 12px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; transition: var(--transition);
+        }
+        .btn-audit-doc:hover { background: var(--text-title); color: var(--yellow); border-color: var(--text-title); }
+        
+        .doc-viewer { display: none; margin-top: 16px; background: #FAFAFA; border: 1px dashed var(--border-mid); border-radius: 6px; padding: 16px; font-family: monospace; font-size: 12px; color: var(--text-main); position: relative; line-height: 1.4; }
+        .doc-viewer.open { display: block; animation: fadeIn 0.3s ease; }
+        .doc-viewer strong { color: var(--text-title); }
+        .doc-viewer-close { position: absolute; top: 8px; right: 12px; cursor: pointer; font-size: 16px; font-weight: bold; color: var(--text-muted); }
+        .doc-viewer-close:hover { color: var(--red-text); }
+
+        /* =========================================
+           RESPONSIVE
+           ========================================= */
+        @media (max-width: 1024px) {
+            .nav-wrapper { display: none; }
+            .mobile-menu-btn { display: block; }
+        }
+
+        @media (max-width: 768px) {
+            .edu-grid { grid-template-columns: 1fr; gap: 24px; }
+            .hero-title { font-size: 28px; }
+            .simulator-section { padding: 24px; }
+            .m-node { gap: 16px; }
+            .m-indicator { margin-top: 0; align-self: flex-start; }
+            .m-content { flex-direction: column; align-items: flex-start; gap: 16px; }
+            .m-finance { text-align: left; padding-left: 0; border-left: none; border-top: 1px solid var(--border-light); padding-top: 16px; width: 100%; }
+            .node-track::before { left: 14px; }
+            .track-progress { left: 14px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- CABECERA PRINCIPAL ESTANDARIZADA -->
+    <header class="main-navbar">
+        <a href="index.html" class="brand-container">
+            <div class="brand-logo-svg"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2v20M4 12h8M12 2l8 10-8 10"/></svg></div>
+            <div class="brand-text">
+                <span class="brand-title">KATUETE</span>
+                <span class="brand-subtitle">Gestión Pública</span>
+            </div>
+        </a>
+        
+        <div class="nav-wrapper" id="nav-wrapper">
+            <nav class="nav-links">
+                <a href="autoridades/index.html">Autoridades</a>
+                
+                <div class="nav-item-dropdown">
+                    <a href="#">Transparencia <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></a>
+                    <div class="dropdown-menu">
+                        <a href="#" class="dropdown-item">
+                            <div class="dropdown-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg></div>
+                            <div class="dropdown-text">
+                                <strong>Presupuesto y Ejecución</strong>
+                                <span>Fonacide, Royalties y Rendición de Cuentas.</span>
+                            </div>
+                        </a>
+                        <a href="#" class="dropdown-item">
+                            <div class="dropdown-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg></div>
+                            <div class="dropdown-text">
+                                <strong>Nómina y Salarios</strong>
+                                <span>Sueldos y viáticos (Ley 5189/14).</span>
+                            </div>
+                        </a>
+                        <a href="donaciones.html" class="dropdown-item">
+                            <div class="dropdown-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg></div>
+                            <div class="dropdown-text">
+                                <strong>Licitaciones y Contratos</strong>
+                                <span>Adjudicaciones y fideicomiso de obras.</span>
+                            </div>
+                        </a>
+                        <a href="#" class="dropdown-item">
+                            <div class="dropdown-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></div>
+                            <div class="dropdown-text">
+                                <strong>Acceso a la Información</strong>
+                                <span>Portal oficial de solicitudes (Ley 5282/14).</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <a href="japaga.html">Recaudaciones</a>
+                <a href="proyectos.html">Proyectos</a>
+            </nav>
+
+            <div class="search-component">
+                <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                <input type="text" placeholder="Buscar expediente...">
+            </div>
+
+            <div class="nav-transactional">
+                <a href="japaga.html" class="btn-header btn-outline">Japaga</a>
+                <a href="donaciones.html" class="btn-header btn-primary">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                    JADONATA
+                </a>
+            </div>
+
+            <div class="user-profile-widget">
+                <button class="avatar-btn" onclick="window.location.href='Mi-perfil.html'">VA</button>
+            </div>
+        </div>
+        <button class="mobile-menu-btn"><div class="hamburger-line"></div><div class="hamburger-line"></div><div class="hamburger-line"></div></button>
+    </header>
+
+    <main class="page-container">
+        
+        <!-- Botón Volver Dinámico -->
+        <a href="javascript:history.back()" class="btn-link-highlight">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            Volver
+        </a>
+
+        <!-- HEADER PEDAGÓGICO -->
+        <div class="landing-header">
+            <h1 class="landing-title">Invierte seguro en Katuete. Tu dinero está protegido.</h1>
+            <p class="landing-subtitle">Entendemos por qué los ciudadanos y empresarios dudan en donar a las municipalidades: falta de transparencia y obras inconclusas. Por eso, en Katuete tu dinero no va a la Intendencia, va a una cuenta blindada en el Banco Central.</p>
+        </div>
+
+        <!-- EXPLICACIÓN CLARA: PROBLEMA Y SOLUCIÓN -->
+        <div class="edu-grid">
+            <div class="edu-card">
+                <h3><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg> El Problema (Sistema Antiguo)</h3>
+                <p>Si tú donas plata de la forma tradicional, el dinero ingresa directamente a la cuenta común de la Municipalidad.</p>
+                <ul class="edu-list">
+                    <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--red-text)" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg> <span>El dinero se mezcla y puede usarse para pagar salarios atrasados.</span></li>
+                    <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--red-text)" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg> <span>Si la Municipalidad tiene demandas, la justicia puede embargar tu donación.</span></li>
+                    <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--red-text)" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg> <span>La obra puede quedar por la mitad y tú pierdes el capital.</span></li>
+                </ul>
+            </div>
+
+            <div class="edu-card" style="border: 2px solid var(--yellow);">
+                <h3><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--text-title)" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg> La Solución (Fideicomiso)</h3>
+                <p>El Banco Central del Paraguay (BCP) guarda tu plata. La Municipalidad arranca con Gs. 0 y solo recibe pagos si demuestra que está trabajando.</p>
+                <ul class="edu-list">
+                    <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--green-text)" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> <span><strong>Inembargable:</strong> Nadie puede tocar la plata, está asegurada por ley.</span></li>
+                    <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--green-text)" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> <span><strong>Exige pruebas:</strong> Tienen que subir fotos con GPS y facturas para que el BCP les libere un % del pago.</span></li>
+                    <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--green-text)" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> <span><strong>Tú auditas todo:</strong> Recibes las facturas en tu perfil ciudadano.</span></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="guarantee-box">
+            <h2>Garantía de Devolución Absoluta</h2>
+            <p>Si la Municipalidad de Katuete no cumple con los requisitos, se atrasa o paraliza la obra, el sistema bloquea los fondos automáticamente. <strong>El Banco Central te devolverá la totalidad del dinero restante directamente a tu cuenta bancaria.</strong></p>
+        </div>
+
+        <!-- SIMULADOR INTERACTIVO CON ANIMACIÓN -->
+        <section class="simulator-section">
+            <div class="sim-config">
+                <h2 class="sim-header-title">Simulador de Trazabilidad</h2>
+                <p class="sim-header-desc">Simula una donación. Observa cómo el sistema mantiene el candado cerrado, exige los documentos a la Municipalidad y solo libera la plata cuando todo está correcto.</p>
+                
+                <div class="input-wrapper">
+                    <span class="input-currency">Gs.</span>
+                    <input type="text" id="amountInput" class="input-amount" placeholder="Ej: 150.000.000" autocomplete="off">
+                </div>
+
+                <button class="btn-simulate" id="btnSimulate">
+                    Ejecutar Simulación
+                </button>
+            </div>
+
+            <!-- PIPELINE DOCUMENTAL -->
+            <div class="pipeline-container" id="pipelineContainer">
+                
+                <div class="bcp-vault-status">
+                    <div class="bcp-vault-info">
+                        <h4>Fondo Resguardado en el Banco Central (BCP)</h4>
+                        <div class="val" id="vaultAmount">Gs. 0</div>
+                    </div>
+                    <div class="bcp-badge">Blindado</div>
+                </div>
+
+                <div class="node-track">
+                    <div class="track-progress" id="trackProgress"></div>
+                    
+                    <!-- NODO 1 -->
+                    <div class="m-node" id="node-1">
+                        <div class="m-indicator" id="icon-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg></div>
+                        <div class="m-content">
+                            <div class="m-details">
+                                <h3 class="m-title">1. Anticipo de Obra (30%)</h3>
+                                <div class="m-status-text" id="status-1">A la espera de documentos iniciales...</div>
+                                
+                                <div class="audit-docs">
+                                    <button class="btn-audit-doc" onclick="showDoc('doc-1a')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg> Ver Resolución JM</button>
+                                    <button class="btn-audit-doc" onclick="showDoc('doc-1b')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg> Ver Contrato</button>
+                                </div>
+                                <div class="doc-viewer" id="doc-1a">
+                                    <span class="doc-viewer-close" onclick="closeDoc('doc-1a')">✖</span>
+                                    <strong>RESOLUCIÓN N° 145/2026:</strong> Aprobación de la Junta Municipal de Katuete para ejecutar el proyecto. [Firma Validada].
+                                </div>
+                                <div class="doc-viewer" id="doc-1b">
+                                    <span class="doc-viewer-close" onclick="closeDoc('doc-1b')">✖</span>
+                                    <strong>CONTRATO DE OBRA:</strong> Adjudicación a la empresa constructora con póliza de seguro de fiel cumplimiento.
+                                </div>
+                            </div>
+                            <div class="m-finance">
+                                <div class="m-finance-lbl">Se libera a la Municipalidad</div>
+                                <div class="m-finance-val" id="val-1">Gs. 0</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- NODO 2 -->
+                    <div class="m-node" id="node-2">
+                        <div class="m-indicator" id="icon-2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg></div>
+                        <div class="m-content">
+                            <div class="m-details">
+                                <h3 class="m-title">2. Avance de Obra (30%)</h3>
+                                <div class="m-status-text" id="status-2">A la espera de verificación en terreno...</div>
+                                
+                                <div class="audit-docs">
+                                    <button class="btn-audit-doc" onclick="showDoc('doc-2a')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line></svg> Ver Facturas</button>
+                                    <button class="btn-audit-doc" onclick="showDoc('doc-2b')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg> Ver Datos GPS</button>
+                                </div>
+                                <div class="doc-viewer" id="doc-2a">
+                                    <span class="doc-viewer-close" onclick="closeDoc('doc-2a')">✖</span>
+                                    <strong>FACTURA LEGAL N° 001-002-441:</strong> Visada por la Contraloría (CGR). Avala el 50% del progreso físico de la obra.
+                                </div>
+                                <div class="doc-viewer" id="doc-2b">
+                                    <span class="doc-viewer-close" onclick="closeDoc('doc-2b')">✖</span>
+                                    <strong>REPORTE GPS:</strong> Fotos en terreno. Lat: -24.2341, Long: -54.7891 (Katuete). Sistema anti-fraude verificado.
+                                </div>
+                            </div>
+                            <div class="m-finance">
+                                <div class="m-finance-lbl">Se libera a la Municipalidad</div>
+                                <div class="m-finance-val" id="val-2">Gs. 0</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- NODO 3 -->
+                    <div class="m-node" id="node-3">
+                        <div class="m-indicator" id="icon-3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg></div>
+                        <div class="m-content">
+                            <div class="m-details">
+                                <h3 class="m-title">3. Liquidación Final (40%)</h3>
+                                <div class="m-status-text" id="status-3">A la espera de la firma de los vecinos...</div>
+                                
+                                <div class="audit-docs">
+                                    <button class="btn-audit-doc" onclick="showDoc('doc-3a')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg> Ver Acta de Recepción</button>
+                                </div>
+                                <div class="doc-viewer" id="doc-3a">
+                                    <span class="doc-viewer-close" onclick="closeDoc('doc-3a')">✖</span>
+                                    <strong>ACTA DE RECEPCIÓN N° 45/2026:</strong> Obra culminada al 100%. Firmada por la Comisión Vecinal confirmando que el trabajo se hizo bien.
+                                </div>
+                            </div>
+                            <div class="m-finance">
+                                <div class="m-finance-lbl">Se libera a la Municipalidad</div>
+                                <div class="m-finance-val" id="val-3">Gs. 0</div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        // Formateo de Moneda (JS Nativo)
+        const formatPYG = (num) => new Intl.NumberFormat('es-PY', { maximumFractionDigits: 0 }).format(num);
+
+        const inputAmount = document.getElementById('amountInput');
+        const btnSimulate = document.getElementById('btnSimulate');
+        const pipeline = document.getElementById('pipelineContainer');
+        const trackProgress = document.getElementById('trackProgress');
+        
+        // Auto-formato de input
+        inputAmount.addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, ''); 
+            if (value !== '') {
+                e.target.value = formatPYG(value);
+            }
+        });
+
+        // Helper para pausas asíncronas
+        const sleep = ms => new Promise(r => setTimeout(r, ms));
+
+        // Motor Asíncrono de Animación de Trazabilidad
+        btnSimulate.addEventListener('click', async () => {
+            const rawValue = parseInt(inputAmount.value.replace(/\D/g, ''));
+            
+            if (isNaN(rawValue) || rawValue < 100000) {
+                alert("Ingrese un capital válido para la simulación (Mínimo Gs. 100.000)");
+                inputAmount.focus();
+                return;
+            }
+
+            // Deshabilitar botón temporalmente
+            btnSimulate.disabled = true;
+            btnSimulate.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 1 1-6.219-8.56"></path></svg> Procesando Lógica...';
+            
+            // Limpieza de estado previo
+            trackProgress.style.height = '0%';
+            document.querySelectorAll('.m-node').forEach(n => n.classList.remove('active'));
+            document.querySelectorAll('.m-indicator').forEach(i => i.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>');
+            document.querySelectorAll('.doc-viewer').forEach(v => v.classList.remove('open'));
+            
+            // Resetear textos de estado
+            document.getElementById('status-1').className = 'm-status-text';
+            document.getElementById('status-1').textContent = 'A la espera de documentos iniciales...';
+            document.getElementById('status-2').className = 'm-status-text';
+            document.getElementById('status-2').textContent = 'A la espera de verificación en terreno...';
+            document.getElementById('status-3').className = 'm-status-text';
+            document.getElementById('status-3').textContent = 'A la espera de la firma de los vecinos...';
+
+            // Cálculos Fiduciarios
+            const chunk1 = rawValue * 0.3;
+            const chunk2 = rawValue * 0.3;
+            const chunk3 = rawValue * 0.4;
+
+            document.getElementById('vaultAmount').textContent = `Gs. ${formatPYG(rawValue)}`;
+            document.getElementById('val-1').textContent = `Gs. ${formatPYG(chunk1)}`;
+            document.getElementById('val-2').textContent = `Gs. ${formatPYG(chunk2)}`;
+            document.getElementById('val-3').textContent = `Gs. ${formatPYG(chunk3)}`;
+
+            // Mostrar Contenedor
+            pipeline.style.display = 'block';
+
+            // --- INICIO DE SECUENCIA ASÍNCRONA ---
+            
+            // NODO 1
+            await sleep(500);
+            trackProgress.style.height = '15%'; // Línea baja al primer nodo
+            const status1 = document.getElementById('status-1');
+            status1.classList.add('processing');
+            status1.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg> Verificando Resolución y Contrato...';
+            
+            await sleep(1500); // Tiempo de lectura/tensión
+            
+            status1.className = 'm-status-text success';
+            status1.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> Documentos Aprobados. Liberando fondos...';
+            document.getElementById('node-1').classList.add('active');
+            document.getElementById('icon-1').innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 9.9-1"></path></svg>'; // Candado Abierto
+
+            // NODO 2
+            await sleep(1500);
+            trackProgress.style.height = '55%'; // Línea baja al segundo nodo
+            const status2 = document.getElementById('status-2');
+            status2.classList.add('processing');
+            status2.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> Analizando Coordenadas GPS y Facturas...';
+
+            await sleep(1800);
+
+            status2.className = 'm-status-text success';
+            status2.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> Avance 50% Verificado. Liberando fondos...';
+            document.getElementById('node-2').classList.add('active');
+            document.getElementById('icon-2').innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 9.9-1"></path></svg>';
+
+            // NODO 3
+            await sleep(1500);
+            trackProgress.style.height = '100%'; // Línea baja al final
+            const status3 = document.getElementById('status-3');
+            status3.classList.add('processing');
+            status3.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path></svg> Validando firmas de veeduría vecinal...';
+
+            await sleep(2000);
+
+            status3.className = 'm-status-text success';
+            status3.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> Acta Final Aprobada. Liquidación Completada.';
+            document.getElementById('node-3').classList.add('active');
+            document.getElementById('icon-3').innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 9.9-1"></path></svg>';
+
+            // Restaurar botón
+            btnSimulate.disabled = false;
+            btnSimulate.innerHTML = 'Ejecutar Simulación de Nuevo';
+        });
+
+        // Visor de Documentos Interactivo
+        window.showDoc = function(docId) {
+            const node = document.getElementById(docId).closest('.m-node');
+            node.querySelectorAll('.doc-viewer').forEach(v => v.classList.remove('open'));
+            document.getElementById(docId).classList.add('open');
+        };
+
+        window.closeDoc = function(docId) {
+            document.getElementById(docId).classList.remove('open');
+        };
+
+        // Componentes de la Cabecera
+        document.addEventListener('DOMContentLoaded', () => {
+            const mobileToggle = document.querySelector('.mobile-menu-btn');
+            const navWrapper = document.getElementById('nav-wrapper');
+            const body = document.body;
+
+            if (mobileToggle) {
+                mobileToggle.addEventListener('click', () => {
+                    navWrapper.classList.toggle('active');
+                    body.classList.toggle('menu-open');
+                });
+            }
+        });
+    </script>
+</body>
+</html>
