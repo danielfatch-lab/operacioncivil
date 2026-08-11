@@ -1,841 +1,843 @@
+recuerda que tenian que agregar los botones y sincronizarlos, así como lo habías dicho, para que sean inteligentes, en el caso que caso de que no entro desde ninguna pagina, seria bueno que solamente reinicie la pagna los botones para volver, ok:
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Katuete - Plataforma de Gestión Transparente</title>
-    <style>
-        /* =========================================
-           SISTEMA DE DISEÑO (Soft UI Corporativo)
-           ========================================= */
-        :root {
-            --text-main: #1F2937;
-            --text-muted: #6B7280;
-            --bg-body: #F9FAFB;
-            --bg-card: #FFFFFF;
-            --border-light: #E5E7EB;
-            --border-mid: #D1D5DB;
-            --yellow: #FFC700;
-            --yellow-hover: #F5B800;
-            --red-alert: #FEE2E2;
-            --red-text: #DC2626;
-            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 10px 15px -3px rgba(0,0,0,0.1);
-            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
-            --transition: all 0.25s ease;
-        }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Katuete - Plataforma de Gestión Transparente</title>
+    <style>
+        /* =========================================
+           SISTEMA DE DISEÑO (Soft UI Corporativo)
+           ========================================= */
+        :root {
+            --text-main: #1F2937;
+            --text-muted: #6B7280;
+            --bg-body: #F9FAFB;
+            --bg-card: #FFFFFF;
+            --border-light: #E5E7EB;
+            --border-mid: #D1D5DB;
+            --yellow: #FFC700;
+            --yellow-hover: #F5B800;
+            --red-alert: #FEE2E2;
+            --red-text: #DC2626;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 10px 15px -3px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+            --transition: all 0.25s ease;
+        }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', -apple-system, sans-serif; }
-        body { background-color: var(--bg-body); color: var(--text-main); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', -apple-system, sans-serif; }
+        body { background-color: var(--bg-body); color: var(--text-main); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
 
-        /* =========================================
-           NAVEGACIÓN SUPERIOR
-           ========================================= */
-        .main-navbar {
-            height: 80px; background-color: var(--bg-card); border-bottom: 1px solid var(--border-light);
-            display: flex; justify-content: space-between; align-items: center; padding: 0 5%;
-            position: sticky; top: 0; z-index: 1000; box-shadow: 0 1px 3px rgba(0,0,0,0.02);
-        }
-        .brand-container { display: flex; align-items: center; gap: 12px; text-decoration: none; position: relative; z-index: 2001; }
-        .brand-logo-svg {
-            width: 40px; height: 40px; background-color: var(--text-main); display: flex; align-items: center; justify-content: center;
-            border-radius: 8px; transition: var(--transition); flex-shrink: 0; color: var(--bg-card);
-        }
-        .brand-container:hover .brand-logo-svg { background-color: var(--yellow); color: var(--text-main); }
-        
-        .brand-text { display: flex; flex-direction: column; justify-content: center; margin-top: 2px; }
-        .brand-title { color: var(--text-main); font-size: 18px; font-weight: 800; letter-spacing: -0.5px; line-height: 1; margin-bottom: 2px; }
-        .brand-subtitle { color: var(--text-muted); font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; line-height: 1; }
+        /* =========================================
+           NAVEGACIÓN SUPERIOR
+           ========================================= */
+        .main-navbar {
+            height: 80px; background-color: var(--bg-card); border-bottom: 1px solid var(--border-light);
+            display: flex; justify-content: space-between; align-items: center; padding: 0 5%;
+            position: sticky; top: 0; z-index: 1000; box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+        }
+        .brand-container { display: flex; align-items: center; gap: 12px; text-decoration: none; position: relative; z-index: 2001; }
+        .brand-logo-svg {
+            width: 40px; height: 40px; background-color: var(--text-main); display: flex; align-items: center; justify-content: center;
+            border-radius: 8px; transition: var(--transition); flex-shrink: 0; color: var(--bg-card);
+        }
+        .brand-container:hover .brand-logo-svg { background-color: var(--yellow); color: var(--text-main); }
+        
+        .brand-text { display: flex; flex-direction: column; justify-content: center; margin-top: 2px; }
+        .brand-title { color: var(--text-main); font-size: 18px; font-weight: 800; letter-spacing: -0.5px; line-height: 1; margin-bottom: 2px; }
+        .brand-subtitle { color: var(--text-muted); font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; line-height: 1; }
 
-        .nav-wrapper { display: flex; align-items: center; gap: 20px; flex: 1; justify-content: flex-end; }
-        .nav-links { display: flex; gap: 24px; align-items: center; }
-        .nav-links > a, .nav-item-dropdown > a { 
-            color: var(--text-muted); text-decoration: none; font-size: 14px; font-weight: 600; 
-            position: relative; padding: 28px 0; transition: var(--transition); display: flex; align-items: center; gap: 4px;
-        }
-        .nav-links > a:hover, .nav-item-dropdown > a:hover, .nav-links > a.active { color: var(--text-main); }
-        .nav-links > a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0%; height: 3px; background-color: var(--yellow); transition: var(--transition); border-radius: 3px 3px 0 0; }
-        .nav-links > a:hover::after, .nav-links > a.active::after { width: 100%; }
+        .nav-wrapper { display: flex; align-items: center; gap: 20px; flex: 1; justify-content: flex-end; }
+        .nav-links { display: flex; gap: 24px; align-items: center; }
+        .nav-links > a, .nav-item-dropdown > a { 
+            color: var(--text-muted); text-decoration: none; font-size: 14px; font-weight: 600; 
+            position: relative; padding: 28px 0; transition: var(--transition); display: flex; align-items: center; gap: 4px;
+        }
+        .nav-links > a:hover, .nav-item-dropdown > a:hover, .nav-links > a.active { color: var(--text-main); }
+        .nav-links > a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0%; height: 3px; background-color: var(--yellow); transition: var(--transition); border-radius: 3px 3px 0 0; }
+        .nav-links > a:hover::after, .nav-links > a.active::after { width: 100%; }
 
-        /* Componente Dropdown: Transparencia */
-        .nav-item-dropdown { position: relative; }
-        .dropdown-menu {
-            position: absolute; top: 100%; left: 50%; transform: translateX(-50%) translateY(10px);
-            background-color: var(--bg-card); border: 1px solid var(--border-light); border-radius: 12px;
-            width: 320px; box-shadow: var(--shadow-md); opacity: 0; visibility: hidden; pointer-events: none;
-            transition: var(--transition); display: flex; flex-direction: column; padding: 12px; z-index: 1050;
-        }
-        .dropdown-menu::before {
-            content: ''; position: absolute; top: -6px; left: 50%; transform: translateX(-50%) rotate(45deg);
-            width: 10px; height: 10px; background-color: var(--bg-card); border-top: 1px solid var(--border-light); border-left: 1px solid var(--border-light);
-        }
-        .nav-item-dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); pointer-events: auto; }
-        
-        .dropdown-item { display: flex; align-items: flex-start; gap: 12px; padding: 12px; text-decoration: none; border-radius: 8px; transition: var(--transition); }
-        .dropdown-item:hover { background-color: var(--bg-body); transform: translateX(4px); }
-        .dropdown-icon { width: 36px; height: 36px; background-color: var(--bg-body); border: 1px solid var(--border-light); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--text-main); flex-shrink: 0; }
-        .dropdown-item:hover .dropdown-icon { background-color: var(--yellow); border-color: var(--yellow); }
-        .dropdown-text { display: flex; flex-direction: column; }
-        .dropdown-text strong { color: var(--text-main); font-size: 13px; font-weight: 700; margin-bottom: 2px; }
-        .dropdown-text span { color: var(--text-muted); font-size: 11px; line-height: 1.3; }
+        /* Componente Dropdown: Transparencia */
+        .nav-item-dropdown { position: relative; }
+        .dropdown-menu {
+            position: absolute; top: 100%; left: 50%; transform: translateX(-50%) translateY(10px);
+            background-color: var(--bg-card); border: 1px solid var(--border-light); border-radius: 12px;
+            width: 320px; box-shadow: var(--shadow-md); opacity: 0; visibility: hidden; pointer-events: none;
+            transition: var(--transition); display: flex; flex-direction: column; padding: 12px; z-index: 1050;
+        }
+        .dropdown-menu::before {
+            content: ''; position: absolute; top: -6px; left: 50%; transform: translateX(-50%) rotate(45deg);
+            width: 10px; height: 10px; background-color: var(--bg-card); border-top: 1px solid var(--border-light); border-left: 1px solid var(--border-light);
+        }
+        .nav-item-dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); pointer-events: auto; }
+        
+        .dropdown-item { display: flex; align-items: flex-start; gap: 12px; padding: 12px; text-decoration: none; border-radius: 8px; transition: var(--transition); }
+        .dropdown-item:hover { background-color: var(--bg-body); transform: translateX(4px); }
+        .dropdown-icon { width: 36px; height: 36px; background-color: var(--bg-body); border: 1px solid var(--border-light); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--text-main); flex-shrink: 0; }
+        .dropdown-item:hover .dropdown-icon { background-color: var(--yellow); border-color: var(--yellow); }
+        .dropdown-text { display: flex; flex-direction: column; }
+        .dropdown-text strong { color: var(--text-main); font-size: 13px; font-weight: 700; margin-bottom: 2px; }
+        .dropdown-text span { color: var(--text-muted); font-size: 11px; line-height: 1.3; }
 
-        /* Buscador Ajustado */
-        .search-component {
-            display: flex; align-items: center; background-color: var(--bg-body); border: 1px solid var(--border-light);
-            border-radius: 8px; padding: 0 12px; height: 36px; width: 200px; transition: var(--transition);
-        }
-        .search-component:focus-within { border-color: var(--border-mid); box-shadow: 0 0 0 3px rgba(229, 231, 235, 0.5); width: 240px; background-color: var(--bg-card); }
-        .search-icon { width: 14px; height: 14px; color: var(--text-muted); flex-shrink: 0; }
-        .search-component input { border: none; background: transparent; padding: 0 8px; font-size: 13px; outline: none; width: 100%; color: var(--text-main); }
-        
-        /* Controles de Transacción y Perfil */
-        .nav-transactional { display: flex; gap: 12px; align-items: center; }
-        .btn { display: inline-flex; align-items: center; justify-content: center; padding: 0 16px; height: 36px; font-size: 13px; font-weight: 700; border-radius: 8px; text-decoration: none; transition: var(--transition); gap: 8px; }
-        .btn-outline { border: 1px solid var(--border-mid); color: var(--text-main); background: var(--bg-card); }
-        .btn-outline:hover { background-color: var(--bg-body); border-color: var(--text-muted); }
-        .btn-primary { background-color: var(--yellow); color: var(--text-main); border: 1px solid var(--yellow); }
-        .btn-primary:hover { background-color: var(--text-main); color: var(--yellow); border-color: var(--text-main); }
-        
-        .user-profile-widget { position: relative; margin-left: 8px; padding-left: 16px; border-left: 1px solid var(--border-light); }
-        .avatar-btn {
-            width: 38px; height: 38px; border-radius: 50%; background-color: var(--text-main); color: var(--bg-card);
-            border: 2px solid var(--bg-card); box-shadow: 0 0 0 2px var(--border-mid); display: flex; align-items: center; justify-content: center;
-            font-size: 13px; font-weight: 800; cursor: pointer; transition: var(--transition); outline: none;
-        }
-        .user-profile-widget:hover .avatar-btn, .avatar-btn.active { box-shadow: 0 0 0 2px var(--yellow); color: var(--yellow); }
-        
-        .user-dropdown-menu {
-            position: absolute; top: calc(100% + 15px); right: 0; width: 280px; background: var(--bg-card); border: 1px solid var(--border-light);
-            border-radius: 12px; box-shadow: var(--shadow-lg); opacity: 0; visibility: hidden; transform: translateY(10px); transition: var(--transition); z-index: 2000;
-        }
-        .user-profile-widget:hover .user-dropdown-menu, .user-dropdown-menu.active { opacity: 1; visibility: visible; transform: translateY(0); }
-        
-        .user-header-info { padding: 16px; border-bottom: 1px solid var(--border-light); display: flex; align-items: center; gap: 12px; }
-        .user-header-avatar { width: 48px; height: 48px; background: var(--text-main); color: var(--yellow); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 800; }
-        .user-header-data { display: flex; flex-direction: column; }
-        .user-header-data strong { font-size: 14px; color: var(--text-main); font-weight: 800; line-height: 1.2; }
-        .user-header-data span { font-size: 11px; color: var(--text-muted); font-weight: 600; margin-top: 2px; }
-        .user-header-data .badge-kyc { display: inline-block; background: #ECFCCB; color: #B45309; padding: 2px 6px; border-radius: 4px; font-size: 9px; font-weight: 800; margin-top: 4px; width: max-content; }
+        /* Buscador Ajustado */
+        .search-component {
+            display: flex; align-items: center; background-color: var(--bg-body); border: 1px solid var(--border-light);
+            border-radius: 8px; padding: 0 12px; height: 36px; width: 200px; transition: var(--transition);
+        }
+        .search-component:focus-within { border-color: var(--border-mid); box-shadow: 0 0 0 3px rgba(229, 231, 235, 0.5); width: 240px; background-color: var(--bg-card); }
+        .search-icon { width: 14px; height: 14px; color: var(--text-muted); flex-shrink: 0; }
+        .search-component input { border: none; background: transparent; padding: 0 8px; font-size: 13px; outline: none; width: 100%; color: var(--text-main); }
+        
+        /* Controles de Transacción y Perfil */
+        .nav-transactional { display: flex; gap: 12px; align-items: center; }
+        .btn { display: inline-flex; align-items: center; justify-content: center; padding: 0 16px; height: 36px; font-size: 13px; font-weight: 700; border-radius: 8px; text-decoration: none; transition: var(--transition); gap: 8px; }
+        .btn-outline { border: 1px solid var(--border-mid); color: var(--text-main); background: var(--bg-card); }
+        .btn-outline:hover { background-color: var(--bg-body); border-color: var(--text-muted); }
+        .btn-primary { background-color: var(--yellow); color: var(--text-main); border: 1px solid var(--yellow); }
+        .btn-primary:hover { background-color: var(--text-main); color: var(--yellow); border-color: var(--text-main); }
+        
+        .user-profile-widget { position: relative; margin-left: 8px; padding-left: 16px; border-left: 1px solid var(--border-light); }
+        .avatar-btn {
+            width: 38px; height: 38px; border-radius: 50%; background-color: var(--text-main); color: var(--bg-card);
+            border: 2px solid var(--bg-card); box-shadow: 0 0 0 2px var(--border-mid); display: flex; align-items: center; justify-content: center;
+            font-size: 13px; font-weight: 800; cursor: pointer; transition: var(--transition); outline: none;
+        }
+        .user-profile-widget:hover .avatar-btn, .avatar-btn.active { box-shadow: 0 0 0 2px var(--yellow); color: var(--yellow); }
+        
+        .user-dropdown-menu {
+            position: absolute; top: calc(100% + 15px); right: 0; width: 280px; background: var(--bg-card); border: 1px solid var(--border-light);
+            border-radius: 12px; box-shadow: var(--shadow-lg); opacity: 0; visibility: hidden; transform: translateY(10px); transition: var(--transition); z-index: 2000;
+        }
+        .user-profile-widget:hover .user-dropdown-menu, .user-dropdown-menu.active { opacity: 1; visibility: visible; transform: translateY(0); }
+        
+        .user-header-info { padding: 16px; border-bottom: 1px solid var(--border-light); display: flex; align-items: center; gap: 12px; }
+        .user-header-avatar { width: 48px; height: 48px; background: var(--text-main); color: var(--yellow); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 800; }
+        .user-header-data { display: flex; flex-direction: column; }
+        .user-header-data strong { font-size: 14px; color: var(--text-main); font-weight: 800; line-height: 1.2; }
+        .user-header-data span { font-size: 11px; color: var(--text-muted); font-weight: 600; margin-top: 2px; }
+        .user-header-data .badge-kyc { display: inline-block; background: #ECFCCB; color: #B45309; padding: 2px 6px; border-radius: 4px; font-size: 9px; font-weight: 800; margin-top: 4px; width: max-content; }
 
-        .user-nav-grid { padding: 12px; display: grid; gap: 4px; }
-        .user-nav-link { display: flex; align-items: center; gap: 12px; padding: 10px 12px; border-radius: 8px; text-decoration: none; color: var(--text-main); font-size: 13px; font-weight: 600; transition: var(--transition); }
-        .user-nav-link:hover { background-color: var(--bg-body); }
-        .user-nav-link svg { width: 18px; height: 18px; color: var(--text-muted); }
-        .user-nav-link:hover svg { color: var(--black); }
-        .user-nav-link.danger-zone:hover { background-color: var(--red-alert); color: var(--red-text); }
-        .user-nav-link.danger-zone:hover svg { color: var(--red-text); }
+        .user-nav-grid { padding: 12px; display: grid; gap: 4px; }
+        .user-nav-link { display: flex; align-items: center; gap: 12px; padding: 10px 12px; border-radius: 8px; text-decoration: none; color: var(--text-main); font-size: 13px; font-weight: 600; transition: var(--transition); }
+        .user-nav-link:hover { background-color: var(--bg-body); }
+        .user-nav-link svg { width: 18px; height: 18px; color: var(--text-muted); }
+        .user-nav-link:hover svg { color: var(--black); }
+        .user-nav-link.danger-zone:hover { background-color: var(--red-alert); color: var(--red-text); }
+        .user-nav-link.danger-zone:hover svg { color: var(--red-text); }
 
-        .mobile-menu-btn { display: none; background: none; border: none; padding: 8px; z-index: 2001; cursor: pointer; }
-        .hamburger-line { width: 22px; height: 2px; background-color: var(--text-main); margin: 5px 0; transition: var(--transition); border-radius: 2px; }
+        .mobile-menu-btn { display: none; background: none; border: none; padding: 8px; z-index: 2001; cursor: pointer; }
+        .hamburger-line { width: 22px; height: 2px; background-color: var(--text-main); margin: 5px 0; transition: var(--transition); border-radius: 2px; }
 
-        /* =========================================
-           0. DASHBOARD DE IMPACTO CÍVICO (Panel Personal Superior)
-           Arquitectura 2x2 Optimizado
-           ========================================= */
-        .citizen-dashboard {
-            max-width: 1100px; margin: 24px auto 0; padding: 0 5%; width: 100%;
-        }
-        .citizen-panel {
-            background-color: var(--bg-card); border: 1px solid var(--border-light); border-left: 4px solid var(--yellow);
-            border-radius: 12px; padding: 24px; box-shadow: var(--shadow-sm); transition: var(--transition);
-            display: flex; justify-content: space-between; align-items: center; gap: 32px;
-        }
-        .citizen-panel:hover { box-shadow: var(--shadow-md); border-color: var(--border-mid); }
-        
-        .c-profile-col {
-            display: flex; flex-direction: column; gap: 16px; flex: 1;
-        }
-        .c-user-info { display: flex; align-items: center; gap: 16px; }
-        .c-avatar {
-            width: 64px; height: 64px; background-color: var(--text-main); color: var(--yellow);
-            border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 900;
-        }
-        .c-details h2 { font-size: 20px; font-weight: 800; color: var(--text-main); line-height: 1.1; margin-bottom: 4px; }
-        .c-badge { display: inline-flex; align-items: center; gap: 4px; background: #ECFCCB; color: #B45309; padding: 4px 8px; border-radius: 4px; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; }
-        
-        .c-actions { display: flex; gap: 12px; }
-        .c-btn {
-            display: inline-flex; align-items: center; justify-content: center; padding: 8px 16px; font-size: 12px; font-weight: 700;
-            border-radius: 6px; text-decoration: none; border: 1px solid var(--border-mid); color: var(--text-main); transition: var(--transition); gap: 6px;
-        }
-        .c-btn:hover { background-color: var(--bg-body); border-color: var(--text-main); }
-        .c-btn-primary { background-color: var(--text-main); color: var(--bg-card); border-color: var(--text-main); }
-        .c-btn-primary:hover { background-color: var(--yellow); color: var(--text-main); border-color: var(--yellow); }
+        /* =========================================
+           0. DASHBOARD DE IMPACTO CÍVICO (Panel Personal Superior)
+           Arquitectura 2x2 Optimizado
+           ========================================= */
+        .citizen-dashboard {
+            max-width: 1100px; margin: 24px auto 0; padding: 0 5%; width: 100%;
+        }
+        .citizen-panel {
+            background-color: var(--bg-card); border: 1px solid var(--border-light); border-left: 4px solid var(--yellow);
+            border-radius: 12px; padding: 24px; box-shadow: var(--shadow-sm); transition: var(--transition);
+            display: flex; justify-content: space-between; align-items: center; gap: 32px;
+        }
+        .citizen-panel:hover { box-shadow: var(--shadow-md); border-color: var(--border-mid); }
+        
+        .c-profile-col {
+            display: flex; flex-direction: column; gap: 16px; flex: 1;
+        }
+        .c-user-info { display: flex; align-items: center; gap: 16px; }
+        .c-avatar {
+            width: 64px; height: 64px; background-color: var(--text-main); color: var(--yellow);
+            border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 900;
+        }
+        .c-details h2 { font-size: 20px; font-weight: 800; color: var(--text-main); line-height: 1.1; margin-bottom: 4px; }
+        .c-badge { display: inline-flex; align-items: center; gap: 4px; background: #ECFCCB; color: #B45309; padding: 4px 8px; border-radius: 4px; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; }
+        
+        .c-actions { display: flex; gap: 12px; }
+        .c-btn {
+            display: inline-flex; align-items: center; justify-content: center; padding: 8px 16px; font-size: 12px; font-weight: 700;
+            border-radius: 6px; text-decoration: none; border: 1px solid var(--border-mid); color: var(--text-main); transition: var(--transition); gap: 6px;
+        }
+        .c-btn:hover { background-color: var(--bg-body); border-color: var(--text-main); }
+        .c-btn-primary { background-color: var(--text-main); color: var(--bg-card); border-color: var(--text-main); }
+        .c-btn-primary:hover { background-color: var(--yellow); color: var(--text-main); border-color: var(--yellow); }
 
-        /* Matriz de Métricas 2x2 */
-        .c-metrics-grid {
-            display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; min-width: 380px;
-        }
-        .c-metric-box {
-            background-color: var(--bg-body); border: 1px solid var(--border-light); padding: 16px; border-radius: 8px;
-            display: flex; flex-direction: column; justify-content: center;
-        }
-        .c-metric-val { font-size: 22px; font-weight: 900; color: var(--text-main); line-height: 1; margin-bottom: 4px; }
-        .c-metric-lbl { font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; line-height: 1.2; }
+        /* Matriz de Métricas 2x2 */
+        .c-metrics-grid {
+            display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; min-width: 380px;
+        }
+        .c-metric-box {
+            background-color: var(--bg-body); border: 1px solid var(--border-light); padding: 16px; border-radius: 8px;
+            display: flex; flex-direction: column; justify-content: center;
+        }
+        .c-metric-val { font-size: 22px; font-weight: 900; color: var(--text-main); line-height: 1; margin-bottom: 4px; }
+        .c-metric-lbl { font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; line-height: 1.2; }
 
-        /* =========================================
-           SECCIONES GLOBALES
-           ========================================= */
-        .content-section { max-width: 1100px; margin: 40px auto; padding: 0 5%; width: 100%; }
-        .section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; border-bottom: 1px solid var(--border-light); padding-bottom: 12px; }
-        .section-title { font-size: 20px; font-weight: 800; letter-spacing: -0.5px; color: var(--text-main); }
-        
-        .btn-link-highlight {
-            font-size: 12px; font-weight: 700; color: var(--text-main); text-decoration: none; display: inline-flex; align-items: center; gap: 6px;
-            background-color: var(--bg-body); border: 1px solid var(--border-mid); padding: 6px 14px; border-radius: 6px; transition: var(--transition);
-        }
-        .btn-link-highlight:hover { background-color: var(--text-main); color: var(--yellow); border-color: var(--text-main); }
+        /* =========================================
+           SECCIONES GLOBALES
+           ========================================= */
+        .content-section { max-width: 1100px; margin: 40px auto; padding: 0 5%; width: 100%; }
+        .section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; border-bottom: 1px solid var(--border-light); padding-bottom: 12px; }
+        .section-title { font-size: 20px; font-weight: 800; letter-spacing: -0.5px; color: var(--text-main); }
+        
+        .btn-link-highlight {
+            font-size: 12px; font-weight: 700; color: var(--text-main); text-decoration: none; display: inline-flex; align-items: center; gap: 6px;
+            background-color: var(--bg-body); border: 1px solid var(--border-mid); padding: 6px 14px; border-radius: 6px; transition: var(--transition);
+        }
+        .btn-link-highlight:hover { background-color: var(--text-main); color: var(--yellow); border-color: var(--text-main); }
 
-        /* =========================================
-           1. DASHBOARD CÍVICO GENERAL
-           ========================================= */
-        .dashboard-grid { display: grid; grid-template-columns: 3fr 2.5fr; gap: 20px; margin-bottom: 20px; }
-        
-        .finance-card { background-color: var(--text-main); border-radius: 12px; padding: 32px; box-shadow: var(--shadow-md); display: flex; flex-direction: column; justify-content: space-between; }
-        .finance-info h3 { font-size: 13px; font-weight: 600; color: #9CA3AF; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
-        .finance-amount { font-size: clamp(28px, 4vw, 42px); font-weight: 800; color: var(--bg-card); letter-spacing: -1px; white-space: nowrap; }
-        .finance-date { font-size: 12px; color: #D1D5DB; background: rgba(255,255,255,0.1); padding: 4px 8px; border-radius: 4px; display: inline-block; margin-top: 12px; }
+        /* =========================================
+           1. DASHBOARD CÍVICO GENERAL
+           ========================================= */
+        .dashboard-grid { display: grid; grid-template-columns: 3fr 2.5fr; gap: 20px; margin-bottom: 20px; }
+        
+        .finance-card { background-color: var(--text-main); border-radius: 12px; padding: 32px; box-shadow: var(--shadow-md); display: flex; flex-direction: column; justify-content: space-between; }
+        .finance-info h3 { font-size: 13px; font-weight: 600; color: #9CA3AF; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+        .finance-amount { font-size: clamp(28px, 4vw, 42px); font-weight: 800; color: var(--bg-card); letter-spacing: -1px; white-space: nowrap; }
+        .finance-date { font-size: 12px; color: #D1D5DB; background: rgba(255,255,255,0.1); padding: 4px 8px; border-radius: 4px; display: inline-block; margin-top: 12px; }
 
-        .action-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-        .action-btn { background-color: var(--bg-card); border: 1px solid var(--border-light); padding: 16px; border-radius: 12px; display: flex; flex-direction: column; align-items: flex-start; gap: 12px; text-decoration: none; color: var(--text-main); transition: var(--transition); }
-        .action-btn:hover { border-color: var(--border-mid); box-shadow: var(--shadow-sm); transform: translateY(-2px); }
-        .action-icon { width: 36px; height: 36px; background-color: var(--yellow); color: var(--text-main); display: flex; align-items: center; justify-content: center; border-radius: 8px; flex-shrink: 0; }
-        .action-content { width: 100%; min-width: 0; }
-        .action-content h4 { font-size: 13px; font-weight: 700; margin-bottom: 4px; line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .action-content p { font-size: 11px; color: var(--text-muted); line-height: 1.3; }
+        .action-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .action-btn { background-color: var(--bg-card); border: 1px solid var(--border-light); padding: 16px; border-radius: 12px; display: flex; flex-direction: column; align-items: flex-start; gap: 12px; text-decoration: none; color: var(--text-main); transition: var(--transition); }
+        .action-btn:hover { border-color: var(--border-mid); box-shadow: var(--shadow-sm); transform: translateY(-2px); }
+        .action-icon { width: 36px; height: 36px; background-color: var(--yellow); color: var(--text-main); display: flex; align-items: center; justify-content: center; border-radius: 8px; flex-shrink: 0; }
+        .action-content { width: 100%; min-width: 0; }
+        .action-content h4 { font-size: 13px; font-weight: 700; margin-bottom: 4px; line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .action-content p { font-size: 11px; color: var(--text-muted); line-height: 1.3; }
 
-        /* =========================================
-           2. MÓDULOS DE TRANSPARENCIA Y CONTROL
-           ========================================= */
-        .civic-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 40px; }
-        .civic-card { background-color: var(--bg-card); border: 1px solid var(--border-light); border-radius: 12px; padding: 24px; display: flex; flex-direction: column; justify-content: space-between; }
-        .civic-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
-        .civic-header h4 { font-size: 15px; font-weight: 700; }
-        .badge-live { background-color: var(--red-alert); color: var(--red-text); padding: 4px 8px; border-radius: 4px; font-size: 11px; font-weight: 800; display: inline-flex; align-items: center; gap: 4px; }
-        .dot { width: 6px; height: 6px; background-color: var(--red-text); border-radius: 50%; }
+        /* =========================================
+           2. MÓDULOS DE TRANSPARENCIA Y CONTROL
+           ========================================= */
+        .civic-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 40px; }
+        .civic-card { background-color: var(--bg-card); border: 1px solid var(--border-light); border-radius: 12px; padding: 24px; display: flex; flex-direction: column; justify-content: space-between; }
+        .civic-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .civic-header h4 { font-size: 15px; font-weight: 700; }
+        .badge-live { background-color: var(--red-alert); color: var(--red-text); padding: 4px 8px; border-radius: 4px; font-size: 11px; font-weight: 800; display: inline-flex; align-items: center; gap: 4px; }
+        .dot { width: 6px; height: 6px; background-color: var(--red-text); border-radius: 50%; }
 
-        .progress-container { margin-top: 12px; }
-        .progress-labels { display: flex; justify-content: space-between; font-size: 12px; font-weight: 600; margin-bottom: 8px; }
-        .progress-bar-bg { height: 12px; background-color: var(--border-light); border-radius: 6px; overflow: hidden; display: flex; margin-bottom: 16px; }
-        .progress-fill-1 { width: 68%; background-color: var(--text-main); }
-        .progress-fill-2 { width: 32%; background-color: var(--yellow); }
+        .progress-container { margin-top: 12px; }
+        .progress-labels { display: flex; justify-content: space-between; font-size: 12px; font-weight: 600; margin-bottom: 8px; }
+        .progress-bar-bg { height: 12px; background-color: var(--border-light); border-radius: 6px; overflow: hidden; display: flex; margin-bottom: 16px; }
+        .progress-fill-1 { width: 68%; background-color: var(--text-main); }
+        .progress-fill-2 { width: 32%; background-color: var(--yellow); }
 
-        .gps-item { display: flex; align-items: center; gap: 12px; padding: 12px; background: var(--bg-body); border-radius: 8px; border: 1px solid var(--border-light); }
-        .gps-icon { color: var(--text-main); flex-shrink: 0; }
-        .gps-info h5 { font-size: 13px; font-weight: 700; }
-        .gps-info p { font-size: 11px; color: var(--text-muted); }
+        .gps-item { display: flex; align-items: center; gap: 12px; padding: 12px; background: var(--bg-body); border-radius: 8px; border: 1px solid var(--border-light); }
+        .gps-icon { color: var(--text-main); flex-shrink: 0; }
+        .gps-info h5 { font-size: 13px; font-weight: 700; }
+        .gps-info p { font-size: 11px; color: var(--text-muted); }
 
-        /* =========================================
-           3. AUDITORÍA LEGISLATIVA (Concejales)
-           ========================================= */
-        .council-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
-        .council-card { background-color: var(--bg-card); border: 1px solid var(--border-light); border-radius: 12px; padding: 20px; transition: var(--transition); display: flex; flex-direction: column; }
-        .council-card:hover { box-shadow: var(--shadow-md); border-color: var(--border-mid); transform: translateY(-2px); }
-        .council-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
-        .council-avatar { width: 44px; height: 44px; background-color: var(--bg-body); border: 1px solid var(--border-light); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; color: var(--text-main); flex-shrink: 0; }
-        .council-info h4 { font-size: 14px; font-weight: 700; color: var(--text-main); margin-bottom: 2px; }
-        .council-info p { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
-        .council-stats { display: flex; gap: 16px; margin-bottom: 16px; padding: 12px 0; border-top: 1px solid var(--border-light); border-bottom: 1px solid var(--border-light); }
-        .stat { display: flex; flex-direction: column; gap: 2px; flex: 1; }
-        .stat-val { font-size: 16px; font-weight: 800; color: var(--text-main); }
-        .stat-lbl { font-size: 10px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; }
+        /* =========================================
+           3. AUDITORÍA LEGISLATIVA (Concejales)
+           ========================================= */
+        .council-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+        .council-card { background-color: var(--bg-card); border: 1px solid var(--border-light); border-radius: 12px; padding: 20px; transition: var(--transition); display: flex; flex-direction: column; }
+        .council-card:hover { box-shadow: var(--shadow-md); border-color: var(--border-mid); transform: translateY(-2px); }
+        .council-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+        .council-avatar { width: 44px; height: 44px; background-color: var(--bg-body); border: 1px solid var(--border-light); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; color: var(--text-main); flex-shrink: 0; }
+        .council-info h4 { font-size: 14px; font-weight: 700; color: var(--text-main); margin-bottom: 2px; }
+        .council-info p { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+        .council-stats { display: flex; gap: 16px; margin-bottom: 16px; padding: 12px 0; border-top: 1px solid var(--border-light); border-bottom: 1px solid var(--border-light); }
+        .stat { display: flex; flex-direction: column; gap: 2px; flex: 1; }
+        .stat-val { font-size: 16px; font-weight: 800; color: var(--text-main); }
+        .stat-lbl { font-size: 10px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; }
 
-        /* =========================================
-           4. EXPEDIENTES (List Cards)
-           ========================================= */
-        .project-list { display: flex; flex-direction: column; gap: 16px; }
-        .card-row {
-            background-color: var(--bg-card); border: 1px solid var(--border-light); border-radius: 12px; padding: 20px 24px;
-            display: flex; justify-content: space-between; align-items: flex-start; transition: var(--transition); gap: 24px; position: relative; overflow: hidden;
-        }
-        .card-row::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background-color: transparent; transition: var(--transition); }
-        .card-row:hover { box-shadow: var(--shadow-md); border-color: var(--border-mid); }
-        .card-row:hover::before { background-color: var(--text-muted); }
-        .card-row.active-row::before { background-color: var(--yellow); }
+        /* =========================================
+           4. EXPEDIENTES (List Cards)
+           ========================================= */
+        .project-list { display: flex; flex-direction: column; gap: 16px; }
+        .card-row {
+            background-color: var(--bg-card); border: 1px solid var(--border-light); border-radius: 12px; padding: 20px 24px;
+            display: flex; justify-content: space-between; align-items: flex-start; transition: var(--transition); gap: 24px; position: relative; overflow: hidden;
+        }
+        .card-row::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background-color: transparent; transition: var(--transition); }
+        .card-row:hover { box-shadow: var(--shadow-md); border-color: var(--border-mid); }
+        .card-row:hover::before { background-color: var(--text-muted); }
+        .card-row.active-row::before { background-color: var(--yellow); }
 
-        .card-main { display: flex; flex-direction: column; gap: 6px; flex: 1; }
-        .card-title { font-size: 15px; font-weight: 700; color: var(--text-main); }
-        .card-details { font-size: 12px; color: var(--text-muted); display: flex; gap: 16px; flex-wrap: wrap; }
-        .card-details span strong { color: var(--text-main); font-weight: 600; }
+        .card-main { display: flex; flex-direction: column; gap: 6px; flex: 1; }
+        .card-title { font-size: 15px; font-weight: 700; color: var(--text-main); }
+        .card-details { font-size: 12px; color: var(--text-muted); display: flex; gap: 16px; flex-wrap: wrap; }
+        .card-details span strong { color: var(--text-main); font-weight: 600; }
 
-        .card-actions { display: flex; gap: 12px; margin-top: 10px; flex-wrap: wrap; }
-        .btn-card { padding: 8px 14px; font-size: 11px; font-weight: 600; border-radius: 6px; display: inline-flex; align-items: center; gap: 6px; text-decoration: none; transition: var(--transition); }
-        .btn-card-primary { background-color: var(--bg-body); color: var(--text-main); border: 1px solid var(--border-mid); }
-        .btn-card-primary:hover { background-color: var(--border-light); }
-        .btn-card-secondary { background-color: transparent; color: var(--text-main); border: 1px solid var(--border-mid); }
-        .btn-card-secondary:hover { background-color: var(--text-main); color: var(--yellow); border-color: var(--text-main); }
+        .card-actions { display: flex; gap: 12px; margin-top: 10px; flex-wrap: wrap; }
+        .btn-card { padding: 8px 14px; font-size: 11px; font-weight: 600; border-radius: 6px; display: inline-flex; align-items: center; gap: 6px; text-decoration: none; transition: var(--transition); }
+        .btn-card-primary { background-color: var(--bg-body); color: var(--text-main); border: 1px solid var(--border-mid); }
+        .btn-card-primary:hover { background-color: var(--border-light); }
+        .btn-card-secondary { background-color: transparent; color: var(--text-main); border: 1px solid var(--border-mid); }
+        .btn-card-secondary:hover { background-color: var(--text-main); color: var(--yellow); border-color: var(--text-main); }
 
-        .card-aside { display: flex; flex-direction: column; align-items: flex-end; gap: 10px; min-width: 160px; }
-        .status-badge { padding: 6px 12px; font-size: 11px; font-weight: 600; border-radius: 6px; display: inline-flex; align-items: center; gap: 6px; }
-        .status-mesa { background: var(--bg-body); color: var(--text-muted); border: 1px solid var(--border-mid); }
-        .status-votando { background: #FEF3C7; color: #B45309; border: 1px solid #FDE68A; }
-        .status-aprobado { background: var(--text-main); color: var(--bg-card); }
+        .card-aside { display: flex; flex-direction: column; align-items: flex-end; gap: 10px; min-width: 160px; }
+        .status-badge { padding: 6px 12px; font-size: 11px; font-weight: 600; border-radius: 6px; display: inline-flex; align-items: center; gap: 6px; }
+        .status-mesa { background: var(--bg-body); color: var(--text-muted); border: 1px solid var(--border-mid); }
+        .status-votando { background: #FEF3C7; color: #B45309; border: 1px solid #FDE68A; }
+        .status-aprobado { background: var(--text-main); color: var(--bg-card); }
 
-        .voting-tally { display: flex; width: 100%; justify-content: space-between; font-size: 11px; font-weight: 600; background-color: var(--bg-body); padding: 6px 10px; border: 1px solid var(--border-light); border-radius: 6px; }
-        .vote-favor { color: var(--text-main); }
-        .vote-contra { color: var(--text-muted); }
+        .voting-tally { display: flex; width: 100%; justify-content: space-between; font-size: 11px; font-weight: 600; background-color: var(--bg-body); padding: 6px 10px; border: 1px solid var(--border-light); border-radius: 6px; }
+        .vote-favor { color: var(--text-main); }
+        .vote-contra { color: var(--text-muted); }
 
-        /* =========================================
-           5. REPORTES DE OBRAS (Noticias)
-           ========================================= */
-        .news-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
-        .news-card { background-color: var(--bg-card); border: 1px solid var(--border-light); border-radius: 12px; overflow: hidden; transition: var(--transition); display: flex; flex-direction: column; }
-        .news-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-4px); border-color: var(--border-mid); }
-        .news-img { height: 160px; background-color: var(--border-light); display: flex; align-items: center; justify-content: center; color: var(--text-muted); font-size: 13px; font-weight: 600; }
-        .news-content { padding: 20px; display: flex; flex-direction: column; flex: 1; }
-        .news-badge { display: inline-block; align-self: flex-start; background-color: var(--bg-body); color: var(--text-muted); padding: 4px 8px; font-size: 10px; font-weight: 700; border-radius: 4px; margin-bottom: 12px; text-transform: uppercase; }
-        .news-content h4 { font-size: 15px; font-weight: 700; margin-bottom: 8px; color: var(--text-main); line-height: 1.4; }
-        .news-content p { font-size: 12px; color: var(--text-muted); margin-bottom: 16px; line-height: 1.5; flex: 1; }
-        .news-link { font-size: 12px; font-weight: 600; color: var(--text-main); text-decoration: none; display: flex; align-items: center; gap: 4px; }
-        .news-link:hover { color: var(--yellow-hover); }
+        /* =========================================
+           5. REPORTES DE OBRAS (Noticias)
+           ========================================= */
+        .news-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .news-card { background-color: var(--bg-card); border: 1px solid var(--border-light); border-radius: 12px; overflow: hidden; transition: var(--transition); display: flex; flex-direction: column; }
+        .news-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-4px); border-color: var(--border-mid); }
+        .news-img { height: 160px; background-color: var(--border-light); display: flex; align-items: center; justify-content: center; color: var(--text-muted); font-size: 13px; font-weight: 600; }
+        .news-content { padding: 20px; display: flex; flex-direction: column; flex: 1; }
+        .news-badge { display: inline-block; align-self: flex-start; background-color: var(--bg-body); color: var(--text-muted); padding: 4px 8px; font-size: 10px; font-weight: 700; border-radius: 4px; margin-bottom: 12px; text-transform: uppercase; }
+        .news-content h4 { font-size: 15px; font-weight: 700; margin-bottom: 8px; color: var(--text-main); line-height: 1.4; }
+        .news-content p { font-size: 12px; color: var(--text-muted); margin-bottom: 16px; line-height: 1.5; flex: 1; }
+        .news-link { font-size: 12px; font-weight: 600; color: var(--text-main); text-decoration: none; display: flex; align-items: center; gap: 4px; }
+        .news-link:hover { color: var(--yellow-hover); }
 
-        /* =========================================
-           BREAKPOINT MÓVIL Y ACTION SHEET (PERFIL)
-           ========================================= */
-        .mobile-bottom-bar { display: none; }
-        
-        .mobile-profile-sheet {
-            position: fixed; bottom: -100%; left: 0; width: 100%; background: var(--bg-card); border-radius: 20px 20px 0 0;
-            box-shadow: 0 -10px 25px rgba(0,0,0,0.1); z-index: 2100; transition: bottom 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            padding: 24px 0 80px 0; max-height: 85vh; overflow-y: auto;
-        }
-        .mobile-profile-sheet.active { bottom: 0; }
-        .sheet-handle { width: 40px; height: 4px; background: var(--border-mid); border-radius: 2px; margin: 0 auto 16px; }
-        .sheet-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 2050; opacity: 0; visibility: hidden; transition: var(--transition); }
-        .sheet-overlay.active { opacity: 1; visibility: visible; }
+        /* =========================================
+           BREAKPOINT MÓVIL Y ACTION SHEET (PERFIL)
+           ========================================= */
+        .mobile-bottom-bar { display: none; }
+        
+        .mobile-profile-sheet {
+            position: fixed; bottom: -100%; left: 0; width: 100%; background: var(--bg-card); border-radius: 20px 20px 0 0;
+            box-shadow: 0 -10px 25px rgba(0,0,0,0.1); z-index: 2100; transition: bottom 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            padding: 24px 0 80px 0; max-height: 85vh; overflow-y: auto;
+        }
+        .mobile-profile-sheet.active { bottom: 0; }
+        .sheet-handle { width: 40px; height: 4px; background: var(--border-mid); border-radius: 2px; margin: 0 auto 16px; }
+        .sheet-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 2050; opacity: 0; visibility: hidden; transition: var(--transition); }
+        .sheet-overlay.active { opacity: 1; visibility: visible; }
 
-        @media (max-width: 1024px) {
-            body { padding-bottom: 70px; }
-            .main-navbar { height: 70px; padding: 0 4%; }
-            .mobile-menu-btn { display: block; }
-            .menu-open .hamburger-line:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-            .menu-open .hamburger-line:nth-child(2) { opacity: 0; }
-            .menu-open .hamburger-line:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+        @media (max-width: 1024px) {
+            body { padding-bottom: 70px; }
+            .main-navbar { height: 70px; padding: 0 4%; }
+            .mobile-menu-btn { display: block; }
+            .menu-open .hamburger-line:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+            .menu-open .hamburger-line:nth-child(2) { opacity: 0; }
+            .menu-open .hamburger-line:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-            .nav-wrapper {
-                position: fixed; top: 0; right: -100%; width: 100%; max-width: 350px;
-                height: 100dvh; background-color: var(--bg-card); flex-direction: column; justify-content: flex-start; padding: 90px 24px 40px; 
-                box-shadow: -4px 0 24px rgba(0,0,0,0.1); transition: var(--transition); overflow-y: auto; z-index: 2000;
-            }
-            .nav-wrapper.active { right: 0; }
-            .nav-links { flex-direction: column; width: 100%; gap: 0; margin-bottom: 24px; align-items: flex-start; }
-            
-            .nav-links > a, .nav-item-dropdown > a { padding: 16px 0; font-size: 16px; border-bottom: 1px solid var(--border-light); width: 100%; justify-content: space-between; }
-            .nav-links > a::after { display: none; }
-            
-            .nav-item-dropdown { width: 100%; }
-            .dropdown-menu {
-                position: relative; top: 0; left: 0; transform: none; width: 100%; box-shadow: none; border: none; border-bottom: 1px solid var(--border-light);
-                border-radius: 0; opacity: 1; visibility: visible; pointer-events: auto; padding: 8px 0 16px 16px; display: none;
-            }
-            .dropdown-menu::before { display: none; }
-            .nav-item-dropdown.mobile-open .dropdown-menu { display: flex; }
+            .nav-wrapper {
+                position: fixed; top: 0; right: -100%; width: 100%; max-width: 350px;
+                height: 100dvh; background-color: var(--bg-card); flex-direction: column; justify-content: flex-start; padding: 90px 24px 40px; 
+                box-shadow: -4px 0 24px rgba(0,0,0,0.1); transition: var(--transition); overflow-y: auto; z-index: 2000;
+            }
+            .nav-wrapper.active { right: 0; }
+            .nav-links { flex-direction: column; width: 100%; gap: 0; margin-bottom: 24px; align-items: flex-start; }
+            
+            .nav-links > a, .nav-item-dropdown > a { padding: 16px 0; font-size: 16px; border-bottom: 1px solid var(--border-light); width: 100%; justify-content: space-between; }
+            .nav-links > a::after { display: none; }
+            
+            .nav-item-dropdown { width: 100%; }
+            .dropdown-menu {
+                position: relative; top: 0; left: 0; transform: none; width: 100%; box-shadow: none; border: none; border-bottom: 1px solid var(--border-light);
+                border-radius: 0; opacity: 1; visibility: visible; pointer-events: auto; padding: 8px 0 16px 16px; display: none;
+            }
+            .dropdown-menu::before { display: none; }
+            .nav-item-dropdown.mobile-open .dropdown-menu { display: flex; }
 
-            .search-component, .search-component:focus-within { width: 100%; height: 48px; margin-bottom: 24px; }
-            .nav-transactional { flex-direction: column; width: 100%; gap: 12px; }
-            .btn { width: 100%; height: 48px; }
-            
-            .user-profile-widget { display: none; }
+            .search-component, .search-component:focus-within { width: 100%; height: 48px; margin-bottom: 24px; }
+            .nav-transactional { flex-direction: column; width: 100%; gap: 12px; }
+            .btn { width: 100%; height: 48px; }
+            
+            .user-profile-widget { display: none; }
 
-            .mobile-bottom-bar {
-                display: flex; position: fixed; bottom: 0; left: 0; width: 100%; height: 64px; background-color: var(--bg-card); border-top: 1px solid var(--border-light); z-index: 1500;
-            }
-            .mobile-bottom-bar button, .mobile-bottom-bar a { flex: 1; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; text-decoration: none; gap: 4px; flex-direction: column; padding: 8px 0; color: var(--text-muted); background: none; border: none; outline: none; font-family: inherit; cursor: pointer; }
-            .mobile-bottom-bar button:active, .mobile-bottom-bar a:active { color: var(--text-main); }
-            .mobile-bottom-bar .bottom-japaga { border-right: 1px solid var(--border-light); }
-            .mobile-bottom-bar .bottom-jadonata { color: var(--text-main); border-right: 1px solid var(--border-light); }
-            .mobile-bottom-bar svg { width: 20px; height: 20px; }
+            .mobile-bottom-bar {
+                display: flex; position: fixed; bottom: 0; left: 0; width: 100%; height: 64px; background-color: var(--bg-card); border-top: 1px solid var(--border-light); z-index: 1500;
+            }
+            .mobile-bottom-bar button, .mobile-bottom-bar a { flex: 1; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; text-decoration: none; gap: 4px; flex-direction: column; padding: 8px 0; color: var(--text-muted); background: none; border: none; outline: none; font-family: inherit; cursor: pointer; }
+            .mobile-bottom-bar button:active, .mobile-bottom-bar a:active { color: var(--text-main); }
+            .mobile-bottom-bar .bottom-japaga { border-right: 1px solid var(--border-light); }
+            .mobile-bottom-bar .bottom-jadonata { color: var(--text-main); border-right: 1px solid var(--border-light); }
+            .mobile-bottom-bar svg { width: 20px; height: 20px; }
 
-            .dashboard-grid, .civic-grid, .action-cards { grid-template-columns: 1fr; }
-            .finance-card { padding: 24px; }
-            .action-btn { flex-direction: row; align-items: center; padding: 16px; }
-            
-            .card-row { flex-direction: column; padding: 20px; gap: 16px; border-left: none; border-top: 4px solid transparent; }
-            .card-row:hover::before, .card-row.active-row::before { display: none; }
-            .card-row.active-row { border-top-color: var(--yellow); }
-            .card-details { flex-direction: column; gap: 4px; }
-            .card-actions { width: 100%; flex-direction: column; }
-            .btn-card { width: 100%; justify-content: center; padding: 12px; }
-            
-            .card-aside { order: -1; width: 100%; flex-direction: row; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-light); padding-bottom: 12px; margin-bottom: 4px; gap: 12px; }
-            .voting-tally { width: auto; flex: 1; justify-content: space-around; }
-        }
+            .dashboard-grid, .civic-grid, .action-cards { grid-template-columns: 1fr; }
+            .finance-card { padding: 24px; }
+            .action-btn { flex-direction: row; align-items: center; padding: 16px; }
+            
+            .card-row { flex-direction: column; padding: 20px; gap: 16px; border-left: none; border-top: 4px solid transparent; }
+            .card-row:hover::before, .card-row.active-row::before { display: none; }
+            .card-row.active-row { border-top-color: var(--yellow); }
+            .card-details { flex-direction: column; gap: 4px; }
+            .card-actions { width: 100%; flex-direction: column; }
+            .btn-card { width: 100%; justify-content: center; padding: 12px; }
+            
+            .card-aside { order: -1; width: 100%; flex-direction: row; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-light); padding-bottom: 12px; margin-bottom: 4px; gap: 12px; }
+            .voting-tally { width: auto; flex: 1; justify-content: space-around; }
+        }
 
-        /* Responsive Específico para el Panel Ciudadano (Grilla 2x2 en móvil) */
-        @media (max-width: 768px) {
-            .citizen-panel { flex-direction: column; align-items: flex-start; gap: 24px; padding: 20px; }
-            .c-profile-col { width: 100%; }
-            .c-metrics-grid { width: 100%; min-width: 100%; }
-            .c-actions { flex-wrap: wrap; }
-            .c-btn { flex: 1; justify-content: center; text-align: center; }
-        }
-    </style>
+        /* Responsive Específico para el Panel Ciudadano (Grilla 2x2 en móvil) */
+        @media (max-width: 768px) {
+            .citizen-panel { flex-direction: column; align-items: flex-start; gap: 24px; padding: 20px; }
+            .c-profile-col { width: 100%; }
+            .c-metrics-grid { width: 100%; min-width: 100%; }
+            .c-actions { flex-wrap: wrap; }
+            .c-btn { flex: 1; justify-content: center; text-align: center; }
+        }
+    </style>
 </head>
 <body>
 
-    <!-- CABECERA PRINCIPAL -->
-    <header class="main-navbar">
-        <a href="#" class="brand-container">
-            <div class="brand-logo-svg"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2v20M4 12h8M12 2l8 10-8 10"/></svg></div>
-            <div class="brand-text">
-                <span class="brand-title">KATUETE</span>
-                <span class="brand-subtitle">Gestión Pública</span>
-            </div>
-        </a>
-        <button class="mobile-menu-btn" id="mobile-toggle">
-            <div class="hamburger-line"></div><div class="hamburger-line"></div><div class="hamburger-line"></div>
-        </button>
-        <div class="nav-wrapper" id="nav-wrapper">
-            <nav class="nav-links">
-                <a href="autoridades/index.html">Autoridades</a>
-                
-                <!-- COMPONENTE DESPLEGABLE: TRANSPARENCIA -->
-                <div class="nav-item-dropdown" id="transparencyDropdown">
-                    <a href="#">Transparencia <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></a>
-                    <div class="dropdown-menu">
-                        <a href="#" class="dropdown-item">
-                            <div class="dropdown-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg></div>
-                            <div class="dropdown-text">
-                                <strong>Presupuesto y Ejecución</strong>
-                                <span>Fonacide, Royalties y Rendición de Cuentas.</span>
-                            </div>
-                        </a>
-                        <a href="#" class="dropdown-item">
-                            <div class="dropdown-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg></div>
-                            <div class="dropdown-text">
-                                <strong>Nómina y Salarios</strong>
-                                <span>Sueldos y viáticos (Ley 5189/14).</span>
-                            </div>
-                        </a>
-                        <a href="#" class="dropdown-item">
-                            <div class="dropdown-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg></div>
-                            <div class="dropdown-text">
-                                <strong>Licitaciones y Contratos</strong>
-                                <span>Adjudicaciones y pliegos de bases.</span>
-                            </div>
-                        </a>
-                        <a href="#" class="dropdown-item">
-                            <div class="dropdown-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></div>
-                            <div class="dropdown-text">
-                                <strong>Acceso a la Información</strong>
-                                <span>Portal oficial de solicitudes (Ley 5282/14).</span>
-                            </div>
-                        </a>
-                    </div>
-                </div>
+    <!-- CABECERA PRINCIPAL -->
+    <header class="main-navbar">
+        <a href="#" class="brand-container">
+            <div class="brand-logo-svg"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2v20M4 12h8M12 2l8 10-8 10"/></svg></div>
+            <div class="brand-text">
+                <span class="brand-title">KATUETE</span>
+                <span class="brand-subtitle">Gestión Pública</span>
+            </div>
+        </a>
+        <button class="mobile-menu-btn" id="mobile-toggle">
+            <div class="hamburger-line"></div><div class="hamburger-line"></div><div class="hamburger-line"></div>
+        </button>
+        <div class="nav-wrapper" id="nav-wrapper">
+            <nav class="nav-links">
+                <a href="autoridades/index.html">Autoridades</a>
+                
+                <!-- COMPONENTE DESPLEGABLE: TRANSPARENCIA -->
+                <div class="nav-item-dropdown" id="transparencyDropdown">
+                    <a href="#">Transparencia <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></a>
+                    <div class="dropdown-menu">
+                        <a href="#" class="dropdown-item">
+                            <div class="dropdown-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg></div>
+                            <div class="dropdown-text">
+                                <strong>Presupuesto y Ejecución</strong>
+                                <span>Fonacide, Royalties y Rendición de Cuentas.</span>
+                            </div>
+                        </a>
+                        <a href="#" class="dropdown-item">
+                            <div class="dropdown-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg></div>
+                            <div class="dropdown-text">
+                                <strong>Nómina y Salarios</strong>
+                                <span>Sueldos y viáticos (Ley 5189/14).</span>
+                            </div>
+                        </a>
+                        <a href="#" class="dropdown-item">
+                            <div class="dropdown-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg></div>
+                            <div class="dropdown-text">
+                                <strong>Licitaciones y Contratos</strong>
+                                <span>Adjudicaciones y pliegos de bases.</span>
+                            </div>
+                        </a>
+                        <a href="#" class="dropdown-item">
+                            <div class="dropdown-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></div>
+                            <div class="dropdown-text">
+                                <strong>Acceso a la Información</strong>
+                                <span>Portal oficial de solicitudes (Ley 5282/14).</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
 
-                <a href="#">Recaudaciones</a>
-                <a href="#" class="active">Proyectos</a>
-            </nav>
-            <div class="search-component">
-                <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                <input type="text" placeholder="Buscar expediente...">
-            </div>
-            <div class="nav-transactional">
-                <a href="#" class="btn btn-outline">Japaga</a>
-                <a href="#" class="btn btn-primary">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-                    JADONATA
-                </a>
-            </div>
+                <a href="#">Recaudaciones</a>
+                <a href="#" class="active">Proyectos</a>
+            </nav>
+            <div class="search-component">
+                <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                <input type="text" placeholder="Buscar expediente...">
+            </div>
+            <div class="nav-transactional">
+                <a href="#" class="btn btn-outline">Japaga</a>
+                <a href="#" class="btn btn-primary">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                    JADONATA
+                </a>
+            </div>
 
-            <!-- COMPONENTE: ÁREA PRIVADA (Desktop Dropdown) -->
-            <div class="user-profile-widget" id="userProfileDesktop">
-                <button class="avatar-btn">VA</button>
-                <div class="user-dropdown-menu">
-                    <div class="user-header-info">
-                        <div class="user-header-avatar">VA</div>
-                        <div class="user-header-data">
-                            <strong>Daniel Franco</strong>
-                            <span>C.I. Registrada</span>
-                            <span class="badge-kyc">Identidad Validada</span>
-                        </div>
-                    </div>
-                    <div class="user-nav-grid">
-                        <a href="#" class="user-nav-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg> Mi Perfil</a>
-                        <a href="#" class="user-nav-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg> Mis Proyectos</a>
-                        <a href="#" class="user-nav-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> Explorar Proyectos</a>
-                        <a href="#" class="user-nav-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg> Centro de Votación</a>
-                        <a href="#" class="user-nav-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg> Portal de Becas</a>
-                        <a href="#" class="user-nav-link danger-zone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg> Denunciar Corrupción</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
+            <!-- COMPONENTE: ÁREA PRIVADA (Desktop Dropdown) -->
+            <div class="user-profile-widget" id="userProfileDesktop">
+                <button class="avatar-btn">VA</button>
+                <div class="user-dropdown-menu">
+                    <div class="user-header-info">
+                        <div class="user-header-avatar">VA</div>
+                        <div class="user-header-data">
+                            <strong>Daniel Franco</strong>
+                            <span>C.I. Registrada</span>
+                            <span class="badge-kyc">Identidad Validada</span>
+                        </div>
+                    </div>
+                    <div class="user-nav-grid">
+                        <a href="#" class="user-nav-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg> Mi Perfil</a>
+                        <a href="#" class="user-nav-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg> Mis Proyectos</a>
+                        <a href="#" class="user-nav-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> Explorar Proyectos</a>
+                        <a href="#" class="user-nav-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg> Centro de Votación</a>
+                        <a href="#" class="user-nav-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg> Portal de Becas</a>
+                        <a href="#" class="user-nav-link danger-zone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg> Denunciar Corrupción</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
 
-    <!-- 0. DASHBOARD DE IMPACTO CÍVICO (Panel Personal Superior Grilla 2x2) -->
-    <div class="citizen-dashboard">
-        <div class="citizen-panel">
-            <div class="c-profile-col">
-                <div class="c-user-info">
-                    <div class="c-avatar">VA</div>
-                    <div class="c-details">
-                        <h2>Daniel Franco</h2>
-                        <span class="c-badge">
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                            Identidad Validada (C.I.)
-                        </span>
-                    </div>
-                </div>
-                <div class="c-actions">
-                    <a href="#" class="c-btn c-btn-primary">Ver mis Proyectos</a>
-                    <a href="#" class="c-btn">Ver mi perfil</a>
-                </div>
-            </div>
-            
-            <div class="c-metrics-grid">
-                <div class="c-metric-box">
-                    <span class="c-metric-val">3</span>
-                    <span class="c-metric-lbl">Proyectos Presentados</span>
-                </div>
-                <div class="c-metric-box">
-                    <span class="c-metric-val">1</span>
-                    <span class="c-metric-lbl">Proyectos Tratados</span>
-                </div>
-                <div class="c-metric-box">
-                    <span class="c-metric-val">14</span>
-                    <span class="c-metric-lbl">Votos Emitidos</span>
-                </div>
-                <div class="c-metric-box">
-                    <span class="c-metric-val">5</span>
-                    <span class="c-metric-lbl">Reclamos Activos</span>
-                </div>
-            </div>
-        </div>
-    </div>
+    <!-- 0. DASHBOARD DE IMPACTO CÍVICO (Panel Personal Superior Grilla 2x2) -->
+    <div class="citizen-dashboard">
+        <div class="citizen-panel">
+            <div class="c-profile-col">
+                <div class="c-user-info">
+                    <div class="c-avatar">VA</div>
+                    <div class="c-details">
+                        <h2>Daniel Franco</h2>
+                        <span class="c-badge">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                            Identidad Validada (C.I.)
+                        </span>
+                    </div>
+                </div>
+                <div class="c-actions">
+                    <a href="#" class="c-btn c-btn-primary">Ver mis Proyectos</a>
+                    <a href="#" class="c-btn">Ver mi perfil</a>
+                </div>
+            </div>
+            
+            <div class="c-metrics-grid">
+                <div class="c-metric-box">
+                    <span class="c-metric-val">3</span>
+                    <span class="c-metric-lbl">Proyectos Presentados</span>
+                </div>
+                <div class="c-metric-box">
+                    <span class="c-metric-val">1</span>
+                    <span class="c-metric-lbl">Proyectos Tratados</span>
+                </div>
+                <div class="c-metric-box">
+                    <span class="c-metric-val">14</span>
+                    <span class="c-metric-lbl">Votos Emitidos</span>
+                </div>
+                <div class="c-metric-box">
+                    <span class="c-metric-val">5</span>
+                    <span class="c-metric-lbl">Reclamos Activos</span>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <!-- 1. DASHBOARD CÍVICO -->
-    <section class="content-section">
-        <div class="dashboard-grid">
-            <div class="finance-card">
-                <div class="finance-info">
-                    <h3>Recaudación Municipal</h3>
-                    <div class="finance-amount">₲ 20.450.000.000</div>
-                    <div class="finance-date">Actualizado al 08 de Agosto de 2026</div>
-                </div>
-            </div>
+    <!-- 1. DASHBOARD CÍVICO -->
+    <section class="content-section">
+        <div class="dashboard-grid">
+            <div class="finance-card">
+                <div class="finance-info">
+                    <h3>Recaudación Municipal</h3>
+                    <div class="finance-amount">₲ 20.450.000.000</div>
+                    <div class="finance-date">Actualizado al 08 de Agosto de 2026</div>
+                </div>
+            </div>
 
-            <!-- Matriz de Acción Ciudadana -->
-            <div class="action-cards">
-                <a href="#" class="action-btn">
-                    <div class="action-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></div>
-                    <div class="action-content">
-                        <h4>Crear Proyecto</h4>
-                        <p>Radicar propuesta</p>
-                    </div>
-                </a>
-                <a href="#" class="action-btn">
-                    <div class="action-icon" style="background: var(--bg-body); border: 1px solid var(--border-mid);"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg></div>
-                    <div class="action-content">
-                        <h4>Inscripción a Becas</h4>
-                        <p>Inscripción abierta</p>
-                    </div>
-                </a>
-                <a href="#" class="action-btn">
-                    <div class="action-icon" style="background: var(--bg-body); border: 1px solid var(--border-mid);"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11l18-5v12L3 14v-3z"></path><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"></path></svg></div>
-                    <div class="action-content">
-                        <h4>Hacer Reclamo</h4>
-                        <p>Baches, iluminación</p>
-                    </div>
-                </a>
-                <a href="#" class="action-btn">
-                    <div class="action-icon" style="background: var(--red-alert); color: var(--red-text); border: 1px solid #FECACA;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></div>
-                    <div class="action-content">
-                        <h4>Denunciar Corrupción</h4>
-                        <p>Canal confidencial</p>
-                    </div>
-                </a>
-            </div>
-        </div>
+            <!-- Matriz de Acción Ciudadana -->
+            <div class="action-cards">
+                <a href="#" class="action-btn">
+                    <div class="action-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></div>
+                    <div class="action-content">
+                        <h4>Crear Proyecto</h4>
+                        <p>Radicar propuesta</p>
+                    </div>
+                </a>
+                <a href="#" class="action-btn">
+                    <div class="action-icon" style="background: var(--bg-body); border: 1px solid var(--border-mid);"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg></div>
+                    <div class="action-content">
+                        <h4>Inscripción a Becas</h4>
+                        <p>Inscripción abierta</p>
+                    </div>
+                </a>
+                <a href="#" class="action-btn">
+                    <div class="action-icon" style="background: var(--bg-body); border: 1px solid var(--border-mid);"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11l18-5v12L3 14v-3z"></path><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"></path></svg></div>
+                    <div class="action-content">
+                        <h4>Hacer Reclamo</h4>
+                        <p>Baches, iluminación</p>
+                    </div>
+                </a>
+                <a href="#" class="action-btn">
+                    <div class="action-icon" style="background: var(--red-alert); color: var(--red-text); border: 1px solid #FECACA;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></div>
+                    <div class="action-content">
+                        <h4>Denunciar Corrupción</h4>
+                        <p>Canal confidencial</p>
+                    </div>
+                </a>
+            </div>
+        </div>
 
-        <!-- Módulos de Transparencia Activa -->
-        <div class="civic-grid">
-            <div class="civic-card">
-                <div>
-                    <div class="civic-header">
-                        <h4>Tu Barrio Decide (Votación)</h4>
-                        <span class="badge-live" style="background: #FFFBEB; color: #D97706;">Abierto</span>
-                    </div>
-                    <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 12px;">Decidí el destino de los Royalties 2026. Tu voto es público e inalterable.</p>
-                    <div class="progress-container">
-                        <div class="progress-labels">
-                            <span>Obras Viales (68%)</span>
-                            <span>Puesto de Salud (32%)</span>
-                        </div>
-                        <div class="progress-bar-bg">
-                            <div class="progress-fill-1"></div>
-                            <div class="progress-fill-2"></div>
-                        </div>
-                    </div>
-                </div>
-                <a href="#" class="btn btn-outline" style="width: 100%; margin-top: 16px; padding: 10px; font-size: 12px;">Emitir Voto Público</a>
-            </div>
+        <!-- Módulos de Transparencia Activa -->
+        <div class="civic-grid">
+            <div class="civic-card">
+                <div>
+                    <div class="civic-header">
+                        <h4>Tu Barrio Decide (Votación)</h4>
+                        <span class="badge-live" style="background: #FFFBEB; color: #D97706;">Abierto</span>
+                    </div>
+                    <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 12px;">Decidí el destino de los Royalties 2026. Tu voto es público e inalterable.</p>
+                    <div class="progress-container">
+                        <div class="progress-labels">
+                            <span>Obras Viales (68%)</span>
+                            <span>Puesto de Salud (32%)</span>
+                        </div>
+                        <div class="progress-bar-bg">
+                            <div class="progress-fill-1"></div>
+                            <div class="progress-fill-2"></div>
+                        </div>
+                    </div>
+                </div>
+                <a href="#" class="btn btn-outline" style="width: 100%; margin-top: 16px; padding: 10px; font-size: 12px;">Emitir Voto Público</a>
+            </div>
 
-            <div class="civic-card">
-                <div>
-                    <div class="civic-header">
-                        <h4>Auditoría GPS de Maquinarias</h4>
-                        <span class="badge-live"><span class="dot"></span> En Vivo</span>
-                    </div>
-                    <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 16px;">Rastreo satelital del parque automotor municipal.</p>
-                    <div class="gps-item">
-                        <svg class="gps-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon></svg>
-                        <div class="gps-info">
-                            <h5>Motoniveladora CAT-04</h5>
-                            <p>Trabajando en: Barrio Centro (Calle 14 de Mayo)</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+            <div class="civic-card">
+                <div>
+                    <div class="civic-header">
+                        <h4>Auditoría GPS de Maquinarias</h4>
+                        <span class="badge-live"><span class="dot"></span> En Vivo</span>
+                    </div>
+                    <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 16px;">Rastreo satelital del parque automotor municipal.</p>
+                    <div class="gps-item">
+                        <svg class="gps-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon></svg>
+                        <div class="gps-info">
+                            <h5>Motoniveladora CAT-04</h5>
+                            <p>Trabajando en: Barrio Centro (Calle 14 de Mayo)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <!-- 2. AUDITORÍA LEGISLATIVA (Concejales) -->
-    <section class="content-section" style="margin-top: 0;">
-        <div class="section-header">
-            <h2 class="section-title">Gestión Legislativa (Concejales)</h2>
-            <a href="autoridades/index.html" class="btn-link-highlight">Ver Plenario Completo &rarr;</a>
-        </div>
-        <div class="council-grid">
-            <div class="council-card">
-                <div class="council-header">
-                    <div class="council-avatar">JM</div>
-                    <div class="council-info">
-                        <h4>Juan Martínez</h4>
-                        <p>Partido Innovación</p>
-                    </div>
-                </div>
-                <div class="council-stats">
-                    <div class="stat"><span class="stat-val">14</span><span class="stat-lbl">Proyectos</span></div>
-                    <div class="stat"><span class="stat-val">98%</span><span class="stat-lbl">Asistencia</span></div>
-                </div>
-                <a href="autoridades/index.html" class="btn-card btn-card-primary" style="width: 100%; justify-content: center;">Ver Proyectos y Votos</a>
-            </div>
+    <!-- 2. AUDITORÍA LEGISLATIVA (Concejales) -->
+    <section class="content-section" style="margin-top: 0;">
+        <div class="section-header">
+            <h2 class="section-title">Gestión Legislativa (Concejales)</h2>
+            <a href="autoridades/index.html" class="btn-link-highlight">Ver Plenario Completo &rarr;</a>
+        </div>
+        <div class="council-grid">
+            <div class="council-card">
+                <div class="council-header">
+                    <div class="council-avatar">JM</div>
+                    <div class="council-info">
+                        <h4>Juan Martínez</h4>
+                        <p>Partido Innovación</p>
+                    </div>
+                </div>
+                <div class="council-stats">
+                    <div class="stat"><span class="stat-val">14</span><span class="stat-lbl">Proyectos</span></div>
+                    <div class="stat"><span class="stat-val">98%</span><span class="stat-lbl">Asistencia</span></div>
+                </div>
+                <a href="autoridades/index.html" class="btn-card btn-card-primary" style="width: 100%; justify-content: center;">Ver Proyectos y Votos</a>
+            </div>
 
-            <div class="council-card">
-                <div class="council-header">
-                    <div class="council-avatar">LG</div>
-                    <div class="council-info">
-                        <h4>Laura Gómez</h4>
-                        <p>Frente Ciudadano</p>
-                    </div>
-                </div>
-                <div class="council-stats">
-                    <div class="stat"><span class="stat-val">22</span><span class="stat-lbl">Proyectos</span></div>
-                    <div class="stat"><span class="stat-val">100%</span><span class="stat-lbl">Asistencia</span></div>
-                </div>
-                <a href="autoridades/index.html" class="btn-card btn-card-primary" style="width: 100%; justify-content: center;">Ver Proyectos y Votos</a>
-            </div>
-            
-            <div class="council-card">
-                <div class="council-header">
-                    <div class="council-avatar">CF</div>
-                    <div class="council-info">
-                        <h4>Carlos Franco</h4>
-                        <p>Movimiento Sur</p>
-                    </div>
-                </div>
-                <div class="council-stats">
-                    <div class="stat"><span class="stat-val">8</span><span class="stat-lbl">Proyectos</span></div>
-                    <div class="stat"><span class="stat-val">82%</span><span class="stat-lbl">Asistencia</span></div>
-                </div>
-                <a href="autoridades/index.html" class="btn-card btn-card-primary" style="width: 100%; justify-content: center;">Ver Proyectos y Votos</a>
-            </div>
-        </div>
-    </section>
+            <div class="council-card">
+                <div class="council-header">
+                    <div class="council-avatar">LG</div>
+                    <div class="council-info">
+                        <h4>Laura Gómez</h4>
+                        <p>Frente Ciudadano</p>
+                    </div>
+                </div>
+                <div class="council-stats">
+                    <div class="stat"><span class="stat-val">22</span><span class="stat-lbl">Proyectos</span></div>
+                    <div class="stat"><span class="stat-val">100%</span><span class="stat-lbl">Asistencia</span></div>
+                </div>
+                <a href="autoridades/index.html" class="btn-card btn-card-primary" style="width: 100%; justify-content: center;">Ver Proyectos y Votos</a>
+            </div>
+            
+            <div class="council-card">
+                <div class="council-header">
+                    <div class="council-avatar">CF</div>
+                    <div class="council-info">
+                        <h4>Carlos Franco</h4>
+                        <p>Movimiento Sur</p>
+                    </div>
+                </div>
+                <div class="council-stats">
+                    <div class="stat"><span class="stat-val">8</span><span class="stat-lbl">Proyectos</span></div>
+                    <div class="stat"><span class="stat-val">82%</span><span class="stat-lbl">Asistencia</span></div>
+                </div>
+                <a href="autoridades/index.html" class="btn-card btn-card-primary" style="width: 100%; justify-content: center;">Ver Proyectos y Votos</a>
+            </div>
+        </div>
+    </section>
 
-    <!-- 3. EXPEDIENTES EN TRATAMIENTO -->
-    <section class="content-section" style="margin-top: 0;">
-        <div class="section-header">
-            <h2 class="section-title">Expedientes en Tratamiento</h2>
-            <a href="#" class="btn-link-highlight">Explorar Directorio Completo &rarr;</a>
-        </div>
+    <!-- 3. EXPEDIENTES EN TRATAMIENTO -->
+    <section class="content-section" style="margin-top: 0;">
+        <div class="section-header">
+            <h2 class="section-title">Expedientes en Tratamiento</h2>
+            <a href="#" class="btn-link-highlight">Explorar Directorio Completo &rarr;</a>
+        </div>
 
-        <div class="project-list">
-            <div class="card-row active-row">
-                <div class="card-main">
-                    <div class="card-title">Iluminación Barrio Santa Librada</div>
-                    <div class="card-details">
-                        <span><strong>EXP:</strong> 2026-0799</span>
-                        <span><strong>Comisión:</strong> Santa Librada</span>
-                    </div>
-                    <div class="card-actions">
-                        <a href="#" class="btn-card btn-card-primary">Leer Proyecto</a>
-                        <a href="#" class="btn-card btn-card-secondary">Ver Votos Detallados</a>
-                    </div>
-                </div>
-                <div class="card-aside">
-                    <div class="status-badge status-votando">En Plenaria</div>
-                    <div class="voting-tally">
-                        <span class="vote-favor">FAVOR: 8</span>
-                        <span class="vote-contra">CONTRA: 2</span>
-                    </div>
-                </div>
-            </div>
+        <div class="project-list">
+            <div class="card-row active-row">
+                <div class="card-main">
+                    <div class="card-title">Iluminación Barrio Santa Librada</div>
+                    <div class="card-details">
+                        <span><strong>EXP:</strong> 2026-0799</span>
+                        <span><strong>Comisión:</strong> Santa Librada</span>
+                    </div>
+                    <div class="card-actions">
+                        <a href="#" class="btn-card btn-card-primary">Leer Proyecto</a>
+                        <a href="#" class="btn-card btn-card-secondary">Ver Votos Detallados</a>
+                    </div>
+                </div>
+                <div class="card-aside">
+                    <div class="status-badge status-votando">En Plenaria</div>
+                    <div class="voting-tally">
+                        <span class="vote-favor">FAVOR: 8</span>
+                        <span class="vote-contra">CONTRA: 2</span>
+                    </div>
+                </div>
+            </div>
 
-            <div class="card-row">
-                <div class="card-main">
-                    <div class="card-title">Remodelación Polideportivo Municipal</div>
-                    <div class="card-details">
-                        <span><strong>EXP:</strong> 2026-0612</span>
-                        <span><strong>Dirección:</strong> Deportes</span>
-                    </div>
-                    <div class="card-actions">
-                        <a href="#" class="btn-card btn-card-primary">Leer Proyecto</a>
-                        <a href="#" class="btn-card btn-card-secondary">Ver Votos Detallados</a>
-                    </div>
-                </div>
-                <div class="card-aside">
-                    <div class="status-badge status-aprobado">Aprobado</div>
-                    <div class="voting-tally">
-                        <span class="vote-favor">FAVOR: 12</span>
-                        <span class="vote-contra">CONTRA: 0</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="card-row">
-                <div class="card-main">
-                    <div class="card-title">Construcción Canalización Sur</div>
-                    <div class="card-details">
-                        <span><strong>EXP:</strong> 2026-0902</span>
-                        <span><strong>Comisión:</strong> Vecinal Sur</span>
-                    </div>
-                    <div class="card-actions">
-                        <a href="#" class="btn-card btn-card-primary">Leer Proyecto</a>
-                        <a href="#" class="btn-card btn-card-secondary">Ver Votos Detallados</a>
-                    </div>
-                </div>
-                <div class="card-aside">
-                    <div class="status-badge status-mesa">Mesa de Entrada</div>
-                    <div class="voting-tally">
-                        <span class="vote-favor">FAVOR: 0</span>
-                        <span class="vote-contra">CONTRA: 0</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+            <div class="card-row">
+                <div class="card-main">
+                    <div class="card-title">Remodelación Polideportivo Municipal</div>
+                    <div class="card-details">
+                        <span><strong>EXP:</strong> 2026-0612</span>
+                        <span><strong>Dirección:</strong> Deportes</span>
+                    </div>
+                    <div class="card-actions">
+                        <a href="#" class="btn-card btn-card-primary">Leer Proyecto</a>
+                        <a href="#" class="btn-card btn-card-secondary">Ver Votos Detallados</a>
+                    </div>
+                </div>
+                <div class="card-aside">
+                    <div class="status-badge status-aprobado">Aprobado</div>
+                    <div class="voting-tally">
+                        <span class="vote-favor">FAVOR: 12</span>
+                        <span class="vote-contra">CONTRA: 0</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card-row">
+                <div class="card-main">
+                    <div class="card-title">Construcción Canalización Sur</div>
+                    <div class="card-details">
+                        <span><strong>EXP:</strong> 2026-0902</span>
+                        <span><strong>Comisión:</strong> Vecinal Sur</span>
+                    </div>
+                    <div class="card-actions">
+                        <a href="#" class="btn-card btn-card-primary">Leer Proyecto</a>
+                        <a href="#" class="btn-card btn-card-secondary">Ver Votos Detallados</a>
+                    </div>
+                </div>
+                <div class="card-aside">
+                    <div class="status-badge status-mesa">Mesa de Entrada</div>
+                    <div class="voting-tally">
+                        <span class="vote-favor">FAVOR: 0</span>
+                        <span class="vote-contra">CONTRA: 0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <!-- 4. REPORTES DE AUDITORÍA -->
-    <section class="content-section">
-        <div class="section-header">
-            <h2 class="section-title">Reportes de Obras en Terreno</h2>
-        </div>
-        
-        <div class="news-grid">
-            <article class="news-card">
-                <div class="news-img">Imagen Fotográfica GPS</div>
-                <div class="news-content">
-                    <span class="news-badge">Ejecutado</span>
-                    <h4>Culminación de Asfalto en Fátima</h4>
-                    <p>Auditoría física confirma 32.000 metros de nueva superficie vial bajo el EXP-2026-015.</p>
-                    <a href="#" class="news-link">Ver Documentación <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
-                </div>
-            </article>
-            <article class="news-card">
-                <div class="news-img">Imagen Fotográfica GPS</div>
-                <div class="news-content">
-                    <span class="news-badge">Fiscalización</span>
-                    <h4>Intervención Técnica en ESSAP</h4>
-                    <p>Gestión Ambiental documentó el desborde cloacal. Se inician notificaciones automáticas.</p>
-                    <a href="#" class="news-link">Ver Dictamen <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
-                </div>
-            </article>
-            <article class="news-card">
-                <div class="news-img">Imagen Fotográfica GPS</div>
-                <div class="news-content">
-                    <span class="news-badge">Inauguración</span>
-                    <h4>Clínica Veterinaria Operativa</h4>
-                    <p>Inicio de operaciones a costo cero. Control de insumos verificado en sistema.</p>
-                    <a href="#" class="news-link">Ver Presupuesto <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
-                </div>
-            </article>
-        </div>
-    </section>
+    <!-- 4. REPORTES DE AUDITORÍA -->
+    <section class="content-section">
+        <div class="section-header">
+            <h2 class="section-title">Reportes de Obras en Terreno</h2>
+        </div>
+        
+        <div class="news-grid">
+            <article class="news-card">
+                <div class="news-img">Imagen Fotográfica GPS</div>
+                <div class="news-content">
+                    <span class="news-badge">Ejecutado</span>
+                    <h4>Culminación de Asfalto en Fátima</h4>
+                    <p>Auditoría física confirma 32.000 metros de nueva superficie vial bajo el EXP-2026-015.</p>
+                    <a href="#" class="news-link">Ver Documentación <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+                </div>
+            </article>
+            <article class="news-card">
+                <div class="news-img">Imagen Fotográfica GPS</div>
+                <div class="news-content">
+                    <span class="news-badge">Fiscalización</span>
+                    <h4>Intervención Técnica en ESSAP</h4>
+                    <p>Gestión Ambiental documentó el desborde cloacal. Se inician notificaciones automáticas.</p>
+                    <a href="#" class="news-link">Ver Dictamen <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+                </div>
+            </article>
+            <article class="news-card">
+                <div class="news-img">Imagen Fotográfica GPS</div>
+                <div class="news-content">
+                    <span class="news-badge">Inauguración</span>
+                    <h4>Clínica Veterinaria Operativa</h4>
+                    <p>Inicio de operaciones a costo cero. Control de insumos verificado en sistema.</p>
+                    <a href="#" class="news-link">Ver Presupuesto <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+                </div>
+            </article>
+        </div>
+    </section>
 
-    <!-- BARRA INFERIOR MÓVIL Y ACTION SHEET (ÁREA PRIVADA) -->
-    <div class="sheet-overlay" id="profileOverlay"></div>
-    
-    <div class="mobile-profile-sheet" id="mobileProfileSheet">
-        <div class="sheet-handle"></div>
-        <div class="user-header-info" style="padding: 0 24px 16px;">
-            <div class="user-header-avatar">VA</div>
-            <div class="user-header-data">
-                <strong>Daniel Franco</strong>
-                <span>C.I. Registrada</span>
-                <span class="badge-kyc">Identidad Validada</span>
-            </div>
-        </div>
-        <div class="user-nav-grid" style="padding: 12px 24px;">
-            <a href="#" class="user-nav-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg> Mi Perfil</a>
-            <a href="#" class="user-nav-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg> Mis Proyectos</a>
-            <a href="#" class="user-nav-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> Explorar Proyectos</a>
-            <a href="#" class="user-nav-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg> Centro de Votación</a>
-            <a href="#" class="user-nav-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg> Portal de Becas</a>
-            <a href="#" class="user-nav-link danger-zone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg> Denunciar Corrupción</a>
-        </div>
-    </div>
+    <!-- BARRA INFERIOR MÓVIL Y ACTION SHEET (ÁREA PRIVADA) -->
+    <div class="sheet-overlay" id="profileOverlay"></div>
+    
+    <div class="mobile-profile-sheet" id="mobileProfileSheet">
+        <div class="sheet-handle"></div>
+        <div class="user-header-info" style="padding: 0 24px 16px;">
+            <div class="user-header-avatar">VA</div>
+            <div class="user-header-data">
+                <strong>Daniel Franco</strong>
+                <span>C.I. Registrada</span>
+                <span class="badge-kyc">Identidad Validada</span>
+            </div>
+        </div>
+        <div class="user-nav-grid" style="padding: 12px 24px;">
+            <a href="#" class="user-nav-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg> Mi Perfil</a>
+            <a href="#" class="user-nav-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg> Mis Proyectos</a>
+            <a href="#" class="user-nav-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> Explorar Proyectos</a>
+            <a href="#" class="user-nav-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg> Centro de Votación</a>
+            <a href="#" class="user-nav-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg> Portal de Becas</a>
+            <a href="#" class="user-nav-link danger-zone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg> Denunciar Corrupción</a>
+        </div>
+    </div>
 
-    <!-- Navegación Base Móvil -->
-    <div class="mobile-bottom-bar">
-        <button id="btnMobileProfile" style="color: var(--text-main);">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-            Perfil
-        </button>
-        <a href="#" class="bottom-japaga">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="6" width="20" height="12" rx="2"></rect><circle cx="12" cy="12" r="2"></circle></svg>
-            Japaga
-        </a>
-        <a href="#" class="bottom-jadonata">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-            JADONATA
-        </a>
-    </div>
+    <!-- Navegación Base Móvil -->
+    <div class="mobile-bottom-bar">
+        <button id="btnMobileProfile" style="color: var(--text-main);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+            Perfil
+        </button>
+        <a href="#" class="bottom-japaga">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="6" width="20" height="12" rx="2"></rect><circle cx="12" cy="12" r="2"></circle></svg>
+            Japaga
+        </a>
+        <a href="#" class="bottom-jadonata">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+            JADONATA
+        </a>
+    </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const mobileToggle = document.getElementById('mobile-toggle');
-            const navWrapper = document.getElementById('nav-wrapper');
-            const body = document.body;
-            const transparencyDropdown = document.getElementById('transparencyDropdown');
-            
-            const userProfileDesktop = document.getElementById('userProfileDesktop');
-            if(userProfileDesktop) {
-                userProfileDesktop.addEventListener('click', () => {
-                    userProfileDesktop.querySelector('.user-dropdown-menu').classList.toggle('active');
-                    userProfileDesktop.querySelector('.avatar-btn').classList.toggle('active');
-                });
-            }
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const mobileToggle = document.getElementById('mobile-toggle');
+            const navWrapper = document.getElementById('nav-wrapper');
+            const body = document.body;
+            const transparencyDropdown = document.getElementById('transparencyDropdown');
+            
+            const userProfileDesktop = document.getElementById('userProfileDesktop');
+            if(userProfileDesktop) {
+                userProfileDesktop.addEventListener('click', () => {
+                    userProfileDesktop.querySelector('.user-dropdown-menu').classList.toggle('active');
+                    userProfileDesktop.querySelector('.avatar-btn').classList.toggle('active');
+                });
+            }
 
-            mobileToggle.addEventListener('click', () => {
-                navWrapper.classList.toggle('active');
-                body.classList.toggle('menu-open');
-            });
+            mobileToggle.addEventListener('click', () => {
+                navWrapper.classList.toggle('active');
+                body.classList.toggle('menu-open');
+            });
 
-            transparencyDropdown.addEventListener('click', (e) => {
-                if (window.innerWidth <= 1024) {
-                    if(e.target.tagName.toLowerCase() === 'a' && e.target.nextElementSibling) {
-                        e.preventDefault();
-                        transparencyDropdown.classList.toggle('mobile-open');
-                    }
-                }
-            });
+            transparencyDropdown.addEventListener('click', (e) => {
+                if (window.innerWidth <= 1024) {
+                    if(e.target.tagName.toLowerCase() === 'a' && e.target.nextElementSibling) {
+                        e.preventDefault();
+                        transparencyDropdown.classList.toggle('mobile-open');
+                    }
+                }
+            });
 
-            const btnMobileProfile = document.getElementById('btnMobileProfile');
-            const mobileProfileSheet = document.getElementById('mobileProfileSheet');
-            const profileOverlay = document.getElementById('profileOverlay');
+            const btnMobileProfile = document.getElementById('btnMobileProfile');
+            const mobileProfileSheet = document.getElementById('mobileProfileSheet');
+            const profileOverlay = document.getElementById('profileOverlay');
 
-            function toggleProfileSheet() {
-                mobileProfileSheet.classList.toggle('active');
-                profileOverlay.classList.toggle('active');
-                body.classList.toggle('menu-open');
-            }
+            function toggleProfileSheet() {
+                mobileProfileSheet.classList.toggle('active');
+                profileOverlay.classList.toggle('active');
+                body.classList.toggle('menu-open');
+            }
 
-            if(btnMobileProfile) btnMobileProfile.addEventListener('click', toggleProfileSheet);
-            if(profileOverlay) profileOverlay.addEventListener('click', toggleProfileSheet);
-        });
-    </script>
+            if(btnMobileProfile) btnMobileProfile.addEventListener('click', toggleProfileSheet);
+            if(profileOverlay) profileOverlay.addEventListener('click', toggleProfileSheet);
+        });
+    </script>
 </body>
 </html>
