@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Katuete - Expediente Legislativo y Votación</title>
+    <style>
+        /* =========================================
+           SISTEMA DE DISEÑO (Corporate Clean Estricto)
+           ========================================= */
+        :root {
+            --text-title: #1F2937;
+            --text-main: #4B5563;
+            --text-muted: #9CA3AF;
+            --bg-body: #F9FAFB;
+            --bg-card: #FFFFFF;
+            --border-light: #F3F4F6;
+            --border-mid: #E5E7EB;
+            --border-dark: #D1D5DB;
+            --yellow: #FFC700;
+            --yellow-hover: #E5B300;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            --transition: all 0.25s ease;
+        }
+
+        /* Bloqueo estricto de herencias del navegador */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', -apple-system, sans-serif; }
+        body { background-color: var(--bg-body); color: var(--text-main); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+        a { text-decoration: none; color: inherit; cursor: pointer; }
+        svg { display: block; }
+
+        /* =========================================
+           NAVEGACIÓN SUPERIOR ESTANDARIZADA
+           ========================================= */
+        .main-navbar {
+            height: 72px; background-color: var(--bg-card); border-bottom: 1px solid var(--border-mid);
+            display: flex; justify-content: space-between; align-items: center; padding: 0 5%;
+            position: sticky; top: 0; z-index: 1000; box-shadow: var(--shadow-sm);
+        }
+        
+        .brand-container { display: flex; align-items: center; gap: 12px; }
+        .brand-logo-svg {
+            width: 40px; height: 40px; background-color: var(--text-title); display: flex; align-items: center; justify-content: center;
+            border-radius: 8px; transition: var(--transition); flex-shrink: 0; color: var(--bg-card);
+        }
+        .brand-container:hover .brand-logo-svg { background-color: var(--yellow); color: var(--text-title); }
+        .brand-text { display: flex; flex-direction: column; justify-content: center; margin-top: 2px; }
+        .brand-title { color: var(--text-title); font-size: 16px; font-weight: 800; letter-spacing: -0.5px; line-height: 1; margin-bottom: 2px; }
+        .brand-subtitle { color: var(--text-muted); font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+
+        .nav-wrapper { display: flex; align-items: center; gap: 24px; flex: 1; justify-content: flex-end; }
+        .nav-links { display: flex; gap: 20px; align-items: center; }
+        .nav-links > a, .nav-item-dropdown > a { 
+            color: var(--text-muted); font-size: 13px; font-weight: 600; 
+            padding: 26px 0; transition: var(--transition); display: flex; align-items: center; gap: 6px; position: relative; 
+        }
+        .nav-links > a:hover, .nav-item-dropdown > a:hover, .nav-links > a.active { color: var(--text-title); }
+        
+        .nav-links > a::after, .nav-item-dropdown > a::after { 
+            content: ''; position: absolute; bottom: -1px; left: 0; width: 0%; height: 3px; 
+            background-color: var(--yellow); transition: var(--transition); border-radius: 3px 3px 0 0; 
+        }
+        .nav-links > a:hover::after, .nav-item-dropdown > a:hover::after, .nav-links > a.active::after { width: 100%; }
+
+        .nav-item-dropdown { position: relative; }
+        .dropdown-menu {
+            position: absolute; top: 100%; left: 50%; transform: translateX(-50%) translateY(10px);
+            background-color: var(--bg-card); border: 1px solid var(--border-mid); border-radius: 12px;
+            width: 320px; box-shadow: var(--shadow-md); opacity: 0; visibility: hidden; pointer-events: none;
+            transition: var(--transition); display: flex; flex-direction: column; padding: 12px; z-index: 1050;
+        }
+        .dropdown-menu::before {
+            content: ''; position: absolute; top: -6px; left: 50%; transform: translateX(-50%) rotate(45deg);
+            width: 10px; height: 10px; background-color: var(--bg-card); border-top: 1px solid var(--border-mid); border-left: 1px solid var(--border-mid);
+        }
+        .nav-item-dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); pointer-events: auto; }
+        
+        .dropdown-item { display: flex; align-items: flex-start; gap: 12px; padding: 12px; border-radius: 8px; transition: var(--transition); }
+        .dropdown-item:hover { background-color: var(--bg-body); transform: translateX(4px); }
+        .dropdown-icon { width: 36px; height: 36px; background-color: var(--bg-body); border: 1px solid var(--border-mid); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--text-title); flex-shrink: 0; }
+        .dropdown-item:hover .dropdown-icon { background-color: var(--yellow); border-color: var(--yellow); }
+        .dropdown-text { display: flex; flex-direction: column; }
+        .dropdown-text strong { color: var(--text-title); font-size: 13px; font-weight: 700; margin-bottom: 2px; }
+        .dropdown-text span { color: var(--text-muted); font-size: 11px; line-height: 1.3; }
+
+        .search-component {
+            display: flex; align-items: center; background-color: var(--bg-body); border: 1px solid var(--border-mid);
+            border-radius: 6px; padding: 0 12px; height: 38px; width: 220px; transition: var(--transition);
+        }
+        .search-component:focus-within { border-color: var(--border-dark); background-color: var(--bg-card); box-shadow: 0 0 0 3px rgba(229, 231, 235, 0.4); }
+        .search-icon { width: 14px; height: 14px; color: var(--text-muted); flex-shrink: 0; }
+        .search-component input { border: none; background: transparent; padding: 0 8px; font-size: 13px; outline: none; width: 100%; color: var(--text-title); }
+
+        .nav-transactional { display: flex; gap: 12px; align-items: center; }
+        .btn-header { display: inline-flex; align-items: center; justify-content: center; padding: 0 16px; height: 38px; font-size: 13px; font-weight: 700; border-radius: 6px; transition: var(--transition); gap: 6px; }
+        .btn-outline { background-color: var(--bg-card); border: 1px solid var(--border-mid); color: var(--text-title); }
+        .btn-outline:hover { background-color: var(--bg-body); border-color: var(--border-dark); }
+        .btn-primary { background-color: var(--yellow); border: 1px solid var(--yellow); color: var(--text-title); }
+        .btn-primary:hover { background-color: var(--text-title); color: var(--yellow); border-color: var(--text-title); }
+
+        .user-profile-widget { margin-left: 8px; padding-left: 20px; border-left: 1px solid var(--border-mid); display: flex; align-items: center; height: 40px; position: relative; }
+        .avatar-btn {
+            width: 38px; height: 38px; border-radius: 50%; background-color: var(--text-title); color: var(--bg-card);
+            border: 2px solid var(--bg-card); box-shadow: 0 0 0 2px var(--border-dark); display: flex; align-items: center; justify-content: center;
+            font-size: 13px; font-weight: 800; cursor: pointer; outline: none; transition: var(--transition);
+        }
+        .avatar-btn:hover { box-shadow: 0 0 0 2px var(--yellow); color: var(--yellow); }
+
+        .user-dropdown-menu {
+            position: absolute; top: calc(100% + 15px); right: 0; width: 240px; background: var(--bg-card); border: 1px solid var(--border-light);
+            border-radius: 8px; box-shadow: var(--shadow-md); opacity: 0; visibility: hidden; transform: translateY(10px); transition: var(--transition); z-index: 2000;
+        }
+        .user-profile-widget:hover .user-dropdown-menu, .user-dropdown-menu.active { opacity: 1; visibility: visible; transform: translateY(0); }
+        
+        .user-nav-grid { padding: 8px; display: grid; gap: 4px; }
+        .user-nav-link { display: flex; align-items: center; gap: 10px; padding: 8px 12px; border-radius: 6px; text-decoration: none; color: var(--text-main); font-size: 12px; font-weight: 600; transition: var(--transition); }
+        .user-nav-link:hover { background-color: var(--bg-body); }
+        .user-nav-link svg { width: 14px; height: 14px; color: var(--text-muted); }
+        .user-nav-link:hover svg { color: var(--text-main); }
+
+        .mobile-menu-btn { display: none; background: none; border: none; padding: 8px; cursor: pointer; z-index: 2001; }
+        .hamburger-line { width: 20px; height: 2px; background-color: var(--text-title); margin: 4px 0; border-radius: 2px; transition: var(--transition); }
+
+        /* =========================================
+           ESTRUCTURA DE EXPEDIENTE (Layout inmersivo)
+           ========================================= */
+        .page-container { max-width: 1200px; margin: 32px auto 80px; padding: 0 5%; }
+        
+        .btn-link-highlight {
+            font-size: 12px; font-weight: 700; color: var(--text-main); text-decoration: none; display: inline-flex; align-items: center; gap: 6px;
+            background-color: var(--bg-card); border: 1px solid var(--border-mid); padding: 8px 16px; border-radius: 6px; transition: var(--transition); margin-bottom: 32px; cursor: pointer;
+        }
+        .btn-link-highlight:hover { color: var(--text-title); border-color: var(--text-title); }
+
+        /* HERO HEADER (Mismo padrón) */
+        .landing-header { margin-bottom: 40px; }
+        .landing-badge { display: inline-flex; align-items: center; gap: 6px; background-color: var(--text-title); color: var(--yellow); padding: 6px 16px; border-radius: 20px; font-size: 11px; font-weight: 800; text-transform: uppercase; margin-bottom: 16px; letter-spacing: 0.5px; }
+        .landing-title { font-size: 32px; font-weight: 900; color: var(--text-title); letter-spacing: -1px; margin-bottom: 12px; }
+        .landing-subtitle { font-size: 16px; color: var(--text-main); line-height: 1.6; font-weight: 500; display: flex; align-items: center; gap: 8px; }
+
+        /* LAYOUT A DOS COLUMNAS */
+        .project-layout { display: grid; grid-template-columns: 1fr 380px; gap: 32px; align-items: start; }
+
+        /* COLUMNA IZQ: DOCUMENTO LEGAL */
+        .document-card {
+            background-color: var(--bg-card); border: 1px solid var(--border-mid); border-radius: 12px;
+            padding: 40px; box-shadow: var(--shadow-sm); font-family: 'Georgia', 'Times New Roman', serif;
+            color: #111; line-height: 1.8;
+        }
+        .doc-header { text-align: center; border-bottom: 2px solid #000; padding-bottom: 24px; margin-bottom: 32px; }
+        .doc-header h2 { font-size: 18px; font-weight: bold; text-transform: uppercase; margin-bottom: 8px; letter-spacing: 1px; }
+        .doc-header p { font-size: 12px; text-transform: uppercase; color: #444; font-family: 'Inter', sans-serif; font-weight: 600; }
+        
+        .doc-body p { margin-bottom: 20px; font-size: 15px; text-align: justify; }
+        .doc-body strong { font-weight: bold; }
+        .doc-section-title { font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 800; text-transform: uppercase; color: var(--text-title); margin: 32px 0 12px; }
+        
+        .doc-signature { margin-top: 48px; display: flex; justify-content: space-between; font-family: 'Inter', sans-serif; }
+        .sign-block { text-align: center; width: 45%; border-top: 1px solid #000; padding-top: 8px; }
+        .sign-block strong { font-size: 13px; display: block; color: #000; margin-bottom: 4px; }
+        .sign-block span { font-size: 11px; color: #555; }
+
+        /* COLUMNA DER: PANEL DE VOTACIÓN Y CONCEJALES */
+        .voting-panel {
+            background-color: var(--bg-body); border: 1px solid var(--border-mid); border-radius: 12px;
+            overflow: hidden; position: sticky; top: 100px;
+        }
+
+        .voting-header {
+            background-color: var(--bg-card); padding: 24px; border-bottom: 1px solid var(--border-mid);
+            display: flex; flex-direction: column; gap: 16px;
+        }
+        .v-status { display: inline-flex; align-items: center; justify-content: center; background-color: #FEF3C7; color: #B45309; padding: 6px 12px; border-radius: 6px; font-size: 12px; font-weight: 800; text-transform: uppercase; border: 1px solid #FDE68A; align-self: flex-start; }
+        
+        .v-tally { display: flex; justify-content: space-between; align-items: flex-end; }
+        .v-box { display: flex; flex-direction: column; }
+        .v-box span { font-size: 10px; font-weight: 800; text-transform: uppercase; color: var(--text-muted); margin-bottom: 4px; }
+        .v-box strong { font-size: 32px; font-weight: 900; line-height: 1; font-family: monospace; }
+        .v-favor strong { color: var(--text-title); }
+        .v-contra strong { color: #DC2626; }
+
+        .v-progress-bar { width: 100%; height: 8px; background-color: #FECACA; border-radius: 4px; overflow: hidden; display: flex; }
+        .v-progress-fill { height: 100%; background-color: var(--text-title); width: 80%; } /* 8 de 10 votos = 80% */
+
+        .council-list { padding: 0; margin: 0; list-style: none; max-height: 500px; overflow-y: auto; }
+        .council-list::-webkit-scrollbar { width: 6px; }
+        .council-list::-webkit-scrollbar-thumb { background: var(--border-dark); border-radius: 4px; }
+        
+        .council-item {
+            display: flex; align-items: center; justify-content: space-between; padding: 16px 24px;
+            border-bottom: 1px solid var(--border-light); transition: var(--transition);
+        }
+        .council-item:hover { background-color: var(--bg-card); }
+        .council-info { display: flex; align-items: center; gap: 12px; }
+        .c-avatar {
+            width: 36px; height: 36px; border-radius: 50%; background-color: var(--bg-card);
+            border: 1px solid var(--border-dark); display: flex; align-items: center; justify-content: center;
+            font-size: 11px; font-weight: 800; color: var(--text-title); flex-shrink: 0;
+        }
+        .c-data { display: flex; flex-direction: column; }
+        .c-name { font-size: 13px; font-weight: 700; color: var(--text-title); margin-bottom: 2px; }
+        .c-party { font-size: 10px; color: var(--text-muted); text-transform: uppercase; font-weight: 600; }
+        
+        .c-vote-badge {
+            display: inline-flex; align-items: center; gap: 4px; padding: 4px 8px; border-radius: 4px;
+            font-size: 10px; font-weight: 800; text-transform: uppercase;
+        }
+        .vote-yes { background-color: var(--text-title); color: var(--yellow); }
+        .vote-no { background-color: #FEE2E2; color: #DC2626; border: 1px solid #FECACA; }
+        .vote-absent { background-color: var(--border-light); color: var(--text-muted); }
+
+        /* =========================================
+           RESPONSIVE
+           ========================================= */
+        @media (max-width: 1024px) {
+            .nav-wrapper {
+                position: fixed; top: 0; right: -100%; width: 100%; max-width: 350px;
+                height: 100dvh; background-color: var(--bg-card); flex-direction: column; justify-content: flex-start; padding: 90px 24px 40px; 
+                box-shadow: -4px 0 24px rgba(0,0,0,0.1); transition: var(--transition); overflow-y: auto; z-index: 2000;
+            }
+            .nav-wrapper.active { right: 0; }
+            .nav-links { flex-direction: column; width: 100%; gap: 0; margin-bottom: 24px; align-items: flex-start; }
+            .nav-links > a, .nav-item-dropdown > a { padding: 16px 0; font-size: 16px; border-bottom: 1px solid var(--border-light); width: 100%; justify-content: space-between; }
+            .nav-links > a::after { display: none; }
+            
+            .nav-item-dropdown { width: 100%; }
+            .dropdown-menu {
+                position: relative; top: 0; left: 0; transform: none; width: 100%; box-shadow: none; border: none; border-bottom: 1px solid var(--border-light);
+                border-radius: 0; opacity: 1; visibility: visible; pointer-events: auto; padding: 8px 0 16px 16px; display: none;
+            }
+            .dropdown-menu::before { display: none; }
+            .nav-item-dropdown.mobile-open .dropdown-menu { display: flex; }
+
+            .search-component { width: 100%; margin-bottom: 24px; height: 48px; }
+            .nav-transactional { flex-direction: column; width: 100%; gap: 12px; }
+            .btn-header { width: 100%; height: 48px; }
+
+            .user-profile-widget { display: none; }
+            .mobile-menu-btn { display: block; }
+        }
+
+        @media (max-width: 768px) {
+            .project-layout { grid-template-columns: 1fr; }
+            .voting-panel { position: relative; top: 0; order: -1; margin-bottom: 16px; } /* En móvil el tablero de votos va arriba */
+            .document-card { padding: 24px; }
+            .doc-signature { flex-direction: column; gap: 32px; align-items: center; }
+            .sign-block { width: 100%; }
+            .landing-title { font-size: 28px; }
+            body { padding-bottom: 70px; }
+            .mobile-bottom-bar {
+                display: flex; position: fixed; bottom: 0; left: 0; width: 100%; height: 64px; background-color: var(--bg-card); border-top: 1px solid var(--border-mid); z-index: 1500;
+            }
+            .mobile-bottom-bar button, .mobile-bottom-bar a { flex: 1; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; text-decoration: none; gap: 4px; flex-direction: column; padding: 8px 0; color: var(--text-muted); background: none; border: none; outline: none; cursor: pointer; }
+            .mobile-bottom-bar button:active, .mobile-bottom-bar a:active { color: var(--text-title); }
+            .mobile-bottom-bar svg { width: 24px; height: 24px; }
+        }
+        @media (min-width: 769px) { .mobile-bottom-bar { display: none; } }
+    </style>
+</head>
+<body>
+
+    <!-- CABECERA PRINCIPAL ESTANDARIZADA -->
+    <header class="main-navbar">
+        <a href="index.html" class="brand-container">
+            <div class="brand-logo-svg"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2v20M4 12h8M12 2l8 10-8 10"/></svg></div>
+            <div class="brand-text">
+                <span class="brand-title">KATUETE</span>
+                <span class="brand-subtitle">Gestión Pública</span>
+            </div>
+        </a>
+        
+        <div class="nav-wrapper" id="nav-wrapper">
+            <nav class="nav-links">
+                <a href="autoridades.html">Autoridades</a>
+                
+                <div class="nav-item-dropdown" id="transparencyDropdown">
+                    <a href="#">Transparencia <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></a>
+                    <div class="dropdown-menu">
+                        <a href="#" class="dropdown-item">
+                            <div class="dropdown-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg></div>
+                            <div class="dropdown-text">
+                                <strong>Presupuesto y Ejecución</strong>
+                                <span>Fonacide, Royalties y Rendición de Cuentas.</span>
+                            </div>
+                        </a>
+                        <a href="#" class="dropdown-item">
+                            <div class="dropdown-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg></div>
+                            <div class="dropdown-text">
+                                <strong>Nómina y Salarios</strong>
+                                <span>Sueldos y viáticos (Ley 5189/14).</span>
+                            </div>
+                        </a>
+                        <a href="donaciones.html" class="dropdown-item">
+                            <div class="dropdown-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg></div>
+                            <div class="dropdown-text">
+                                <strong>Licitaciones y Contratos</strong>
+                                <span>Adjudicaciones y fideicomiso de obras.</span>
+                            </div>
+                        </a>
+                        <a href="#" class="dropdown-item">
+                            <div class="dropdown-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></div>
+                            <div class="dropdown-text">
+                                <strong>Acceso a la Información</strong>
+                                <span>Portal oficial de solicitudes (Ley 5282/14).</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <a href="japaga.html">Recaudaciones</a>
+                <a href="proyectos.html" class="active">Proyectos</a>
+            </nav>
+
+            <div class="search-component">
+                <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                <input type="text" placeholder="Buscar expediente...">
+            </div>
+
+            <div class="nav-transactional">
+                <a href="japaga.html" class="btn-header btn-outline">Japaga</a>
+                <a href="donaciones.html" class="btn-header btn-primary">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                    JADONATA
+                </a>
+            </div>
+
+            <div class="user-profile-widget" id="userProfileDesktop">
+                <button class="avatar-btn">VA</button>
+                <div class="user-dropdown-menu">
+                    <div class="user-header-info">
+                        <div class="user-header-avatar">VA</div>
+                        <div class="user-header-data">
+                            <strong>Valeria Lucia Acosta</strong>
+                            <span>C.I. Registrada</span>
+                        </div>
+                    </div>
+                    <div class="user-nav-grid">
+                        <a href="Mi-perfil.html" class="user-nav-link" style="color: var(--text-title); font-weight: 800;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg> Mi Perfil</a>
+                        <a href="crearproyecto.html" class="user-nav-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg> Redactar Proyecto</a>
+                        <a href="#" class="user-nav-link" style="color: var(--red-text); border-top: 1px solid var(--border-light); margin-top: 4px; padding-top: 12px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg> Cerrar Sesión</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="mobile-menu-btn" id="mobile-toggle"><div class="hamburger-line"></div><div class="hamburger-line"></div><div class="hamburger-line"></div></button>
+    </header>
+
+    <main class="page-container">
+        
+        <!-- BOTÓN VOLVER DINÁMICO (History Back inteligente) -->
+        <a href="#" id="dynamicBackBtn" class="btn-link-highlight">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            Volver
+        </a>
+
+        <!-- HERO HEADER -->
+        <div class="landing-header">
+            <div class="landing-badge">EXP: 2026-0799</div>
+            <h1 class="landing-title">Iluminación Barrio Santa Librada</h1>
+            <p class="landing-subtitle">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                Ingresado el 12 de Junio de 2026 • Comisión: Santa Librada
+            </p>
+        </div>
+
+        <div class="project-layout">
+            
+            <!-- COLUMNA IZQ: LECTURA DEL PROYECTO (Dossier) -->
+            <div class="document-card">
+                <div class="doc-header">
+                    <h2>Proyecto de Resolución Municipal</h2>
+                    <p>Junta Municipal de Katuete</p>
+                </div>
+                
+                <div class="doc-body">
+                    <h3 class="doc-section-title">I. Exposición de Motivos</h3>
+                    <p>La presente solicitud tiene como objetivo principal la instalación y modernización del sistema de alumbrado público en la arteria principal del <strong>Barrio Santa Librada</strong> y sus calles adyacentes. Actualmente, la falta de iluminación adecuada representa un riesgo inminente para la seguridad vial y la integridad física de los vecinos que transitan en horario nocturno.</p>
+                    
+                    <p>Basado en los reportes de la Policía Nacional y la comisión vecinal, se ha registrado un aumento en incidentes durante los últimos seis meses, atribuibles directamente a la deficiencia lumínica. El proyecto propone reemplazar las luminarias obsoletas por tecnología LED de alta eficiencia, garantizando no solo mayor visibilidad sino también una reducción en el consumo energético municipal.</p>
+
+                    <h3 class="doc-section-title">II. Especificaciones Técnicas</h3>
+                    <p>El proyecto contempla la instalación de <strong>45 columnas de acero galvanizado</strong> con brazos curvos, equipadas con artefactos LED de 150W. Se priorizarán las intersecciones conflictivas y los accesos principales a la zona escolar del barrio.</p>
+
+                    <h3 class="doc-section-title">III. Presupuesto Estimado y Financiamiento</h3>
+                    <p>Se solicita la afectación de los fondos correspondientes al rubro de "Infraestructura Urbana" provenientes de los <strong>Royalties 2026</strong>. El presupuesto referencial preliminar asciende a Gs. 125.000.000, monto sujeto a licitación pública nacional conforme a la ley de contrataciones vigentes.</p>
+                </div>
+
+                <div class="doc-signature">
+                    <div class="sign-block">
+                        <strong>Comisión Vecinal</strong>
+                        <span>Presidente Barrio Santa Librada</span>
+                    </div>
+                    <div class="sign-block">
+                        <strong>Concejal Proyectista</strong>
+                        <span>Mesa de Entrada Legislativa</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- COLUMNA DER: TABLERO DE VOTACIÓN (Votos Detallados) -->
+            <div class="voting-panel">
+                <div class="voting-header">
+                    <div class="v-status">En Plenaria</div>
+                    <div class="v-tally">
+                        <div class="v-box v-favor">
+                            <span>A Favor</span>
+                            <strong>8</strong>
+                        </div>
+                        <div class="v-box v-contra" style="align-items: flex-end;">
+                            <span>En Contra</span>
+                            <strong>2</strong>
+                        </div>
+                    </div>
+                    <div class="v-progress-bar">
+                        <div class="v-progress-fill"></div>
+                    </div>
+                </div>
+
+                <ul class="council-list">
+                    <!-- Votos a Favor -->
+                    <li class="council-item">
+                        <div class="council-info">
+                            <a href="perfil.html" class="c-avatar" title="Ver perfil del concejal">JM</a>
+                            <div class="c-data">
+                                <a href="perfil.html" class="c-name">Juan Martínez</a>
+                                <span class="c-party">Partido Innovación</span>
+                            </div>
+                        </div>
+                        <div class="c-vote-badge vote-yes">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg> A Favor
+                        </div>
+                    </li>
+                    <li class="council-item">
+                        <div class="council-info">
+                            <a href="perfil.html" class="c-avatar">LG</a>
+                            <div class="c-data">
+                                <a href="perfil.html" class="c-name">Laura Gómez</a>
+                                <span class="c-party">Frente Ciudadano</span>
+                            </div>
+                        </div>
+                        <div class="c-vote-badge vote-yes">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg> A Favor
+                        </div>
+                    </li>
+                    <li class="council-item">
+                        <div class="council-info">
+                            <a href="perfil.html" class="c-avatar">CF</a>
+                            <div class="c-data">
+                                <a href="perfil.html" class="c-name">Carlos Franco</a>
+                                <span class="c-party">Movimiento Sur</span>
+                            </div>
+                        </div>
+                        <div class="c-vote-badge vote-yes">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg> A Favor
+                        </div>
+                    </li>
+                    <li class="council-item">
+                        <div class="council-info">
+                            <a href="perfil.html" class="c-avatar">MB</a>
+                            <div class="c-data">
+                                <a href="perfil.html" class="c-name">María Benítez</a>
+                                <span class="c-party">Partido Independiente</span>
+                            </div>
+                        </div>
+                        <div class="c-vote-badge vote-yes">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg> A Favor
+                        </div>
+                    </li>
+                    <li class="council-item">
+                        <div class="council-info">
+                            <a href="perfil.html" class="c-avatar">RA</a>
+                            <div class="c-data">
+                                <a href="perfil.html" class="c-name">Roberto Ayala</a>
+                                <span class="c-party">Frente Unido</span>
+                            </div>
+                        </div>
+                        <div class="c-vote-badge vote-yes">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg> A Favor
+                        </div>
+                    </li>
+                    <li class="council-item">
+                        <div class="council-info">
+                            <a href="perfil.html" class="c-avatar">SO</a>
+                            <div class="c-data">
+                                <a href="perfil.html" class="c-name">Silvia Ortiz</a>
+                                <span class="c-party">Partido Innovación</span>
+                            </div>
+                        </div>
+                        <div class="c-vote-badge vote-yes">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg> A Favor
+                        </div>
+                    </li>
+                    <li class="council-item">
+                        <div class="council-info">
+                            <a href="perfil.html" class="c-avatar">HD</a>
+                            <div class="c-data">
+                                <a href="perfil.html" class="c-name">Hugo Duarte</a>
+                                <span class="c-party">Alianza Cívica</span>
+                            </div>
+                        </div>
+                        <div class="c-vote-badge vote-yes">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg> A Favor
+                        </div>
+                    </li>
+                    <li class="council-item">
+                        <div class="council-info">
+                            <a href="perfil.html" class="c-avatar">PV</a>
+                            <div class="c-data">
+                                <a href="perfil.html" class="c-name">Paola Vargas</a>
+                                <span class="c-party">Frente Ciudadano</span>
+                            </div>
+                        </div>
+                        <div class="c-vote-badge vote-yes">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg> A Favor
+                        </div>
+                    </li>
+
+                    <!-- Votos En Contra -->
+                    <li class="council-item" style="background-color: #FEF2F2;">
+                        <div class="council-info">
+                            <a href="perfil.html" class="c-avatar" style="border-color:#FCA5A5;">ER</a>
+                            <div class="c-data">
+                                <a href="perfil.html" class="c-name" style="color: #991B1B;">Esteban Ríos</a>
+                                <span class="c-party" style="color: #B91C1C;">Partido Conservador</span>
+                            </div>
+                        </div>
+                        <div class="c-vote-badge vote-no">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg> Contra
+                        </div>
+                    </li>
+                    <li class="council-item" style="background-color: #FEF2F2;">
+                        <div class="council-info">
+                            <a href="perfil.html" class="c-avatar" style="border-color:#FCA5A5;">NC</a>
+                            <div class="c-data">
+                                <a href="perfil.html" class="c-name" style="color: #991B1B;">Natalia Cáceres</a>
+                                <span class="c-party" style="color: #B91C1C;">Partido Conservador</span>
+                            </div>
+                        </div>
+                        <div class="c-vote-badge vote-no">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg> Contra
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- BARRA INFERIOR MÓVIL (Dimensiones Blindadas) -->
+    <div class="mobile-bottom-bar">
+        <a href="index.html">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+            Inicio
+        </a>
+        <a href="japaga.html">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="6" width="20" height="12" rx="2"></rect><circle cx="12" cy="12" r="2"></circle></svg>
+            Japaga
+        </a>
+        <a href="Mi-perfil.html">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+            Perfil
+        </a>
+    </div>
+
+    <script>
+        // Lógica Inteligente del Botón Volver
+        document.getElementById('dynamicBackBtn').addEventListener('click', function(e) {
+            e.preventDefault();
+            // Verifica si el usuario vino de alguna página anterior de la misma plataforma
+            if (window.history.length > 1 && document.referrer !== "") {
+                window.history.back();
+            } else {
+                // Si entró por URL directa o en pestaña nueva, redirige seguro a Proyectos
+                window.location.href = 'proyectos.html';
+            }
+        });
+
+        // Funcionalidad de Menú Desplegable Responsivo
+        document.addEventListener('DOMContentLoaded', () => {
+            const mobileToggle = document.querySelector('.mobile-menu-btn');
+            const navWrapper = document.getElementById('nav-wrapper');
+            const body = document.body;
+            const transparencyDropdown = document.getElementById('transparencyDropdown');
+            const userProfileDesktop = document.getElementById('userProfileDesktop');
+
+            if (userProfileDesktop) {
+                userProfileDesktop.addEventListener('click', (e) => {
+                    if (!e.target.closest('.user-dropdown-menu')) {
+                        userProfileDesktop.querySelector('.user-dropdown-menu').classList.toggle('active');
+                        userProfileDesktop.querySelector('.avatar-btn').classList.toggle('active');
+                    }
+                });
+            }
+
+            if (mobileToggle) {
+                mobileToggle.addEventListener('click', () => {
+                    navWrapper.classList.toggle('active');
+                    body.classList.toggle('menu-open');
+                });
+            }
+
+            if (transparencyDropdown) {
+                transparencyDropdown.addEventListener('click', (e) => {
+                    if (window.innerWidth <= 1024) {
+                        if(e.target.tagName.toLowerCase() === 'a' && e.target.nextElementSibling) {
+                            e.preventDefault();
+                            transparencyDropdown.classList.toggle('mobile-open');
+                        }
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
